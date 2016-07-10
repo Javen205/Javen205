@@ -281,6 +281,177 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/29/Redis安装/" itemprop="url">
+                  Redis 安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-29T15:01:34+08:00" content="2016-06-29">
+              2016-06-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/29/Redis安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/29/Redis安装/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/29/Redis安装/" class="leancloud_visitors" data-flag-title="Redis 安装">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a><strong>Redis 安装</strong></h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p> <a href="http://redis.io/download" target="_blank" rel="external">官网下载地址</a></p>
+<h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><blockquote>
+<p> 目前最新文档版3.2.0</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ wget http://download.redis.io/releases/redis-3.2.0.tar.gz</div><div class="line">$ tar xzf redis-3.2.0.tar.gz</div><div class="line">$ cd redis-3.2.0</div><div class="line">$ make</div></pre></td></tr></table></figure>
+<p>==注意==</p>
+<p>执行 编译过程中make报错，make[3]: gcc：命令未找到</p>
+<p>==问题原因==:没有gcc编译器。需要安装gcc、g++编译器;如果还提示其他的命令未找到直接使用yum 安装即可</p>
+<blockquote>
+<p>执行安装</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y gcc g++ gcc-c++ make</div></pre></td></tr></table></figure>
+<blockquote>
+<p>再次执行 make</p>
+</blockquote>
+<p><img src="http://note.youdao.com/yws/public/resource/4523bd7a85406b4689e419df61d674ff/xmlnote/WEBRESOURCE15dd44a0559ed68431e3e1127c19159e/1186" alt="image"></p>
+<blockquote>
+<p>执行 检查是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make test</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>出现如下结果表示安装成功</p>
+<p><img src="http://note.youdao.com/yws/public/resource/4523bd7a85406b4689e419df61d674ff/xmlnote/WEBRESOURCE471ec9627e018acc056cdd438c71c5b3/1193" alt="image"></p>
+<blockquote>
+<p>启动服务端 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">src/redis-server  或者 ./redis-server</div></pre></td></tr></table></figure>
+<p>后者需要进入安装目录 /mnt/redis/redis-3.2.0/src</p>
+<blockquote>
+<p>启动客户端</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">src/redis-cli 或者./redis-cli</div></pre></td></tr></table></figure>
+<p><img src="http://note.youdao.com/yws/public/resource/4523bd7a85406b4689e419df61d674ff/xmlnote/WEBRESOURCEe4de2fb679d2cf4285b64485ab227f5e/1210" alt="image"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/28/hello-world/" itemprop="url">
                   Hello World
                 </a>
@@ -423,7 +594,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
