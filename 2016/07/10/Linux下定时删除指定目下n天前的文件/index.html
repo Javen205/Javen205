@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="智慧云端日记">
 <meta property="og:description" content="案例命令1* 2 * * * find /home/ftp/private/* ctime 1 -exec rm -rf &amp;#123;&amp;#125; \;
 详解表示每天两点删除/home/ftp/private/目录下一天前创建的所有文件，不删除文件夹private，如果这个文件夹也要删除的话用* 6 * * * find /home/ftp/private ctime 1 -exec rm -rf">
-<meta property="og:updated_time" content="2016-07-10T11:08:20.000Z">
+<meta property="og:updated_time" content="2016-07-10T11:10:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下定时删除指定目下n天前的文件">
 <meta name="twitter:description" content="案例命令1* 2 * * * find /home/ftp/private/* ctime 1 -exec rm -rf &amp;#123;&amp;#125; \;
@@ -394,7 +394,7 @@
 <h2 id="启动定时任务"><a href="#启动定时任务" class="headerlink" title="启动定时任务"></a>启动定时任务</h2><p>首先要创建一个<code>crontab</code>,输入命令<code>crontab -e</code> 进入编辑界面，编写你的定时任务，即上面的命令。</p>
 <p>也可以不使用<code>crontab -e</code> 命令。可以创建<code>crontab</code>配置文件，其他任何文本编辑器编写命令序列，比如文件名为<code>abc.cron</code>，然后使用命令：<code>crontab abc.cron</code>将命令序列添加到<code>crontab</code>中。</p>
 <p>创建好<code>crontab</code>之后，就可以把上面的命令写道 <code>/etc/crontab</code>这个文件中<br>通过<code>crontab /etc/crontab</code> 命令启动这个定时任务，可以通过 <code>crontab -l</code> 命令查看当下的定时任务</p>
-<p>为保险起见，最好再重启服务，之后查看下crontab的服务状态<br>命令如下：</p>
+<h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><p>为保险起见，最好再重启服务，之后查看下crontab的服务状态<br>命令如下：</p>
 <p>查看crontab服务状态：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond status</div></pre></td></tr></table></figure>
 <p>启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond start</div></pre></td></tr></table></figure></p>
@@ -663,7 +663,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">1.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">2.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详解"><span class="nav-number">3.</span> <span class="nav-text">详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除目录下的指定文件"><span class="nav-number"></span> <span class="nav-text">删除目录下的指定文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动定时任务"><span class="nav-number"></span> <span class="nav-text">启动定时任务</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">1.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">2.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详解"><span class="nav-number">3.</span> <span class="nav-text">详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除目录下的指定文件"><span class="nav-number"></span> <span class="nav-text">删除目录下的指定文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动定时任务"><span class="nav-number"></span> <span class="nav-text">启动定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务"><span class="nav-number"></span> <span class="nav-text">重启服务</span></a></div>
             
           </div>
         </section>
