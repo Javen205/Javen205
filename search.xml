@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[Linux下定时删除指定目下n天前的文件]]></title>
-      <url>http://localhost:4000/2016/07/10/Linux%E4%B8%8B%E5%AE%9A%E6%97%B6%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9B%AE%E4%B8%8Bn%E5%A4%A9%E5%89%8D%E7%9A%84%E6%96%87%E4%BB%B6/</url>
+      <url>http://javen205.gihub.io/2016/07/10/Linux%E4%B8%8B%E5%AE%9A%E6%97%B6%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9B%AE%E4%B8%8Bn%E5%A4%A9%E5%89%8D%E7%9A%84%E6%96%87%E4%BB%B6/</url>
       <content type="html"><![CDATA[<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 2 * * * find /home/ftp/private/* ctime 1 -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
 <h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p>表示每天两点删除<code>/home/ftp/private/</code>目录下一天前创建的所有文件，不删除文件夹<code>private</code>，如果这个文件夹也要删除的话用<code>* 6 * * * find /home/ftp/private ctime 1 -exec rm -rf {} \;</code></p>
 <p>其中</p>
@@ -47,13 +47,13 @@
     
     <entry>
       <title><![CDATA[美图欣赏(一)]]></title>
-      <url>http://localhost:4000/2016/07/04/%E7%BE%8E%E5%9B%BE%E6%AC%A3%E8%B5%8F/</url>
+      <url>http://javen205.gihub.io/2016/07/04/%E7%BE%8E%E5%9B%BE%E6%AC%A3%E8%B5%8F/</url>
       <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/images/beautiful/3.jpeg" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 16.666666666666668%;"><img src="/images/beautiful/4.jpeg" alt=""></div><div class="group-picture-column" style="width: 16.666666666666668%;"><img src="/images/beautiful/6.jpeg" alt=""></div><div class="group-picture-column" style="width: 16.666666666666668%;"><img src="/images/beautiful/9.jpeg" alt=""></div><div class="group-picture-column" style="width: 16.666666666666668%;"><img src="/images/beautiful/10.jpeg" alt=""></div><div class="group-picture-column" style="width: 16.666666666666668%;"><img src="/images/beautiful/13.jpeg" alt=""></div><div class="group-picture-column" style="width: 16.666666666666668%;"><img src="/images/beautiful/15.jpeg" alt=""></div></div></div></div>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Linux/Centos 局域网内文件传送]]></title>
-      <url>http://localhost:4000/2016/07/03/linux%20%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%81/</url>
+      <url>http://javen205.gihub.io/2016/07/03/linux%20%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%81/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>Linux scp命令用于Linux之间复制文件和目录，具体如何使用这里好好介绍一下，从本地复制到远程、从远程复制到本地是两种使用方式。这里有具体举例</p>
 </blockquote>
@@ -122,7 +122,7 @@
     
     <entry>
       <title><![CDATA[Linux/Centos mysql 更改MySQL数据库目录位置]]></title>
-      <url>http://localhost:4000/2016/07/03/linux%20mysql%20%E6%9B%B4%E6%94%B9MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%AE%E5%BD%95%E4%BD%8D%E7%BD%AE/</url>
+      <url>http://javen205.gihub.io/2016/07/03/linux%20mysql%20%E6%9B%B4%E6%94%B9MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%AE%E5%BD%95%E4%BD%8D%E7%BD%AE/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>引言：MySQL默认的数据文件存储目录为/var/lib/mysql。假如要把目录移到/home/data下该如何操作呢？</p>
 </blockquote>
@@ -151,7 +151,7 @@
     
     <entry>
       <title><![CDATA[Centos7下使用yum安装mysql]]></title>
-      <url>http://localhost:4000/2016/07/03/centos7%E4%B8%8B%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85mysql/</url>
+      <url>http://javen205.gihub.io/2016/07/03/centos7%E4%B8%8B%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85mysql/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>引言：CentOS7的yum源中默认好像是没有mysql的。为了解决这个问题，我们要先下载mysql的repo源。</p>
 </blockquote>
@@ -191,7 +191,7 @@
     
     <entry>
       <title><![CDATA[Linux 安转JDK]]></title>
-      <url>http://localhost:4000/2016/07/03/Linux%E5%AE%89%E8%A3%85JDK/</url>
+      <url>http://javen205.gihub.io/2016/07/03/Linux%E5%AE%89%E8%A3%85JDK/</url>
       <content type="html"><![CDATA[<h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><p>Ubuntu版本：ubuntukylin-14.04.1-desktop-amd64</p>
 <p>JDK版本：jdk1.8.0_60</p>
 <p>安装目录：/usr/local/development/jdk1.8.0_60</p>
@@ -235,7 +235,7 @@
     
     <entry>
       <title><![CDATA[捐赠、打赏列表]]></title>
-      <url>http://localhost:4000/2016/07/02/%E6%89%93%E8%B5%8F%E6%8D%90%E8%B5%A0%E5%88%97%E8%A1%A8/</url>
+      <url>http://javen205.gihub.io/2016/07/02/%E6%89%93%E8%B5%8F%E6%8D%90%E8%B5%A0%E5%88%97%E8%A1%A8/</url>
       <content type="html"><![CDATA[<hr>
 <h2 id="捐赠、打赏列表"><a href="#捐赠、打赏列表" class="headerlink" title="捐赠、打赏列表"></a>捐赠、打赏列表</h2><table>
 <thead>
@@ -273,7 +273,7 @@
     
     <entry>
       <title><![CDATA[Redis 禁用危险指令]]></title>
-      <url>http://localhost:4000/2016/06/30/Redis%E7%A6%81%E7%94%A8%E5%8D%B1%E9%99%A9%E6%8C%87%E4%BB%A4/</url>
+      <url>http://javen205.gihub.io/2016/06/30/Redis%E7%A6%81%E7%94%A8%E5%8D%B1%E9%99%A9%E6%8C%87%E4%BB%A4/</url>
       <content type="html"><![CDATA[<p><strong>禁用危险指令</strong></p>
 <p>在redis.conf中，通过将指令禁用达到避免人为误操作的可能<br>rename-command 是表示重命名指令，如果是指令后是空字符串 “” ， 那么就表示禁用，如果填入其他值，就表示改名，另外还有一个更绝的方法，是redis在安装时，修改redis的源码src/redis.c中。<br>研发环境可以改名，但是生产环境建议禁用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;flushdb&quot;,flushdbCommand,1,&quot;w&quot;,0,NULL,0,0,0,0,0&#125;,</div><div class="line">&#123;&quot;flushall&quot;,flushallCommand,1,&quot;w&quot;,0,NULL,0,0,0,0,0&#125;</div></pre></td></tr></table></figure>
@@ -285,7 +285,7 @@
     
     <entry>
       <title><![CDATA[Redis 配置认证密码]]></title>
-      <url>http://localhost:4000/2016/06/29/Redis%E9%85%8D%E7%BD%AE%E8%AE%A4%E8%AF%81%E5%AF%86%E7%A0%81/</url>
+      <url>http://javen205.gihub.io/2016/06/29/Redis%E9%85%8D%E7%BD%AE%E8%AE%A4%E8%AF%81%E5%AF%86%E7%A0%81/</url>
       <content type="html"><![CDATA[<p><strong>redis配置密码</strong></p>
 <p>引导语</p>
 <p>Redis安全设置<br>redis默认安装完成后，没有登录密码和安全设置，没有密码的系统安全隐患很大，另外如果发生一些误操作，比如FLUSHALL会导致整个库被清空，所以为了安全起见，需要设置reids的安全配置项。比如&lt;设置密码、禁用危险指令&gt;</p>
@@ -324,7 +324,7 @@
     
     <entry>
       <title><![CDATA[Redis 的三种启动方式]]></title>
-      <url>http://localhost:4000/2016/06/29/Redis%E7%9A%84%E4%B8%89%E7%A7%8D%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/</url>
+      <url>http://javen205.gihub.io/2016/06/29/Redis%E7%9A%84%E4%B8%89%E7%A7%8D%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/</url>
       <content type="html"><![CDATA[<p><strong>Redis的三种启动方式</strong></p>
 <p><strong>Part I. 直接启动</strong></p>
 <blockquote>
@@ -391,7 +391,7 @@
     
     <entry>
       <title><![CDATA[Redis 安装]]></title>
-      <url>http://localhost:4000/2016/06/29/Redis%E5%AE%89%E8%A3%85/</url>
+      <url>http://javen205.gihub.io/2016/06/29/Redis%E5%AE%89%E8%A3%85/</url>
       <content type="html"><![CDATA[<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a><strong>Redis 安装</strong></h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p> <a href="http://redis.io/download" target="_blank" rel="external">官网下载地址</a></p>
 <h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><blockquote>
 <p> 目前最新文档版3.2.0</p>
@@ -428,7 +428,7 @@
     
     <entry>
       <title><![CDATA[Hello World]]></title>
-      <url>http://localhost:4000/2016/06/28/hello-world/</url>
+      <url>http://javen205.gihub.io/2016/06/28/hello-world/</url>
       <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
