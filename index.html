@@ -393,11 +393,11 @@
 <p>其实Linux中不存在文件创建时间，只有访问时间（<code>atime</code>）、修改时间（<code>mtime</code>）、状态改动时间（<code>ctime</code>） </p>
 <p>可以通过命令 <code>stat + 文件路径</code> 查看时间</p>
 </blockquote>
-<h2 id="删除目录下的指定文件"><a href="#删除目录下的指定文件" class="headerlink" title="删除目录下的指定文件"></a>删除目录下的指定文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ind 对应目录 -mtime +天数 -name &quot;文件名&quot; -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
-<h2 id="启动定时任务"><a href="#启动定时任务" class="headerlink" title="启动定时任务"></a>启动定时任务</h2><p>首先要创建一个<code>crontab</code>,输入命令<code>crontab -e</code> 进入编辑界面，编写你的定时任务，即上面的命令。</p>
+<h3 id="删除目录下的指定文件"><a href="#删除目录下的指定文件" class="headerlink" title="删除目录下的指定文件"></a>删除目录下的指定文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ind 对应目录 -mtime +天数 -name &quot;文件名&quot; -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
+<h3 id="启动定时任务"><a href="#启动定时任务" class="headerlink" title="启动定时任务"></a>启动定时任务</h3><p>首先要创建一个<code>crontab</code>,输入命令<code>crontab -e</code> 进入编辑界面，编写你的定时任务，即上面的命令。</p>
 <p>也可以不使用<code>crontab -e</code> 命令。可以创建<code>crontab</code>配置文件，其他任何文本编辑器编写命令序列，比如文件名为<code>abc.cron</code>，然后使用命令：<code>crontab abc.cron</code>将命令序列添加到<code>crontab</code>中。</p>
 <p>创建好<code>crontab</code>之后，就可以把上面的命令写道 <code>/etc/crontab</code>这个文件中<br>通过<code>crontab /etc/crontab</code> 命令启动这个定时任务，可以通过 <code>crontab -l</code> 命令查看当下的定时任务</p>
-<h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><p>为保险起见，最好再重启服务，之后查看下crontab的服务状态<br>命令如下：</p>
+<h3 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h3><p>为保险起见，最好再重启服务，之后查看下crontab的服务状态<br>命令如下：</p>
 <p>查看crontab服务状态：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond status</div></pre></td></tr></table></figure>
 <p>启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond start</div></pre></td></tr></table></figure></p>
