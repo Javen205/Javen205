@@ -281,6 +281,484 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/16/Centos 安装FTP详细讲解/" itemprop="url">
+                  Contos/Linux 安装FTP详解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T22:50:00+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/Centos/" itemprop="url" rel="index">
+                    <span itemprop="name">Centos</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/16/Centos 安装FTP详细讲解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/Centos 安装FTP详细讲解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/16/Centos 安装FTP详细讲解/" class="leancloud_visitors" data-flag-title="Contos/Linux 安装FTP详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="安装FTP"><a href="#安装FTP" class="headerlink" title="安装FTP"></a>安装FTP</h3><h2 id="使用yum安装"><a href="#使用yum安装" class="headerlink" title="使用yum安装"></a>使用yum安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -yinstall ftp vsftpd</div></pre></td></tr></table></figure>
+<h2 id="使用RPM安装"><a href="#使用RPM安装" class="headerlink" title="使用RPM安装"></a>使用RPM安装</h2><p>需要安装一下两个包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ftp-0.17-66.el7.x86_64</div><div class="line"></div><div class="line">vsftpd-3.0.2-9.el7.x86_64</div></pre></td></tr></table></figure>
+<p>另外需要安装db包，用来加密虚拟用户的账户信息（这个包在centos7中默认已经安装了）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qf/usr/bin/db_load libdb-utils-5.3.21-17.el7_0.1.x86_64</div></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h2 id="创建Ftp文件保存路径"><a href="#创建Ftp文件保存路径" class="headerlink" title="创建Ftp文件保存路径"></a>创建Ftp文件保存路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir/ftp/open</div></pre></td></tr></table></figure>
+<h2 id="添加测试文件"><a href="#添加测试文件" class="headerlink" title="添加测试文件"></a>添加测试文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo opentest &gt; /ftp/open/open.txt</div><div class="line"></div><div class="line">touch /ftp/open/anontest.txt</div></pre></td></tr></table></figure>
+<h2 id="查看配置文件所在路径"><a href="#查看配置文件所在路径" class="headerlink" title="查看配置文件所在路径"></a>查看配置文件所在路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">rpm -qc vsftpd</div><div class="line"></div><div class="line">/etc/logrotate.d/vsftpd</div><div class="line">/etc/pam.d/vsftpd</div><div class="line">/etc/vsftpd/ftpusers</div><div class="line">/etc/vsftpd/user_list</div><div class="line">/etc/vsftpd/vsftpd.conf</div></pre></td></tr></table></figure>
+<h2 id="备份原有配置文件"><a href="#备份原有配置文件" class="headerlink" title="备份原有配置文件"></a>备份原有配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp vsftpd.conf vsftpd.conf.origin</div></pre></td></tr></table></figure>
+<h2 id="创建密码明文文件"><a href="#创建密码明文文件" class="headerlink" title="创建密码明文文件"></a>创建密码明文文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/vsftpd/vftpuser.txt</div></pre></td></tr></table></figure>
+<p>添加如下类容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">javen</div><div class="line">javen123</div><div class="line">test</div><div class="line">test123</div></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：基数行是用户名；偶数行是密码</p>
+</blockquote>
+<h2 id="根据明文创建密码DB文件"><a href="#根据明文创建密码DB文件" class="headerlink" title="根据明文创建密码DB文件"></a>根据明文创建密码DB文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db_load -T -t hash -f /etc/vsftpd/vftpuser.txt  /etc/vsftpd/vftpuser.db</div></pre></td></tr></table></figure>
+<h2 id="查看密码数据文件"><a href="#查看密码数据文件" class="headerlink" title="查看密码数据文件"></a>查看密码数据文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file /etc/vsftpd/vftpuser.db</div></pre></td></tr></table></figure>
+<p>输出结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/vsftpd/vftpuser.db: Berkeley DB (Hash, version 9, native byte-order)</div></pre></td></tr></table></figure>
+<h2 id="创建vftpd的guest账户"><a href="#创建vftpd的guest账户" class="headerlink" title="创建vftpd的guest账户"></a>创建vftpd的guest账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -d/ftp/private -s /sbin/nologin vftpuser</div></pre></td></tr></table></figure>
+<h2 id="编辑生成虚拟用户所需的PAM-配置文件"><a href="#编辑生成虚拟用户所需的PAM-配置文件" class="headerlink" title="编辑生成虚拟用户所需的PAM 配置文件"></a>编辑生成虚拟用户所需的PAM 配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/pam.d/vsftpd</div></pre></td></tr></table></figure>
+<p>再将auth及account的所有配置行行均注释掉，添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auth required /lib/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div><div class="line"></div><div class="line">account required /lib/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div></pre></td></tr></table></figure>
+<p>如果你是64位系统则添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div><div class="line"></div><div class="line">account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div></pre></td></tr></table></figure>
+<p>如何查询系统的版本？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getconf LONG_BIT</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果没有填写出错将会出现以下异常：</p>
+<p>530 Login incorrect错误</p>
+<p>查看日志<br>tail -f /var/log/secure</p>
+<p>发现 PAM unable to dlopen(/lib/security/pam_userdb.so): /lib/security/pam_userdb.so: cannot open shared object file: No such file or directory</p>
+<p>原来pam_userdb.so在/lib64/security/pam_userdb.so</p>
+</blockquote>
+<h2 id="最终的配置"><a href="#最终的配置" class="headerlink" title="最终的配置"></a>最终的配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#%PAM-1.0</div><div class="line">#session    optional     pam_keyinit.so    force revoke</div><div class="line">#auth       required    pam_listfile.so item=user sense=deny file=/etc/vsftpd/ftpusers onerr=succeed</div><div class="line">#auth       required    pam_shells.so</div><div class="line">#auth       include     password-auth</div><div class="line">#account    include     password-auth</div><div class="line">#session    required     pam_loginuid.so</div><div class="line">#session    include     password-auth</div><div class="line">auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div><div class="line">account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div></pre></td></tr></table></figure>
+<h2 id="修改vsftpd-conf配置文件"><a href="#修改vsftpd-conf配置文件" class="headerlink" title="修改vsftpd.conf配置文件"></a>修改vsftpd.conf配置文件</h2><p>在最后添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">anon_root=/ftp/open</div><div class="line">virtual_use_local_privs=YES</div><div class="line">guest_enable=YES</div><div class="line">guest_username=vftpuser</div><div class="line">chroot_local_user=YES</div><div class="line">allow_writeable_chroot=YES</div></pre></td></tr></table></figure>
+<p>详细配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div></pre></td><td class="code"><pre><div class="line"># Example config file /etc/vsftpd/vsftpd.conf</div><div class="line">#</div><div class="line"># The default compiled in settings are fairly paranoid. This sample file</div><div class="line"># loosens things up a bit, to make the ftp daemon more usable.</div><div class="line"># Please see vsftpd.conf.5 for all compiled in defaults.</div><div class="line">#</div><div class="line"># READ THIS: This example file is NOT an exhaustive list of vsftpd options.</div><div class="line"># Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd&apos;s</div><div class="line"># capabilities.</div><div class="line">#</div><div class="line"># Allow anonymous FTP? (Beware - allowed by default if you comment this out).</div><div class="line">anonymous_enable=NO</div><div class="line">#</div><div class="line"># Uncomment this to allow local users to log in.</div><div class="line"># When SELinux is enforcing check for SE bool ftp_home_dir</div><div class="line">local_enable=YES</div><div class="line">#</div><div class="line"># Uncomment this to enable any form of FTP write command.</div><div class="line">write_enable=YES</div><div class="line">#</div><div class="line"># Default umask for local users is 077. You may wish to change this to 022,</div><div class="line"># if your users expect that (022 is used by most other ftpd&apos;s)</div><div class="line">local_umask=022</div><div class="line">#</div><div class="line"># Uncomment this to allow the anonymous FTP user to upload files. This only</div><div class="line"># has an effect if the above global write enable is activated. Also, you will</div><div class="line"># obviously need to create a directory writable by the FTP user.</div><div class="line"># When SELinux is enforcing check for SE bool allow_ftpd_anon_write, allow_ftpd_full_access</div><div class="line">anon_upload_enable=YES</div><div class="line">#</div><div class="line"># Uncomment this if you want the anonymous FTP user to be able to create</div><div class="line"># new directories.</div><div class="line">anon_mkdir_write_enable=YES</div><div class="line">#</div><div class="line"># Activate directory messages - messages given to remote users when they</div><div class="line"># go into a certain directory.</div><div class="line">dirmessage_enable=YES</div><div class="line">#</div><div class="line"># Activate logging of uploads/downloads.</div><div class="line">xferlog_enable=YES</div><div class="line">#</div><div class="line"># Make sure PORT transfer connections originate from port 20 (ftp-data).</div><div class="line">connect_from_port_20=YES</div><div class="line">#</div><div class="line"># If you want, you can arrange for uploaded anonymous files to be owned by</div><div class="line"># a different user. Note! Using &quot;root&quot; for uploaded files is not</div><div class="line"># recommended!</div><div class="line">#chown_uploads=YES</div><div class="line">#chown_username=whoever</div><div class="line">#</div><div class="line"># You may override where the log file goes if you like. The default is shown</div><div class="line"># below.</div><div class="line">xferlog_file=/var/log/xferlog</div><div class="line">#</div><div class="line"># If you want, you can have your log file in standard ftpd xferlog format.</div><div class="line"># Note that the default log file location is /var/log/xferlog in this case.</div><div class="line">xferlog_std_format=YES</div><div class="line">#</div><div class="line"># You may change the default value for timing out an idle session.</div><div class="line">#idle_session_timeout=600</div><div class="line">#</div><div class="line"># You may change the default value for timing out a data connection.</div><div class="line">#data_connection_timeout=120</div><div class="line">#</div><div class="line"># It is recommended that you define on your system a unique user which the</div><div class="line"># ftp server can use as a totally isolated and unprivileged user.</div><div class="line">#nopriv_user=ftpsecure</div><div class="line">#</div><div class="line"># Enable this and the server will recognise asynchronous ABOR requests. Not</div><div class="line"># recommended for security (the code is non-trivial). Not enabling it,</div><div class="line"># however, may confuse older FTP clients.</div><div class="line">#async_abor_enable=YES</div><div class="line">#</div><div class="line"># By default the server will pretend to allow ASCII mode but in fact ignore</div><div class="line"># the request. Turn on the below options to have the server actually do ASCII</div><div class="line"># mangling on files when in ASCII mode.</div><div class="line"># Beware that on some FTP servers, ASCII support allows a denial of service</div><div class="line"># attack (DoS) via the command &quot;SIZE /big/file&quot; in ASCII mode. vsftpd</div><div class="line"># predicted this attack and has always been safe, reporting the size of the</div><div class="line"># raw file.</div><div class="line"># ASCII mangling is a horrible feature of the protocol.</div><div class="line">#ascii_upload_enable=YES</div><div class="line">#ascii_download_enable=YES</div><div class="line">#</div><div class="line"># You may fully customise the login banner string:</div><div class="line">ftpd_banner=Welcome to blah FTP service.</div><div class="line">#</div><div class="line"># You may specify a file of disallowed anonymous e-mail addresses. Apparently</div><div class="line"># useful for combatting certain DoS attacks.</div><div class="line">#deny_email_enable=YES</div><div class="line"># (default follows)</div><div class="line">#banned_email_file=/etc/vsftpd/banned_emails</div><div class="line">#</div><div class="line"># You may specify an explicit list of local users to chroot() to their home</div><div class="line"># directory. If chroot_local_user is YES, then this list becomes a list of</div><div class="line"># users to NOT chroot().</div><div class="line"># (Warning! chroot&apos;ing can be very dangerous. If using chroot, make sure that</div><div class="line"># the user does not have write access to the top level directory within the</div><div class="line"># chroot)</div><div class="line">#chroot_local_user=YES</div><div class="line">#chroot_list_enable=YES</div><div class="line"># (default follows)</div><div class="line">#chroot_list_file=/etc/vsftpd/chroot_list</div><div class="line">#</div><div class="line"># You may activate the &quot;-R&quot; option to the builtin ls. This is disabled by</div><div class="line"># default to avoid remote users being able to cause excessive I/O on large</div><div class="line"># sites. However, some broken FTP clients such as &quot;ncftp&quot; and &quot;mirror&quot; assume</div><div class="line"># the presence of the &quot;-R&quot; option, so there is a strong case for enabling it.</div><div class="line">#ls_recurse_enable=YES</div><div class="line">#</div><div class="line"># When &quot;listen&quot; directive is enabled, vsftpd runs in standalone mode and</div><div class="line"># listens on IPv4 sockets. This directive cannot be used in conjunction</div><div class="line"># with the listen_ipv6 directive.</div><div class="line">listen=YES</div><div class="line">#</div><div class="line"># This directive enables listening on IPv6 sockets. By default, listening</div><div class="line"># on the IPv6 &quot;any&quot; address (::) will accept connections from both IPv6</div><div class="line"># and IPv4 clients. It is not necessary to listen on *both* IPv4 and IPv6</div><div class="line"># sockets. If you want that (perhaps because you want to listen on specific</div><div class="line"># addresses) then you must run two copies of vsftpd with two configuration</div><div class="line"># files.</div><div class="line"># Make sure, that one of the listen options is commented !!</div><div class="line">#listen_ipv6=YES</div><div class="line"></div><div class="line">pam_service_name=vsftpd</div><div class="line">userlist_enable=YES</div><div class="line">tcp_wrappers=YES</div><div class="line"></div><div class="line">anon_root=/home/ftp/open</div><div class="line">virtual_use_local_privs=YES</div><div class="line">guest_enable=YES</div><div class="line">guest_username=vftpuser</div><div class="line">chroot_local_user=YES</div><div class="line">allow_writeable_chroot=YES</div></pre></td></tr></table></figure>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start vsftpd</div></pre></td></tr></table></figure>
+<h3 id="查看目前的状态"><a href="#查看目前的状态" class="headerlink" title="查看目前的状态"></a>查看目前的状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl status vsftpd</div></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ftp localhost</div></pre></td></tr></table></figure>
+<p>输入用户名以及密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@iZ94hjirr10Z vsftpd]# ftp localhost</div><div class="line">Trying 127.0.0.1...</div><div class="line">Connected to localhost (127.0.0.1).</div><div class="line">220 Welcome to blah FTP service.</div><div class="line">Name (localhost:root): javen</div><div class="line">331 Please specify the password.</div><div class="line">Password:</div><div class="line">230 Login successful.</div><div class="line">Remote system type is UNIX.</div><div class="line">Using binary mode to transfer files.</div><div class="line">ftp&gt; ls</div><div class="line">227 Entering Passive Mode (127,0,0,1,38,217).</div><div class="line">150 Here comes the directory listing.</div><div class="line">-rw-r--r--    1 1000     1000        11641 Jul 13 07:22 00_1.jpg</div><div class="line">-rw-r--r--    1 1000     1000        13024 Jul 13 07:23 00_2.jpg</div><div class="line">-rw-r--r--    1 1000     1000        10989 Jul 13 07:23 00_3.jpg</div><div class="line">-rwxrwxrwx    1 1000     1000           10 Jul 05 06:14 ftptest.txt</div><div class="line">drwxrwxrwx    2 1000     1000        20480 Jul 16 06:15 images</div><div class="line">-rw-r--r--    1 0        0              12 Jul 05 06:13 ss</div><div class="line">226 Directory send OK.</div><div class="line">ftp&gt; bye</div><div class="line">221 Goodbye.</div></pre></td></tr></table></figure>
+<p>以上是配置的详细教程，有问题请在评论区留言。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/16/Linux防火墙/" itemprop="url">
+                  Linux防火墙
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T21:50:00+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/Centos/" itemprop="url" rel="index">
+                    <span itemprop="name">Centos</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/16/Linux防火墙/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/Linux防火墙/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/16/Linux防火墙/" class="leancloud_visitors" data-flag-title="Linux防火墙">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="重启后生效"><a href="#重启后生效" class="headerlink" title="重启后生效"></a>重启后生效</h3><p>开启：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig iptables on</div></pre></td></tr></table></figure></p>
+<p>关闭：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig iptables off</div></pre></td></tr></table></figure></p>
+<h3 id="即时生效，重启后失效"><a href="#即时生效，重启后失效" class="headerlink" title="即时生效，重启后失效"></a>即时生效，重启后失效</h3><p>开启：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables start</div></pre></td></tr></table></figure></p>
+<p>关闭：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables stop</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。</p>
+</blockquote>
+<h3 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h3><p>在开启了防火墙时，做如下设置，开启相关端口，修改/etc/sysconfig/iptables 文件，添加以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT </div><div class="line"></div><div class="line">-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/16/Linux下启动与关闭Oracle/" itemprop="url">
+                  Linux下启动与关闭Oracle
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T21:36:34+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/Centos/" itemprop="url" rel="index">
+                    <span itemprop="name">Centos</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/16/Linux下启动与关闭Oracle/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/Linux下启动与关闭Oracle/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/16/Linux下启动与关闭Oracle/" class="leancloud_visitors" data-flag-title="Linux下启动与关闭Oracle">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="linux下启动oracle"><a href="#linux下启动oracle" class="headerlink" title="linux下启动oracle"></a>linux下启动oracle</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">su - oracle //切换到Oracle用户</div><div class="line">sqlplus /nolog //启动SQLPLUS</div><div class="line">conn /as sysdba //登陆到本机的数据库 </div><div class="line">startup //启动</div><div class="line">exit </div><div class="line">lsnrctl start  //启动监听</div><div class="line">exit</div></pre></td></tr></table></figure>
+<h3 id="linux下关闭oracle"><a href="#linux下关闭oracle" class="headerlink" title="linux下关闭oracle"></a>linux下关闭oracle</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">su - oracle </div><div class="line"></div><div class="line">sqlplus /nolog </div><div class="line"></div><div class="line">conn /as sysdba </div><div class="line"></div><div class="line">shutdown immediate //关闭实例</div><div class="line"></div><div class="line">exit </div><div class="line"></div><div class="line">lsnrctl stop </div><div class="line"></div><div class="line">exit</div></pre></td></tr></table></figure>
+<h3 id="启动监听器"><a href="#启动监听器" class="headerlink" title="启动监听器"></a>启动监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsnrctl start</div></pre></td></tr></table></figure>
+<h3 id="停止监听器"><a href="#停止监听器" class="headerlink" title="停止监听器"></a>停止监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsnrctl stop</div></pre></td></tr></table></figure>
+<h3 id="查看监听器状态"><a href="#查看监听器状态" class="headerlink" title="查看监听器状态"></a>查看监听器状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsnrctl status</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/10/Linux下定时删除指定目下n天前的文件/" itemprop="url">
                   Linux下定时删除指定目下n天前的文件
                 </a>
@@ -1364,526 +1842,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/30/Redis禁用危险指令/" itemprop="url">
-                  Redis 禁用危险指令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-30T17:00:34+08:00" content="2016-06-30">
-              2016-06-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/30/Redis禁用危险指令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/30/Redis禁用危险指令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/30/Redis禁用危险指令/" class="leancloud_visitors" data-flag-title="Redis 禁用危险指令">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>禁用危险指令</strong></p>
-<p>在redis.conf中，通过将指令禁用达到避免人为误操作的可能<br>rename-command 是表示重命名指令，如果是指令后是空字符串 “” ， 那么就表示禁用，如果填入其他值，就表示改名，另外还有一个更绝的方法，是redis在安装时，修改redis的源码src/redis.c中。<br>研发环境可以改名，但是生产环境建议禁用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;flushdb&quot;,flushdbCommand,1,&quot;w&quot;,0,NULL,0,0,0,0,0&#125;,</div><div class="line">&#123;&quot;flushall&quot;,flushallCommand,1,&quot;w&quot;,0,NULL,0,0,0,0,0&#125;</div></pre></td></tr></table></figure>
-<p>的部分，注释掉也可以解决。<br>主要的危险命令如下：<br>FLUSHALL 删除所有库中的key<br>FLUSHDB 删除当前库中所有的key<br>KEYS 匹配数据库中的key 如果是在生产库使用KEYS * 对性能影响非常大，研发或者测试环境可以保留<br>以下是具体使用方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rename-command FLUSHALL &quot;&quot;</div><div class="line">rename-command FLUSHDB &quot;&quot;</div><div class="line">rename-command KEYS &quot;&quot;</div></pre></td></tr></table></figure>
-<p><a href="http://blog.csdn.net/chwshuang/article/details/48465501" target="_blank" rel="external">参考地址：http://blog.csdn.net/chwshuang/article/details/48465501</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/29/Redis配置认证密码/" itemprop="url">
-                  Redis 配置认证密码
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T16:01:34+08:00" content="2016-06-29">
-              2016-06-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/29/Redis配置认证密码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/29/Redis配置认证密码/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/29/Redis配置认证密码/" class="leancloud_visitors" data-flag-title="Redis 配置认证密码">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>redis配置密码</strong></p>
-<p>引导语</p>
-<p>Redis安全设置<br>redis默认安装完成后，没有登录密码和安全设置，没有密码的系统安全隐患很大，另外如果发生一些误操作，比如FLUSHALL会导致整个库被清空，所以为了安全起见，需要设置reids的安全配置项。比如&lt;设置密码、禁用危险指令&gt;</p>
-<blockquote>
-<p>说明我redis安装目录如下<br>/mnt/redis/redis-3.2.0</p>
-<p>1、通过配置文件进行配置</p>
-</blockquote>
-<p>redis配置文件在/mnt/redis/redis-3.2.0/redis.conf中，打开配置文件找到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#requirepass foobared</div></pre></td></tr></table></figure>
-<p>去掉行前的注释，并修改密码为所需的密码,保存文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">requirepass javen</div></pre></td></tr></table></figure>
-<p>重启redis</p>
-<blockquote>
-<p>2、通过命令行进行配置</p>
-</blockquote>
-<p>后台启动服务端</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">src/redis-server &amp;</div></pre></td></tr></table></figure>
-<p>启动客户端</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@localhost redis-3.2.0]# src/redis-cli </div><div class="line">127.0.0.1:6379&gt; keys *</div><div class="line">1) &quot;sex&quot;</div><div class="line">2) &quot;age&quot;</div><div class="line">3) &quot;name&quot;</div><div class="line">127.0.0.1:6379&gt; config get requirepass </div><div class="line">1) &quot;requirepass&quot;</div><div class="line">2) &quot;&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
-<p>设置密码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@localhost redis-3.2.0]# src/redis-cli </div><div class="line">127.0.0.1:6379&gt; keys *</div><div class="line">1) &quot;sex&quot;</div><div class="line">2) &quot;age&quot;</div><div class="line">3) &quot;name&quot;</div><div class="line">127.0.0.1:6379&gt; config get requirepass </div><div class="line">1) &quot;requirepass&quot;</div><div class="line">2) &quot;&quot;</div><div class="line">127.0.0.1:6379&gt; config set requirepass javen</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
-<p>==无需重启== 使用原来的无密码登录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost redis-3.2.0]# src/redis-cli </div><div class="line">127.0.0.1:6379&gt; keys *</div><div class="line">(error) NOAUTH Authentication required.</div></pre></td></tr></table></figure>
-<p>使用修改后的密码登录redis，可以执行相应操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost redis-3.2.0]# src/redis-cli -h 127.0.0.1 -a javen</div><div class="line">127.0.0.1:6379&gt; keys *</div><div class="line">1) &quot;sex&quot;</div><div class="line">2) &quot;age&quot;</div><div class="line">3) &quot;name&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
-<p>==尝试重启一下redis，用新配置的密码登录redis执行操作，发现新的密码失效，原因是redis重新使用了配置文件中的密码==</p>
-<p>除了在登录时通过 -a 参数制定密码外，还可以登录时不指定密码，而在执行操作前进行认证。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; </div><div class="line">[root@localhost redis-3.2.0]# src/redis-cli </div><div class="line">127.0.0.1:6379&gt; keys *</div><div class="line">(error) NOAUTH Authentication required.</div><div class="line">127.0.0.1:6379&gt; </div><div class="line">[root@localhost redis-3.2.0]# src/redis-cli -h 127.0.0.1 -p 6379  </div><div class="line">127.0.0.1:6379&gt; config get requirepass </div><div class="line">(error) NOAUTH Authentication required.</div><div class="line">127.0.0.1:6379&gt; auth javen</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; config get requirepass</div><div class="line">1) &quot;requirepass&quot;</div><div class="line">2) &quot;javen&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>3.master配置了密码，slave如何配置</p>
-</blockquote>
-<p>若master配置了密码则slave也要配置相应的密码参数否则无法进行正常复制的。<br>slave中配置文件内找到如下行，移除注释，修改密码即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#masterauth  mstpassword</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/29/Redis的三种启动方式/" itemprop="url">
-                  Redis 的三种启动方式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T16:00:34+08:00" content="2016-06-29">
-              2016-06-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/29/Redis的三种启动方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/29/Redis的三种启动方式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/29/Redis的三种启动方式/" class="leancloud_visitors" data-flag-title="Redis 的三种启动方式">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>Redis的三种启动方式</strong></p>
-<p><strong>Part I. 直接启动</strong></p>
-<blockquote>
-<p>启动</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//加上`&amp;`号使redis以后台程序方式运行</div><div class="line">./redis-server &amp;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>检测</p>
-</blockquote>
-<ul>
-<li>检测后台进程是否存在</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -ef |grep redis</div></pre></td></tr></table></figure>
-<ul>
-<li>检测6379端口是否在监听</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -lntp | grep 6379</div></pre></td></tr></table></figure>
-<ul>
-<li>使用<code>redis-cli</code>客户端检测连接是否正常</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">./redis-cli</div><div class="line">127.0.0.1:6379&gt; keys *</div><div class="line">(empty list or set)</div><div class="line">127.0.0.1:6379&gt; set key &quot;hello world&quot;</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get key</div><div class="line">&quot;hello world&quot;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>停止</p>
-</blockquote>
-<ul>
-<li>使用客户端</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis-cli shutdown</div></pre></td></tr></table></figure>
-<ul>
-<li>因为Redis可以妥善处理SIGTERM信号，所以直接kill -9也是可以的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kill -9 PID</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>Part II. 通过指定配置文件启动</strong></p>
-<p><strong>配置文件</strong> </p>
-<p>可为redis服务启动指定配置文件，配置文件 redis.conf 在Redis根目录下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#修改daemonize为yes，即默认以后台程序方式运行（还记得前面手动使用&amp;号强制后台运行吗）。</div><div class="line">daemonize no</div><div class="line">#可修改默认监听端口</div><div class="line">port 6379</div><div class="line">#修改生成默认日志文件位置</div><div class="line">logfile &quot;/home/javen/logs/redis.log&quot;</div><div class="line">#配置持久化文件存放位置</div><div class="line">dir /home/javen/data/redisData</div></pre></td></tr></table></figure>
-<p><strong>启动时指定配置文件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redis-server ./redis.conf</div><div class="line">#如果更改了端口，使用`redis-cli`客户端连接时，也需要指定端口，例如：</div><div class="line">redis-cli -p 6379</div></pre></td></tr></table></figure>
-<p>其启动停止同直接启动方式。配置文件是非常重要的配置工具，随着使用的逐渐深入将显得尤为重要，推荐在一开始就使用配置文件。</p>
-<p><strong>Part III. 使用Redis启动脚本设置开机自启动</strong></p>
-<p><strong>启动脚本</strong></p>
-<p>推荐在生产环境中使用启动脚本方式启动redis服务。启动脚本 redis_init_script 位于位于Redis的 /utils/ 目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#大致浏览下该启动脚本，发现redis习惯性用监听的端口名作为配置文件等命名，我们后面也遵循这个约定。</div><div class="line">#redis服务器监听的端口</div><div class="line">REDISPORT=6379</div><div class="line">#服务端所处位置，在make install后默认存放与`/usr/local/bin/redis-server`，如果未make install则需要修改该路径，下同。</div><div class="line">EXEC=/usr/local/bin/redis-server</div><div class="line">#客户端位置</div><div class="line">CLIEXEC=/usr/local/bin/redis-cli</div><div class="line">#Redis的PID文件位置</div><div class="line">PIDFILE=/var/run/redis_$&#123;REDISPORT&#125;.pid</div><div class="line">#配置文件位置，需要修改</div><div class="line">CONF=&quot;/etc/redis/$&#123;REDISPORT&#125;.conf&quot;</div></pre></td></tr></table></figure>
-<p><strong>配置环境</strong></p>
-<ol>
-<li>根据启动脚本要求，将修改好的配置文件以端口为名复制一份到指定目录。需使用root用户。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /etc/redis</div><div class="line">cp redis.conf /etc/redis/6379.conf</div></pre></td></tr></table></figure>
-<ol>
-<li>将启动脚本复制到/etc/init.d目录下，本例将启动脚本命名为redisd（通常都以d结尾表示是后台自启动服务）。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp redis_init_script /etc/init.d/redisd</div></pre></td></tr></table></figure>
-<ol>
-<li>设置为开机自启动</li>
-</ol>
-<p>此处直接配置开启自启动 chkconfig redisd on 将报错误： service redisd does not support chkconfig </p>
-<p>参照 <a href="http://www.cnblogs.com/goodspeed/archive/2012/10/18/2729615.html" target="_blank" rel="external">此篇文章</a> ，在启动脚本开头添加如下两行注释以修改其运行级别：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line"># chkconfig:   2345 90 10</div><div class="line"># description:  Redis is a persistent key-value database</div><div class="line">#</div></pre></td></tr></table></figure>
-<p> 再设置即可成功。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#设置为开机自启动服务器</div><div class="line">chkconfig redisd on</div><div class="line">#打开服务</div><div class="line">service redisd start</div><div class="line">#关闭服务</div><div class="line">service redisd stop</div></pre></td></tr></table></figure>
-<p><a href="http://www.tuicool.com/articles/aQbQ3u" target="_blank" rel="external">参考文档 http://www.tuicool.com/articles/aQbQ3u</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1929,7 +1887,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1946,7 +1904,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

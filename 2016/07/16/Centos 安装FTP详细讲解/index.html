@@ -1,0 +1,1095 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,Centos,FTP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="安装FTP使用yum安装1yum -yinstall ftp vsftpd
+使用RPM安装需要安装一下两个包
+123ftp-0.17-66.el7.x86_64vsftpd-3.0.2-9.el7.x86_64
+另外需要安装db包，用来加密虚拟用户的账户信息（这个包在centos7中默认已经安装了）
+1rpm -qf/usr/bin/db_load libdb-utils-5.3.21-17.el">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Contos/Linux 安装FTP详解">
+<meta property="og:url" content="http://javen205.gihub.io/2016/07/16/Centos 安装FTP详细讲解/index.html">
+<meta property="og:site_name" content="智慧云端日记">
+<meta property="og:description" content="安装FTP使用yum安装1yum -yinstall ftp vsftpd
+使用RPM安装需要安装一下两个包
+123ftp-0.17-66.el7.x86_64vsftpd-3.0.2-9.el7.x86_64
+另外需要安装db包，用来加密虚拟用户的账户信息（这个包在centos7中默认已经安装了）
+1rpm -qf/usr/bin/db_load libdb-utils-5.3.21-17.el">
+<meta property="og:updated_time" content="2016-07-16T14:48:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contos/Linux 安装FTP详解">
+<meta name="twitter:description" content="安装FTP使用yum安装1yum -yinstall ftp vsftpd
+使用RPM安装需要安装一下两个包
+123ftp-0.17-66.el7.x86_64vsftpd-3.0.2-9.el7.x86_64
+另外需要安装db包，用来加密虚拟用户的账户信息（这个包在centos7中默认已经安装了）
+1rpm -qf/usr/bin/db_load libdb-utils-5.3.21-17.el">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://javen205.gihub.io/2016/07/16/Centos 安装FTP详细讲解/"/>
+
+  <title> Contos/Linux 安装FTP详解 | 智慧云端日记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7db51d5bb8825e0ae42c8881760c229c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">智慧云端日记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just do IT</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rewards">
+          <a href="/2016/07/02/打赏捐赠列表/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-money"></i> <br />
+            
+            捐赠列表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Contos/Linux 安装FTP详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T22:50:00+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/Centos/" itemprop="url" rel="index">
+                    <span itemprop="name">Centos</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/16/Centos 安装FTP详细讲解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/Centos 安装FTP详细讲解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/16/Centos 安装FTP详细讲解/" class="leancloud_visitors" data-flag-title="Contos/Linux 安装FTP详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="安装FTP"><a href="#安装FTP" class="headerlink" title="安装FTP"></a>安装FTP</h3><h2 id="使用yum安装"><a href="#使用yum安装" class="headerlink" title="使用yum安装"></a>使用yum安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -yinstall ftp vsftpd</div></pre></td></tr></table></figure>
+<h2 id="使用RPM安装"><a href="#使用RPM安装" class="headerlink" title="使用RPM安装"></a>使用RPM安装</h2><p>需要安装一下两个包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ftp-0.17-66.el7.x86_64</div><div class="line"></div><div class="line">vsftpd-3.0.2-9.el7.x86_64</div></pre></td></tr></table></figure>
+<p>另外需要安装db包，用来加密虚拟用户的账户信息（这个包在centos7中默认已经安装了）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qf/usr/bin/db_load libdb-utils-5.3.21-17.el7_0.1.x86_64</div></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h2 id="创建Ftp文件保存路径"><a href="#创建Ftp文件保存路径" class="headerlink" title="创建Ftp文件保存路径"></a>创建Ftp文件保存路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir/ftp/open</div></pre></td></tr></table></figure>
+<h2 id="添加测试文件"><a href="#添加测试文件" class="headerlink" title="添加测试文件"></a>添加测试文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo opentest &gt; /ftp/open/open.txt</div><div class="line"></div><div class="line">touch /ftp/open/anontest.txt</div></pre></td></tr></table></figure>
+<h2 id="查看配置文件所在路径"><a href="#查看配置文件所在路径" class="headerlink" title="查看配置文件所在路径"></a>查看配置文件所在路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">rpm -qc vsftpd</div><div class="line"></div><div class="line">/etc/logrotate.d/vsftpd</div><div class="line">/etc/pam.d/vsftpd</div><div class="line">/etc/vsftpd/ftpusers</div><div class="line">/etc/vsftpd/user_list</div><div class="line">/etc/vsftpd/vsftpd.conf</div></pre></td></tr></table></figure>
+<h2 id="备份原有配置文件"><a href="#备份原有配置文件" class="headerlink" title="备份原有配置文件"></a>备份原有配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp vsftpd.conf vsftpd.conf.origin</div></pre></td></tr></table></figure>
+<h2 id="创建密码明文文件"><a href="#创建密码明文文件" class="headerlink" title="创建密码明文文件"></a>创建密码明文文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/vsftpd/vftpuser.txt</div></pre></td></tr></table></figure>
+<p>添加如下类容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">javen</div><div class="line">javen123</div><div class="line">test</div><div class="line">test123</div></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：基数行是用户名；偶数行是密码</p>
+</blockquote>
+<h2 id="根据明文创建密码DB文件"><a href="#根据明文创建密码DB文件" class="headerlink" title="根据明文创建密码DB文件"></a>根据明文创建密码DB文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db_load -T -t hash -f /etc/vsftpd/vftpuser.txt  /etc/vsftpd/vftpuser.db</div></pre></td></tr></table></figure>
+<h2 id="查看密码数据文件"><a href="#查看密码数据文件" class="headerlink" title="查看密码数据文件"></a>查看密码数据文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file /etc/vsftpd/vftpuser.db</div></pre></td></tr></table></figure>
+<p>输出结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/vsftpd/vftpuser.db: Berkeley DB (Hash, version 9, native byte-order)</div></pre></td></tr></table></figure>
+<h2 id="创建vftpd的guest账户"><a href="#创建vftpd的guest账户" class="headerlink" title="创建vftpd的guest账户"></a>创建vftpd的guest账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -d/ftp/private -s /sbin/nologin vftpuser</div></pre></td></tr></table></figure>
+<h2 id="编辑生成虚拟用户所需的PAM-配置文件"><a href="#编辑生成虚拟用户所需的PAM-配置文件" class="headerlink" title="编辑生成虚拟用户所需的PAM 配置文件"></a>编辑生成虚拟用户所需的PAM 配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/pam.d/vsftpd</div></pre></td></tr></table></figure>
+<p>再将auth及account的所有配置行行均注释掉，添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auth required /lib/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div><div class="line"></div><div class="line">account required /lib/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div></pre></td></tr></table></figure>
+<p>如果你是64位系统则添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div><div class="line"></div><div class="line">account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div></pre></td></tr></table></figure>
+<p>如何查询系统的版本？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getconf LONG_BIT</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果没有填写出错将会出现以下异常：</p>
+<p>530 Login incorrect错误</p>
+<p>查看日志<br>tail -f /var/log/secure</p>
+<p>发现 PAM unable to dlopen(/lib/security/pam_userdb.so): /lib/security/pam_userdb.so: cannot open shared object file: No such file or directory</p>
+<p>原来pam_userdb.so在/lib64/security/pam_userdb.so</p>
+</blockquote>
+<h2 id="最终的配置"><a href="#最终的配置" class="headerlink" title="最终的配置"></a>最终的配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#%PAM-1.0</div><div class="line">#session    optional     pam_keyinit.so    force revoke</div><div class="line">#auth       required    pam_listfile.so item=user sense=deny file=/etc/vsftpd/ftpusers onerr=succeed</div><div class="line">#auth       required    pam_shells.so</div><div class="line">#auth       include     password-auth</div><div class="line">#account    include     password-auth</div><div class="line">#session    required     pam_loginuid.so</div><div class="line">#session    include     password-auth</div><div class="line">auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div><div class="line">account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div></pre></td></tr></table></figure>
+<h2 id="修改vsftpd-conf配置文件"><a href="#修改vsftpd-conf配置文件" class="headerlink" title="修改vsftpd.conf配置文件"></a>修改vsftpd.conf配置文件</h2><p>在最后添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">anon_root=/ftp/open</div><div class="line">virtual_use_local_privs=YES</div><div class="line">guest_enable=YES</div><div class="line">guest_username=vftpuser</div><div class="line">chroot_local_user=YES</div><div class="line">allow_writeable_chroot=YES</div></pre></td></tr></table></figure>
+<p>详细配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div></pre></td><td class="code"><pre><div class="line"># Example config file /etc/vsftpd/vsftpd.conf</div><div class="line">#</div><div class="line"># The default compiled in settings are fairly paranoid. This sample file</div><div class="line"># loosens things up a bit, to make the ftp daemon more usable.</div><div class="line"># Please see vsftpd.conf.5 for all compiled in defaults.</div><div class="line">#</div><div class="line"># READ THIS: This example file is NOT an exhaustive list of vsftpd options.</div><div class="line"># Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd&apos;s</div><div class="line"># capabilities.</div><div class="line">#</div><div class="line"># Allow anonymous FTP? (Beware - allowed by default if you comment this out).</div><div class="line">anonymous_enable=NO</div><div class="line">#</div><div class="line"># Uncomment this to allow local users to log in.</div><div class="line"># When SELinux is enforcing check for SE bool ftp_home_dir</div><div class="line">local_enable=YES</div><div class="line">#</div><div class="line"># Uncomment this to enable any form of FTP write command.</div><div class="line">write_enable=YES</div><div class="line">#</div><div class="line"># Default umask for local users is 077. You may wish to change this to 022,</div><div class="line"># if your users expect that (022 is used by most other ftpd&apos;s)</div><div class="line">local_umask=022</div><div class="line">#</div><div class="line"># Uncomment this to allow the anonymous FTP user to upload files. This only</div><div class="line"># has an effect if the above global write enable is activated. Also, you will</div><div class="line"># obviously need to create a directory writable by the FTP user.</div><div class="line"># When SELinux is enforcing check for SE bool allow_ftpd_anon_write, allow_ftpd_full_access</div><div class="line">anon_upload_enable=YES</div><div class="line">#</div><div class="line"># Uncomment this if you want the anonymous FTP user to be able to create</div><div class="line"># new directories.</div><div class="line">anon_mkdir_write_enable=YES</div><div class="line">#</div><div class="line"># Activate directory messages - messages given to remote users when they</div><div class="line"># go into a certain directory.</div><div class="line">dirmessage_enable=YES</div><div class="line">#</div><div class="line"># Activate logging of uploads/downloads.</div><div class="line">xferlog_enable=YES</div><div class="line">#</div><div class="line"># Make sure PORT transfer connections originate from port 20 (ftp-data).</div><div class="line">connect_from_port_20=YES</div><div class="line">#</div><div class="line"># If you want, you can arrange for uploaded anonymous files to be owned by</div><div class="line"># a different user. Note! Using &quot;root&quot; for uploaded files is not</div><div class="line"># recommended!</div><div class="line">#chown_uploads=YES</div><div class="line">#chown_username=whoever</div><div class="line">#</div><div class="line"># You may override where the log file goes if you like. The default is shown</div><div class="line"># below.</div><div class="line">xferlog_file=/var/log/xferlog</div><div class="line">#</div><div class="line"># If you want, you can have your log file in standard ftpd xferlog format.</div><div class="line"># Note that the default log file location is /var/log/xferlog in this case.</div><div class="line">xferlog_std_format=YES</div><div class="line">#</div><div class="line"># You may change the default value for timing out an idle session.</div><div class="line">#idle_session_timeout=600</div><div class="line">#</div><div class="line"># You may change the default value for timing out a data connection.</div><div class="line">#data_connection_timeout=120</div><div class="line">#</div><div class="line"># It is recommended that you define on your system a unique user which the</div><div class="line"># ftp server can use as a totally isolated and unprivileged user.</div><div class="line">#nopriv_user=ftpsecure</div><div class="line">#</div><div class="line"># Enable this and the server will recognise asynchronous ABOR requests. Not</div><div class="line"># recommended for security (the code is non-trivial). Not enabling it,</div><div class="line"># however, may confuse older FTP clients.</div><div class="line">#async_abor_enable=YES</div><div class="line">#</div><div class="line"># By default the server will pretend to allow ASCII mode but in fact ignore</div><div class="line"># the request. Turn on the below options to have the server actually do ASCII</div><div class="line"># mangling on files when in ASCII mode.</div><div class="line"># Beware that on some FTP servers, ASCII support allows a denial of service</div><div class="line"># attack (DoS) via the command &quot;SIZE /big/file&quot; in ASCII mode. vsftpd</div><div class="line"># predicted this attack and has always been safe, reporting the size of the</div><div class="line"># raw file.</div><div class="line"># ASCII mangling is a horrible feature of the protocol.</div><div class="line">#ascii_upload_enable=YES</div><div class="line">#ascii_download_enable=YES</div><div class="line">#</div><div class="line"># You may fully customise the login banner string:</div><div class="line">ftpd_banner=Welcome to blah FTP service.</div><div class="line">#</div><div class="line"># You may specify a file of disallowed anonymous e-mail addresses. Apparently</div><div class="line"># useful for combatting certain DoS attacks.</div><div class="line">#deny_email_enable=YES</div><div class="line"># (default follows)</div><div class="line">#banned_email_file=/etc/vsftpd/banned_emails</div><div class="line">#</div><div class="line"># You may specify an explicit list of local users to chroot() to their home</div><div class="line"># directory. If chroot_local_user is YES, then this list becomes a list of</div><div class="line"># users to NOT chroot().</div><div class="line"># (Warning! chroot&apos;ing can be very dangerous. If using chroot, make sure that</div><div class="line"># the user does not have write access to the top level directory within the</div><div class="line"># chroot)</div><div class="line">#chroot_local_user=YES</div><div class="line">#chroot_list_enable=YES</div><div class="line"># (default follows)</div><div class="line">#chroot_list_file=/etc/vsftpd/chroot_list</div><div class="line">#</div><div class="line"># You may activate the &quot;-R&quot; option to the builtin ls. This is disabled by</div><div class="line"># default to avoid remote users being able to cause excessive I/O on large</div><div class="line"># sites. However, some broken FTP clients such as &quot;ncftp&quot; and &quot;mirror&quot; assume</div><div class="line"># the presence of the &quot;-R&quot; option, so there is a strong case for enabling it.</div><div class="line">#ls_recurse_enable=YES</div><div class="line">#</div><div class="line"># When &quot;listen&quot; directive is enabled, vsftpd runs in standalone mode and</div><div class="line"># listens on IPv4 sockets. This directive cannot be used in conjunction</div><div class="line"># with the listen_ipv6 directive.</div><div class="line">listen=YES</div><div class="line">#</div><div class="line"># This directive enables listening on IPv6 sockets. By default, listening</div><div class="line"># on the IPv6 &quot;any&quot; address (::) will accept connections from both IPv6</div><div class="line"># and IPv4 clients. It is not necessary to listen on *both* IPv4 and IPv6</div><div class="line"># sockets. If you want that (perhaps because you want to listen on specific</div><div class="line"># addresses) then you must run two copies of vsftpd with two configuration</div><div class="line"># files.</div><div class="line"># Make sure, that one of the listen options is commented !!</div><div class="line">#listen_ipv6=YES</div><div class="line"></div><div class="line">pam_service_name=vsftpd</div><div class="line">userlist_enable=YES</div><div class="line">tcp_wrappers=YES</div><div class="line"></div><div class="line">anon_root=/home/ftp/open</div><div class="line">virtual_use_local_privs=YES</div><div class="line">guest_enable=YES</div><div class="line">guest_username=vftpuser</div><div class="line">chroot_local_user=YES</div><div class="line">allow_writeable_chroot=YES</div></pre></td></tr></table></figure>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start vsftpd</div></pre></td></tr></table></figure>
+<h3 id="查看目前的状态"><a href="#查看目前的状态" class="headerlink" title="查看目前的状态"></a>查看目前的状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl status vsftpd</div></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ftp localhost</div></pre></td></tr></table></figure>
+<p>输入用户名以及密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@iZ94hjirr10Z vsftpd]# ftp localhost</div><div class="line">Trying 127.0.0.1...</div><div class="line">Connected to localhost (127.0.0.1).</div><div class="line">220 Welcome to blah FTP service.</div><div class="line">Name (localhost:root): javen</div><div class="line">331 Please specify the password.</div><div class="line">Password:</div><div class="line">230 Login successful.</div><div class="line">Remote system type is UNIX.</div><div class="line">Using binary mode to transfer files.</div><div class="line">ftp&gt; ls</div><div class="line">227 Entering Passive Mode (127,0,0,1,38,217).</div><div class="line">150 Here comes the directory listing.</div><div class="line">-rw-r--r--    1 1000     1000        11641 Jul 13 07:22 00_1.jpg</div><div class="line">-rw-r--r--    1 1000     1000        13024 Jul 13 07:23 00_2.jpg</div><div class="line">-rw-r--r--    1 1000     1000        10989 Jul 13 07:23 00_3.jpg</div><div class="line">-rwxrwxrwx    1 1000     1000           10 Jul 05 06:14 ftptest.txt</div><div class="line">drwxrwxrwx    2 1000     1000        20480 Jul 16 06:15 images</div><div class="line">-rw-r--r--    1 0        0              12 Jul 05 06:13 ss</div><div class="line">226 Directory send OK.</div><div class="line">ftp&gt; bye</div><div class="line">221 Goodbye.</div></pre></td></tr></table></figure>
+<p>以上是配置的详细教程，有问题请在评论区留言。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/to/wechat-qcode.jpg" alt="Javen wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/to/wx.jpg" alt="Javen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/to/apay.jpg" alt="Javen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/Centos/" rel="tag">#Centos</a>
+          
+            <a href="/tags/FTP/" rel="tag">#FTP</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/16/Linux防火墙/" rel="next" title="Linux防火墙">
+                <i class="fa fa-chevron-left"></i> Linux防火墙
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/16/Centos 安装FTP详细讲解/"
+     data-title="Contos/Linux 安装FTP详解"
+     data-content=""
+     data-url="http://javen205.gihub.io/2016/07/16/Centos 安装FTP详细讲解/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/16/Centos 安装FTP详细讲解/"
+           data-title="Contos/Linux 安装FTP详解" data-url="http://javen205.gihub.io/2016/07/16/Centos 安装FTP详细讲解/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo/img.jpg"
+               alt="Javen" />
+          <p class="site-author-name" itemprop="name">Javen</p>
+          <p class="site-description motion-element" itemprop="description">凡事皆有终结，因此，耐心是赢得成功的一种手段。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://git.oschina.net/javen205" target="_blank" title="Git">
+                  
+                    <i class="fa fa-fw fa-git"></i>
+                  
+                  Git
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2545091901" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/zyw-205520" target="_blank" title="博客">
+                  
+                    <i class="fa fa-fw fa-gg-circle"></i>
+                  
+                  博客
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="需要友情链接点击这里" target="_blank">需要友情链接点击这里</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="如果友情链接过多，将会选择打赏前五名" target="_blank">如果友情链接过多，将会选择打赏前五名</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装FTP"><span class="nav-number">1.</span> <span class="nav-text">安装FTP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用yum安装"><span class="nav-number"></span> <span class="nav-text">使用yum安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用RPM安装"><span class="nav-number"></span> <span class="nav-text">使用RPM安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Ftp文件保存路径"><span class="nav-number"></span> <span class="nav-text">创建Ftp文件保存路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加测试文件"><span class="nav-number"></span> <span class="nav-text">添加测试文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看配置文件所在路径"><span class="nav-number"></span> <span class="nav-text">查看配置文件所在路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份原有配置文件"><span class="nav-number"></span> <span class="nav-text">备份原有配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建密码明文文件"><span class="nav-number"></span> <span class="nav-text">创建密码明文文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据明文创建密码DB文件"><span class="nav-number"></span> <span class="nav-text">根据明文创建密码DB文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看密码数据文件"><span class="nav-number"></span> <span class="nav-text">查看密码数据文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建vftpd的guest账户"><span class="nav-number"></span> <span class="nav-text">创建vftpd的guest账户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑生成虚拟用户所需的PAM-配置文件"><span class="nav-number"></span> <span class="nav-text">编辑生成虚拟用户所需的PAM 配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终的配置"><span class="nav-number"></span> <span class="nav-text">最终的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改vsftpd-conf配置文件"><span class="nav-number"></span> <span class="nav-text">修改vsftpd.conf配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看目前的状态"><span class="nav-number">2.</span> <span class="nav-text">查看目前的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Yu7irauVr0CHgnXgUolTJEz1-gzGzoHsz", "NmtG2bRFM173EgH4J6Jj7ygF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
