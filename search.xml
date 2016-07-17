@@ -4,6 +4,138 @@
   
     
     <entry>
+      <title><![CDATA[志强英语]]></title>
+      <url>javen205.github.io/2016/07/17/%E5%BF%97%E5%BC%BA%E8%8B%B1%E8%AF%AD/</url>
+      <content type="html"><![CDATA[<h3 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h3><ol>
+<li>志强课程-微官网</li>
+</ol>
+<ul>
+<li>热线电话</li>
+<li>QQ在线咨询</li>
+<li>订单查询</li>
+<li>微社区</li>
+<li>意见反馈</li>
+<li>直播课程列表</li>
+</ul>
+<ol>
+<li><p>课程介绍</p>
+</li>
+<li><p>课程购买</p>
+<blockquote>
+<p>微信支付</p>
+</blockquote>
+</li>
+<li><p>课程直播 </p>
+<blockquote>
+<p>接入第三方实时直播平台</p>
+</blockquote>
+</li>
+<li><p>英语测评 </p>
+<blockquote>
+<p>6套题，每套题50题。测评时随机分配一套题并打乱顺序进行答题</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="效果图展示"><a href="#效果图展示" class="headerlink" title="效果图展示"></a>效果图展示</h3><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/images/public/ZQEnglish/IMG_1347.png" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 14.285714285714286%;"><img src="/images/public/ZQEnglish/IMG_1348.png" alt=""></div><div class="group-picture-column" style="width: 14.285714285714286%;"><img src="/images/public/ZQEnglish/IMG_1349.png" alt=""></div><div class="group-picture-column" style="width: 14.285714285714286%;"><img src="/images/public/ZQEnglish/IMG_1350.png" alt=""></div><div class="group-picture-column" style="width: 14.285714285714286%;"><img src="/images/public/ZQEnglish/IMG_1352.png" alt=""></div><div class="group-picture-column" style="width: 14.285714285714286%;"><img src="/images/public/ZQEnglish/IMG_1353.png" alt=""></div><div class="group-picture-column" style="width: 14.285714285714286%;"><img src="/images/public/ZQEnglish/IMG_1354.png" alt=""></div><div class="group-picture-column" style="width: 14.285714285714286%;"><img src="/images/public/ZQEnglish/IMG_1346.png" alt=""></div></div></div></div>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[视频报警终端]]></title>
+      <url>javen205.github.io/2016/07/17/%E8%A7%86%E9%A2%91%E6%8A%A5%E8%AD%A6%E7%BB%88%E7%AB%AF/</url>
+      <content type="html"><![CDATA[<h3 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h3><ol>
+<li>设备绑定</li>
+</ol>
+<ul>
+<li>手动输入UID（设备号）绑定</li>
+<li>扫码绑定</li>
+<li>验证设备号</li>
+<li>绑定限制（一个设备只支持3个openId绑定（包括分享））</li>
+</ul>
+<ol>
+<li>绑定设备列表</li>
+</ol>
+<ul>
+<li>设备管理员支持分享设备给好友绑定</li>
+<li>管理员接收分享绑定通知，确定此好友是否绑定</li>
+<li>分享管理</li>
+<li>解除绑定</li>
+<li>设置报警时间</li>
+</ul>
+<p>3、通知</p>
+<ul>
+<li>绑定通知</li>
+<li>解绑通知</li>
+<li>设备报警通知</li>
+<li>分享确定通知</li>
+</ul>
+<blockquote>
+<p>报警图片视频存放在FTP服务器；当点击之报警通知之后下载资源并显示在终端</p>
+</blockquote>
+<h3 id="效果图展示"><a href="#效果图展示" class="headerlink" title="效果图展示"></a>效果图展示</h3><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/images/public/SPBJD/IMG_1356.png" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1357.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1358.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1359.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1360.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1361.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1362.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1363.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1364.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1365.png" alt=""></div><div class="group-picture-column" style="width: 10%;"><img src="/images/public/SPBJD/IMG_1366.png" alt=""></div></div></div></div>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[极速开发微信公众号]]></title>
+      <url>javen205.github.io/2016/07/17/%E6%9E%81%E9%80%9F%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/</url>
+      <content type="html"><![CDATA[<h3 id="项目开源地址"><a href="#项目开源地址" class="headerlink" title="项目开源地址"></a>项目开源地址</h3><p><a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">weixin_guide</a> </p>
+<p><a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">http://git.oschina.net/javen205/weixin_guide</a></p>
+<h3 id="版本更新记录"><a href="#版本更新记录" class="headerlink" title="版本更新记录"></a>版本更新记录</h3><p><code>注意</code> 最新版本的会进行<code>bug</code>修复以及功能点的添加，建议大家尽量升级到最新版本，另外发现<code>bug</code>请及时反馈，谢谢！</p>
+<h1 id="2016-7-6"><a href="#2016-7-6" class="headerlink" title="2016/7/6"></a>2016/7/6</h1><ul>
+<li>异步单文件多文件上传 </li>
+</ul>
+<h1 id="2016-5-30"><a href="#2016-5-30" class="headerlink" title="2016/5/30"></a>2016/5/30</h1><ul>
+<li>自定义菜单的封装</li>
+</ul>
+<blockquote>
+<p>详细的封装见：<code>com.javen.weixin.menu</code></p>
+</blockquote>
+<h1 id="2016-5-28"><a href="#2016-5-28" class="headerlink" title="2016/5/28"></a>2016/5/28</h1><ul>
+<li>添加发送红包的接口以及Demo </li>
+</ul>
+<blockquote>
+<p>API<code>com.javen.utils.ReadPackUtils.java</code><br>Demo<code>com.javen.weixin.controller.RedPackApiController.java</code></p>
+</blockquote>
+<h1 id="2016-5-24"><a href="#2016-5-24" class="headerlink" title="2016/5/24"></a>2016/5/24</h1><ul>
+<li>添加人脸识别功能</li>
+</ul>
+<h1 id="2016-5-22"><a href="#2016-5-22" class="headerlink" title="2016/5/22"></a>2016/5/22</h1><ul>
+<li>添加获取微信用户信息并导入到excel下载到本地</li>
+</ul>
+<h1 id="2016-5-19"><a href="#2016-5-19" class="headerlink" title="2016/5/19"></a>2016/5/19</h1><ul>
+<li>修复数据创建表默认值异常的问题</li>
+</ul>
+<h1 id="weixin-guide-1-0-Change-log"><a href="#weixin-guide-1-0-Change-log" class="headerlink" title="weixin_guide 1.0 Change log"></a>weixin_guide 1.0 Change log</h1><ul>
+<li>会员注册、找回密码、登陆（邮箱与手机验证码）</li>
+<li>JSSDK封装（ShareInterceptor拦截器）</li>
+<li>微信支付完整的Demo</li>
+<li>分享朋友圈添加积分功能</li>
+<li>授权获取用户信息</li>
+<li>判断用户是否关注，如没有跳转到关注页面</li>
+<li>在线翻译</li>
+<li>星座查询</li>
+<li>常用微信事件的封装</li>
+<li>Ajax请求封装</li>
+<li>添加定制器<a href="https://git.oschina.net/javen205/jfinal-scheduler.git" target="_blank" rel="external">SchedulerPlugin</a></li>
+</ul>
+<h3 id="目录结构说明"><a href="#目录结构说明" class="headerlink" title="目录结构说明"></a>目录结构说明</h3><p>注意：由于此项目是正式上线的项目，此次开源只是我抽离出来了核心代码。可能缺少那几个JSP</p>
+<p>项目介绍详细介绍如下</p>
+<ul>
+<li>/msg             微信所有消息的入口（成为开发者<a href="http://域名【/项目名】/msg）" target="_blank" rel="external">http://域名【/项目名】/msg）</a></li>
+<li>/toOauth         授权跳转指定页面 （如果没有关注就跳转到专注页面）  </li>
+<li>/register        会员注册页面  </li>
+<li>/forget          会员找回密码页面  </li>
+<li>/idea            意见反馈页面  </li>
+<li>/translate       在线翻译    </li>
+<li>/constellation/  星座查询</li>
+<li>/share  /share/customer分享以及微信支付页面参考</li>
+<li>/pay             微信支付</li>
+<li>/ajax            ajax控制器 </li>
+<li>项目中定时调度使用的是<a href="https://git.oschina.net/javen205/jfinal-scheduler.git" target="_blank" rel="external">jfinal-scheduler</a></li>
+</ul>
+<h3 id="效果图展示"><a href="#效果图展示" class="headerlink" title="效果图展示"></a>效果图展示</h3><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/images/public/weixin_guide/8.pic.jpg" alt="登录"></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/9.pic.jpg" alt="注册"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/10.pic.jpg" alt="注册"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/11.pic.jpg" alt="找回密码"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/12.pic.jpg" alt="JSSDK签名"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/13.pic.jpg" alt="微信支付"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/14.pic.jpg" alt="JSSDK分享"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/15.pic.jpg" alt="意见反馈"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/18.pic.jpg" alt="百度翻译"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/19.pic.jpg" alt="百度翻译结果"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/20.pic.jpg" alt="星座查询首页"></div><div class="group-picture-column" style="width: 9.090909090909092%;"><img src="/images/public/weixin_guide/21.pic.jpg" alt="星座查询结果"></div></div></div></div>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Contos/Linux 安装FTP详解]]></title>
       <url>javen205.github.io/2016/07/16/Centos%20%E5%AE%89%E8%A3%85FTP%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3/</url>
       <content type="html"><![CDATA[<h3 id="安装FTP"><a href="#安装FTP" class="headerlink" title="安装FTP"></a>安装FTP</h3><h2 id="使用yum安装"><a href="#使用yum安装" class="headerlink" title="使用yum安装"></a>使用yum安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -yinstall ftp vsftpd</div></pre></td></tr></table></figure>
