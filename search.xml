@@ -79,7 +79,10 @@
       <url>http://javen205.oschina.io/2016/07/17/%E6%9E%81%E9%80%9F%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/</url>
       <content type="html"><![CDATA[<h3 id="项目开源地址"><a href="#项目开源地址" class="headerlink" title="项目开源地址"></a>项目开源地址</h3><p><a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">weixin_guide</a> </p>
 <p><a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">http://git.oschina.net/javen205/weixin_guide</a></p>
-<h3 id="版本更新记录"><a href="#版本更新记录" class="headerlink" title="版本更新记录"></a>版本更新记录</h3><figure class="highlight plain"><figcaption><span>最新版本的会进行```bug```修复以及功能点的添加，建议大家尽量升级到最新版本，另外发现```bug```请及时反馈，谢谢！</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 2016/7/6</div><div class="line">- 异步单文件多文件上传  ```@半曲恋江南</div></pre></td></tr></table></figure>
+<h3 id="版本更新记录"><a href="#版本更新记录" class="headerlink" title="版本更新记录"></a>版本更新记录</h3><p><code>注意</code> 最新版本的会进行<code>bug</code>修复以及功能点的添加，建议大家尽量升级到最新版本，另外发现<code>bug</code>请及时反馈，谢谢！</p>
+<h1 id="2016-7-6"><a href="#2016-7-6" class="headerlink" title="2016/7/6"></a>2016/7/6</h1><ul>
+<li>异步单文件多文件上传  <code>@半曲恋江南</code></li>
+</ul>
 <h1 id="2016-5-30"><a href="#2016-5-30" class="headerlink" title="2016/5/30"></a>2016/5/30</h1><ul>
 <li>自定义菜单的封装</li>
 </ul>
