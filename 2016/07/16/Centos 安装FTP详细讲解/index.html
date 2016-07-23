@@ -98,7 +98,7 @@
 123ftp-0.17-66.el7.x86_64vsftpd-3.0.2-9.el7.x86_64
 另外需要安装db包，用来加密虚拟用户的账户信息（这个包在centos7中默认已经安装了）
 1rpm -qf/usr/bin/db_load libdb-utils-5.3.21-17.el">
-<meta property="og:updated_time" content="2016-07-16T14:48:27.000Z">
+<meta property="og:updated_time" content="2016-07-23T07:08:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Contos/Linux 安装FTP详解">
 <meta name="twitter:description" content="安装FTP使用yum安装1yum -yinstall ftp vsftpd
@@ -397,7 +397,7 @@
 <h2 id="查看密码数据文件"><a href="#查看密码数据文件" class="headerlink" title="查看密码数据文件"></a>查看密码数据文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file /etc/vsftpd/vftpuser.db</div></pre></td></tr></table></figure>
 <p>输出结果如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/vsftpd/vftpuser.db: Berkeley DB (Hash, version 9, native byte-order)</div></pre></td></tr></table></figure>
-<h2 id="创建vftpd的guest账户"><a href="#创建vftpd的guest账户" class="headerlink" title="创建vftpd的guest账户"></a>创建vftpd的guest账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -d/ftp/private -s /sbin/nologin vftpuser</div></pre></td></tr></table></figure>
+<h2 id="创建vftpd的guest账户"><a href="#创建vftpd的guest账户" class="headerlink" title="创建vftpd的guest账户"></a>创建vftpd的guest账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -d /ftp/private -s /sbin/nologin vftpuser</div></pre></td></tr></table></figure>
 <h2 id="编辑生成虚拟用户所需的PAM-配置文件"><a href="#编辑生成虚拟用户所需的PAM-配置文件" class="headerlink" title="编辑生成虚拟用户所需的PAM 配置文件"></a>编辑生成虚拟用户所需的PAM 配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/pam.d/vsftpd</div></pre></td></tr></table></figure>
 <p>再将auth及account的所有配置行行均注释掉，添加如下内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auth required /lib/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div><div class="line"></div><div class="line">account required /lib/security/pam_userdb.so db=/etc/vsftpd/vftpuser</div></pre></td></tr></table></figure>
