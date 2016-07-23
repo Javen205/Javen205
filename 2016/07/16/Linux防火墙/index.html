@@ -89,9 +89,7 @@
 即时生效，重启后失效开启：1service iptables start
 关闭：1service iptables stop
 
-需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。
-
-开启端口在开启了防火墙时，做如下设置，开启相关端口，修改/etc/syscon">
+需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux防火墙">
 <meta property="og:url" content="http://javen205.oschina.io/2016/07/16/Linux防火墙/index.html">
@@ -101,10 +99,8 @@
 即时生效，重启后失效开启：1service iptables start
 关闭：1service iptables stop
 
-需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。
-
-开启端口在开启了防火墙时，做如下设置，开启相关端口，修改/etc/syscon">
-<meta property="og:updated_time" content="2016-07-16T13:47:32.000Z">
+需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。">
+<meta property="og:updated_time" content="2016-07-23T07:56:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux防火墙">
 <meta name="twitter:description" content="重启后生效开启：1chkconfig iptables on
@@ -112,9 +108,7 @@
 即时生效，重启后失效开启：1service iptables start
 关闭：1service iptables stop
 
-需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。
-
-开启端口在开启了防火墙时，做如下设置，开启相关端口，修改/etc/syscon">
+需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。">
 
 
 
@@ -392,9 +386,9 @@
 <h3 id="即时生效，重启后失效"><a href="#即时生效，重启后失效" class="headerlink" title="即时生效，重启后失效"></a>即时生效，重启后失效</h3><p>开启：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables start</div></pre></td></tr></table></figure></p>
 <p>关闭：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables stop</div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。</p>
-</blockquote>
-<h3 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h3><p>在开启了防火墙时，做如下设置，开启相关端口，修改/etc/sysconfig/iptables 文件，添加以下内容：</p>
+<p>需要说明的是对于Linux下的其它服务都可以用以上命令执行开启和关闭操作。<br><a id="more"></a> </p>
+<h3 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h3></blockquote>
+<p>在开启了防火墙时，做如下设置，开启相关端口，修改/etc/sysconfig/iptables 文件，添加以下内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT </div><div class="line"></div><div class="line">-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</div></pre></td></tr></table></figure>
 
       

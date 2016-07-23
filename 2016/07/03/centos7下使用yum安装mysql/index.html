@@ -102,7 +102,7 @@
 找到对应的版本下载安装
 
 下载安装下载mysql的repo源1wget http://repo.mysql.com/mysql-community-releas">
-<meta property="og:updated_time" content="2016-07-03T08:47:45.000Z">
+<meta property="og:updated_time" content="2016-07-23T07:56:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos7下使用yum安装mysql">
 <meta name="twitter:description" content="引言：CentOS7的yum源中默认好像是没有mysql的。为了解决这个问题，我们要先下载mysql的repo源。
@@ -393,6 +393,7 @@
 </blockquote>
 <h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><h3 id="下载mysql的repo源"><a href="#下载mysql的repo源" class="headerlink" title="下载mysql的repo源"></a>下载mysql的repo源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
 <h3 id="安装mysql-community-release-el7-5-noarch-rpm包"><a href="#安装mysql-community-release-el7-5-noarch-rpm包" class="headerlink" title="安装mysql-community-release-el7-5.noarch.rpm包"></a>安装mysql-community-release-el7-5.noarch.rpm包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
+<a id="more"></a> 
 <h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-community-server</div></pre></td></tr></table></figure>
 <p>成功安装之后重启mysql服务</p>
 <p>查看mysql进程：</p>
