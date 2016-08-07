@@ -870,8 +870,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/31/从零开始使用Git/" itemprop="url">
-                  从零开始使用Git
+                <a class="post-title-link" href="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/" itemprop="url">
+                  Retrofit 与 RxJava 结合的最佳实践
                 </a>
               
             
@@ -884,8 +884,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-31T12:36:00+08:00" content="2016-07-31">
-              2016-07-31
+            <time itemprop="dateCreated" datetime="2016-08-06T23:43:22+08:00" content="2016-08-06">
+              2016-08-06
             </time>
           </span>
 
@@ -898,8 +898,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -910,8 +910,20 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/资源共享/" itemprop="url" rel="index">
-                    <span itemprop="name">资源共享</span>
+                  <a href="/categories/Android/RxJava/" itemprop="url" rel="index">
+                    <span itemprop="name">RxJava</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/RxJava/Retrofit/" itemprop="url" rel="index">
+                    <span itemprop="name">Retrofit</span>
                   </a>
                 </span>
 
@@ -926,8 +938,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/31/从零开始使用Git/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/31/从零开始使用Git/" itemprop="commentsCount"></span>
+                <a href="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/06/RxJava 与 Retrofit 结合的最佳实践/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -937,7 +949,7 @@
 
           
           
-             <span id="/2016/07/31/从零开始使用Git/" class="leancloud_visitors" data-flag-title="从零开始使用Git">
+             <span id="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/" class="leancloud_visitors" data-flag-title="Retrofit 与 RxJava 结合的最佳实践">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -960,14 +972,13 @@
 
       
         
-          <h2 id="此篇文章是共享资源做记录，我就不重复造轮子了"><a href="#此篇文章是共享资源做记录，我就不重复造轮子了" class="headerlink" title="此篇文章是共享资源做记录，我就不重复造轮子了"></a>此篇文章是共享资源做记录，我就不重复造轮子了</h2><h3 id="什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码"><a href="#什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码" class="headerlink" title="什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码"></a>什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码</h3><p>参考地址：<a href="http://stormzhang.com/github/2016/05/25/learn-github-from-zero1/">http://stormzhang.com/github/2016/05/25/learn-github-from-zero1/</a></p>
-<p>参考地址：<a href="http://blog.csdn.net/marktheone/article/category/6333885">http://blog.csdn.net/marktheone/article/category/6333885</a></p>
-<h3 id="Git下载地址："><a href="#Git下载地址：" class="headerlink" title="Git下载地址："></a>Git下载地址：</h3><p><a href="https://git-scm.com/download/">https://git-scm.com/download/</a></p>
-<h3 id="github-使用帮助文档"><a href="#github-使用帮助文档" class="headerlink" title="github 使用帮助文档"></a>github 使用帮助文档</h3><p><a href="https://help.github.com/articles/generating-an-ssh-key/">https://help.github.com/articles/generating-an-ssh-key/</a></p>
-<h3 id="git-oschina-使用帮助文档"><a href="#git-oschina-使用帮助文档" class="headerlink" title="git.oschina 使用帮助文档"></a>git.oschina 使用帮助文档</h3><p> <a href="http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9#ssh-keys">http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9#ssh-keys</a></p>
-<p><strong>Git 学习笔记</strong></p>
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>RxJava和Retrofit也火了一段时间了。一直没有时间研究这些新东西，最近有时间准备写个项目练手，打算先用Android写一个Demo出来，却发现Android的世界发生了天翻地覆的变化，EventBus和OKHttp3 都不见了，RxJava和Retrofit是什么东东？</p>
+<p>如果你对Retrofit不熟悉就先看 <a href="https://github.com/square/retrofit">官网的介绍</a></p>
+<p>如果你对RxJava不熟悉请先看 <a href="https://github.com/ReactiveX/RxJava">官网介绍</a> 以及 <code>gank.io</code> <a href="http://gank.io/post/560e15be2dca930e00da1083">给 Android 开发者的 RxJava 详解</a> 这篇文章 </p>
+<p>当然也有很多RxJava与Retrofit的文章，我是参考<code>tough1985</code>大神的 <a href="http://gank.io/post/56e80c2c677659311bed9841">这篇文章</a></p>
+<p>学(好)习(记)就(性)要(不)做(如)个(烂)笔(笔)记(头)</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/31/从零开始使用Git/#more" rel="contents">
+            <a class="btn" href="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1001,7 +1012,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1042,7 +1053,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1050,7 +1061,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1059,7 +1070,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
