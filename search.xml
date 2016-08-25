@@ -349,7 +349,7 @@
       <title><![CDATA[Linux下定时删除指定目下n天前的文件]]></title>
       <url>http://javen205.oschina.io/2016/07/10/Linux%E4%B8%8B%E5%AE%9A%E6%97%B6%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9B%AE%E4%B8%8Bn%E5%A4%A9%E5%89%8D%E7%9A%84%E6%96%87%E4%BB%B6/</url>
       <content type="html"><![CDATA[<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 2 * * * find /home/ftp/private/* ctime 1 -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
-<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p>表示每天两点删除<code>/home/ftp/private/</code>目录下一天前创建的所有文件，不删除文件夹<code>private</code>，如果这个文件夹也要删除的话用<code>* 6 * * * find /home/ftp/private ctime 1 -exec rm -rf {} \;</code></p>
+<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p>表示每天两点删除<code>/home/ftp/private/</code>目录下一天前创建的所有文件，不删除文件夹<code>private</code>，如果这个文件夹也要删除的话用<code>* 2 * * * find /home/ftp/private ctime 1 -exec rm -rf {} \;</code></p>
 <a id="more"></a> 
 <p>其中</p>
 <p><code>* 6 * * *</code></p>
@@ -370,7 +370,9 @@
 <p>其实Linux中不存在文件创建时间，只有访问时间（<code>atime</code>）、修改时间（<code>mtime</code>）、状态改动时间（<code>ctime</code>） </p>
 <p>可以通过命令 <code>stat + 文件路径</code> 查看时间</p>
 </blockquote>
-<h3 id="删除目录下的指定文件"><a href="#删除目录下的指定文件" class="headerlink" title="删除目录下的指定文件"></a>删除目录下的指定文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ind 对应目录 -mtime +天数 -name &quot;文件名&quot; -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
+<h3 id="删除目录下的指定文件"><a href="#删除目录下的指定文件" class="headerlink" title="删除目录下的指定文件"></a>删除目录下的指定文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find 对应目录 -mtime +天数 -name &quot;文件名&quot; -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
+<h3 id="删除目录下的指定类型文件"><a href="#删除目录下的指定类型文件" class="headerlink" title="删除目录下的指定类型文件"></a>删除目录下的指定类型文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find 对应目录 -mtime +天数 -name &quot;*.jpg&quot; -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
+<p>栗子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 2 * * * find /home/ftp/private/images -mtime +5 -name &quot;*.jpg&quot; -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure></p>
 <h3 id="启动定时任务"><a href="#启动定时任务" class="headerlink" title="启动定时任务"></a>启动定时任务</h3><p>首先要创建一个<code>crontab</code>,输入命令<code>crontab -e</code> 进入编辑界面，编写你的定时任务，即上面的命令。</p>
 <p>也可以不使用<code>crontab -e</code> 命令。可以创建<code>crontab</code>配置文件，其他任何文本编辑器编写命令序列，比如文件名为<code>abc.cron</code>，然后使用命令：<code>crontab abc.cron</code>将命令序列添加到<code>crontab</code>中。</p>
 <p>创建好<code>crontab</code>之后，就可以把上面的命令写道 <code>/etc/crontab</code>这个文件中<br>通过<code>crontab /etc/crontab</code> 命令启动这个定时任务，可以通过 <code>crontab -l</code> 命令查看当下的定时任务</p>
@@ -380,7 +382,6 @@
 <p>启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond start</div></pre></td></tr></table></figure></p>
 <p>关闭服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond stop</div></pre></td></tr></table></figure></p>
 <p>重启服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond restart</div></pre></td></tr></table></figure></p>
-<p>重新载入配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service crond reload</div></pre></td></tr></table></figure></p>
 <p>以上就是定时删除指定目下n天前的文件操作流程。</p>
 <blockquote>
 <p>如有问题请再评论区留言</p>

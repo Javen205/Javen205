@@ -957,7 +957,7 @@
       
         
           <h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 2 * * * find /home/ftp/private/* ctime 1 -exec rm -rf &#123;&#125; \;</div></pre></td></tr></table></figure>
-<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p>表示每天两点删除<code>/home/ftp/private/</code>目录下一天前创建的所有文件，不删除文件夹<code>private</code>，如果这个文件夹也要删除的话用<code>* 6 * * * find /home/ftp/private ctime 1 -exec rm -rf {} \;</code></p>
+<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p>表示每天两点删除<code>/home/ftp/private/</code>目录下一天前创建的所有文件，不删除文件夹<code>private</code>，如果这个文件夹也要删除的话用<code>* 2 * * * find /home/ftp/private ctime 1 -exec rm -rf {} \;</code></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/10/Linux下定时删除指定目下n天前的文件/#more" rel="contents">
               阅读全文 &raquo;
