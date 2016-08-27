@@ -85,25 +85,19 @@
 
 
 <meta name="description" content="上一篇我们简单实现了一个MVP的构架，下面我们来做一个简单的封装使其使用更简单方便
-源码地址RxMVP分支Tag03最终实现目录结构如下
-BasePresenter如果每一个Activity都需要做绑定和解绑操作就太麻烦了，现在我希望可以有一个通用的presenter来为我们添加view的绑定与销毁。
-1234567891011public abstract class BasePresenter">
+源码地址RxMVP分支Tag03最终实现目录结构如下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android MVP 构架封装">
 <meta property="og:url" content="http://javen205.oschina.io/2016/08/27/Android MVP 架构封装/index.html">
 <meta property="og:site_name" content="智慧云端日记">
 <meta property="og:description" content="上一篇我们简单实现了一个MVP的构架，下面我们来做一个简单的封装使其使用更简单方便
-源码地址RxMVP分支Tag03最终实现目录结构如下
-BasePresenter如果每一个Activity都需要做绑定和解绑操作就太麻烦了，现在我希望可以有一个通用的presenter来为我们添加view的绑定与销毁。
-1234567891011public abstract class BasePresenter">
+源码地址RxMVP分支Tag03最终实现目录结构如下">
 <meta property="og:image" content="http://javen205.oschina.io/images/public/MVP/MVP2.png">
-<meta property="og:updated_time" content="2016-08-27T11:38:44.000Z">
+<meta property="og:updated_time" content="2016-08-27T12:20:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android MVP 构架封装">
 <meta name="twitter:description" content="上一篇我们简单实现了一个MVP的构架，下面我们来做一个简单的封装使其使用更简单方便
-源码地址RxMVP分支Tag03最终实现目录结构如下
-BasePresenter如果每一个Activity都需要做绑定和解绑操作就太麻烦了，现在我希望可以有一个通用的presenter来为我们添加view的绑定与销毁。
-1234567891011public abstract class BasePresenter">
+源码地址RxMVP分支Tag03最终实现目录结构如下">
 <meta name="twitter:image" content="http://javen205.oschina.io/images/public/MVP/MVP2.png">
 
 
@@ -378,7 +372,7 @@ BasePresenter如果每一个Activity都需要做绑定和解绑操作就太麻�
 
       
         <p>上一篇我们简单实现了一个<code>MVP</code>的构架，下面我们来做一个简单的封装使其使用更简单方便</p>
-<h3 id="源码地址RxMVP分支Tag03"><a href="#源码地址RxMVP分支Tag03" class="headerlink" title="源码地址RxMVP分支Tag03"></a><a href="https://github.com/Javen205/RxMVP/tree/Tag03" target="_blank" rel="external">源码地址RxMVP分支Tag03</a></h3><h3 id="最终实现目录结构如下"><a href="#最终实现目录结构如下" class="headerlink" title="最终实现目录结构如下"></a>最终实现目录结构如下</h3><p><img src="/images/public/MVP/MVP2.png" alt=""></p>
+<h3 id="源码地址RxMVP分支Tag03"><a href="#源码地址RxMVP分支Tag03" class="headerlink" title="源码地址RxMVP分支Tag03"></a><a href="https://github.com/Javen205/RxMVP/tree/Tag03" target="_blank" rel="external">源码地址RxMVP分支Tag03</a></h3><h3 id="最终实现目录结构如下"><a href="#最终实现目录结构如下" class="headerlink" title="最终实现目录结构如下"></a>最终实现目录结构如下</h3><p><img src="/images/public/MVP/MVP2.png" alt=""><br><a id="more"></a> </p>
 <h3 id="BasePresenter"><a href="#BasePresenter" class="headerlink" title="BasePresenter"></a>BasePresenter</h3><p>如果每一个Activity都需要做绑定和解绑操作就太麻烦了，现在我希望可以有一个通用的presenter来为我们添加view的绑定与销毁。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public abstract class BasePresenter&lt;T&gt; &#123;</div><div class="line">    public T mView;</div><div class="line"></div><div class="line">    public void attach(T mView)&#123;</div><div class="line">        this.mView = mView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void dettach()&#123;</div><div class="line">        mView = null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>因为不能限定死传入的View，所以使用泛型来代替传入的对象。通过这个通用的presenter我就可以把原来的<code>MvpPresenter</code>简化成下面的样子</p>

@@ -180,6 +180,7 @@
       <url>http://javen205.oschina.io/2016/08/27/Retrofit2+Rxjava+MVP%E5%AE%9E%E8%B7%B5/</url>
       <content type="html"><![CDATA[<p>此博文根据前面两篇文章 <code>Android MVP 架构初试</code> <code>Android MVP 架构封装</code>  再结合主流框架<code>Retrofit2+Rxjava</code>来个实践</p>
 <h3 id="源码地址RxMVP"><a href="#源码地址RxMVP" class="headerlink" title="源码地址RxMVP"></a><a href="https://github.com/Javen205/RxMVP" target="_blank" rel="external">源码地址RxMVP</a></h3><h3 id="项目截图"><a href="#项目截图" class="headerlink" title="项目截图"></a>项目截图</h3><p><img src="/images/public/MVP/MVP3.jpeg" alt=""></p>
+<a id="more"></a> 
 <h3 id="Retrofit2-Rxjava-封装"><a href="#Retrofit2-Rxjava-封装" class="headerlink" title="Retrofit2+Rxjava 封装"></a>Retrofit2+Rxjava 封装</h3><p>JuHeService 数据请求接口</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 请求示例：</div><div class="line"> * http://v.juhe.cn/dream/query</div><div class="line"> * q:梦境关键字，如：黄金 需要utf8 urlencode</div><div class="line"> * cid:指定分类，默认全部</div><div class="line"> * full: 是否显示详细信息，1:是 0:否，默认0</div><div class="line"> */</div><div class="line">public interface JuHeService &#123;</div><div class="line">    @GET(&quot;dream/query&quot;)</div><div class="line">    Observable&lt;HttpJuHeResult&lt;List&lt;JuHeDream&gt;&gt;&gt; getDreams(@QueryMap Map&lt;String, Object&gt; options);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>HttpJuHeMethods 聚合解梦封装的方法</p>
@@ -202,7 +203,7 @@
       <title><![CDATA[Android MVP 构架封装]]></title>
       <url>http://javen205.oschina.io/2016/08/27/Android%20MVP%20%E6%9E%B6%E6%9E%84%E5%B0%81%E8%A3%85/</url>
       <content type="html"><![CDATA[<p>上一篇我们简单实现了一个<code>MVP</code>的构架，下面我们来做一个简单的封装使其使用更简单方便</p>
-<h3 id="源码地址RxMVP分支Tag03"><a href="#源码地址RxMVP分支Tag03" class="headerlink" title="源码地址RxMVP分支Tag03"></a><a href="https://github.com/Javen205/RxMVP/tree/Tag03" target="_blank" rel="external">源码地址RxMVP分支Tag03</a></h3><h3 id="最终实现目录结构如下"><a href="#最终实现目录结构如下" class="headerlink" title="最终实现目录结构如下"></a>最终实现目录结构如下</h3><p><img src="/images/public/MVP/MVP2.png" alt=""></p>
+<h3 id="源码地址RxMVP分支Tag03"><a href="#源码地址RxMVP分支Tag03" class="headerlink" title="源码地址RxMVP分支Tag03"></a><a href="https://github.com/Javen205/RxMVP/tree/Tag03" target="_blank" rel="external">源码地址RxMVP分支Tag03</a></h3><h3 id="最终实现目录结构如下"><a href="#最终实现目录结构如下" class="headerlink" title="最终实现目录结构如下"></a>最终实现目录结构如下</h3><p><img src="/images/public/MVP/MVP2.png" alt=""><br><a id="more"></a> </p>
 <h3 id="BasePresenter"><a href="#BasePresenter" class="headerlink" title="BasePresenter"></a>BasePresenter</h3><p>如果每一个Activity都需要做绑定和解绑操作就太麻烦了，现在我希望可以有一个通用的presenter来为我们添加view的绑定与销毁。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public abstract class BasePresenter&lt;T&gt; &#123;</div><div class="line">    public T mView;</div><div class="line"></div><div class="line">    public void attach(T mView)&#123;</div><div class="line">        this.mView = mView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void dettach()&#123;</div><div class="line">        mView = null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>因为不能限定死传入的View，所以使用泛型来代替传入的对象。通过这个通用的presenter我就可以把原来的<code>MvpPresenter</code>简化成下面的样子</p>
@@ -247,6 +248,7 @@
 <li>P : 新成员Prensenter 用来代理 C(control) 控制层</li>
 </ul>
 <p>MVP与MVC最大的不同，其实是Activity职责的变化，由原来的C (控制层) 变成了 V(视图层)，不再管控制层的问题，只管如何去显示。控制层的角色就由我们的新人 Presenter来担当，这种架构就解决了Activity过度耦合控制层和视图层的问题。</p>
+<a id="more"></a> 
 <h3 id="一个简单实践"><a href="#一个简单实践" class="headerlink" title="一个简单实践"></a>一个简单实践</h3><p><img src="/images/public/MVP/MVP1.png" alt=""></p>
 <p>声明了一个接口，带有请求数据业务的方法</p>
 <p>RequestBiz<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public interface RequestBiz &#123;</div><div class="line">    //请求数据业务</div><div class="line">    void requestForData(OnRequestListener listener);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -284,6 +286,7 @@
       <url>http://javen205.oschina.io/2016/08/27/Android%20Studio%20%E6%B7%BB%E5%8A%A0apt%E7%9A%84%E6%94%AF%E6%8C%81/</url>
       <content type="html"><![CDATA[<p>我们在使用butterknife的时候需要apt的支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//注解绑定view</div><div class="line">compile &apos;com.jakewharton:butterknife:8.2.1&apos;</div><div class="line">apt &apos;com.jakewharton:butterknife-compiler:8.2.1&apos;</div></pre></td></tr></table></figure></p>
 <p>默认的情况下gradle 是支持的，下面是解决方案</p>
+<a id="more"></a> 
 <ul>
 <li>在项目工程级别build.gradle中添加</li>
 </ul>

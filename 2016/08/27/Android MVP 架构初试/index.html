@@ -101,7 +101,7 @@ M : 业务层和模型层，相当与javabean和我们的业务请求代码
 V : 视图层，对应Android的layout.xml布局文件
 C : 控制层，对应于Activity">
 <meta property="og:image" content="http://javen205.oschina.io/images/public/MVP/MVP1.png">
-<meta property="og:updated_time" content="2016-08-27T11:39:05.000Z">
+<meta property="og:updated_time" content="2016-08-27T12:20:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android MVP 构架初试">
 <meta name="twitter:description" content="目前讨论MVP  MVVM 的架构也来越多，这种构架也很适合Android。研究MVP记录如下
@@ -397,6 +397,7 @@ C : 控制层，对应于Activity">
 <li>P : 新成员Prensenter 用来代理 C(control) 控制层</li>
 </ul>
 <p>MVP与MVC最大的不同，其实是Activity职责的变化，由原来的C (控制层) 变成了 V(视图层)，不再管控制层的问题，只管如何去显示。控制层的角色就由我们的新人 Presenter来担当，这种架构就解决了Activity过度耦合控制层和视图层的问题。</p>
+<a id="more"></a> 
 <h3 id="一个简单实践"><a href="#一个简单实践" class="headerlink" title="一个简单实践"></a>一个简单实践</h3><p><img src="/images/public/MVP/MVP1.png" alt=""></p>
 <p>声明了一个接口，带有请求数据业务的方法</p>
 <p>RequestBiz<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public interface RequestBiz &#123;</div><div class="line">    //请求数据业务</div><div class="line">    void requestForData(OnRequestListener listener);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>

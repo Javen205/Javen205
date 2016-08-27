@@ -85,25 +85,19 @@
 
 
 <meta name="description" content="此博文根据前面两篇文章 Android MVP 架构初试 Android MVP 架构封装  再结合主流框架Retrofit2+Rxjava来个实践
-源码地址RxMVP项目截图
-Retrofit2+Rxjava 封装JuHeService 数据请求接口
-1234567891011/** * 请求示例： * http://v.juhe.cn/dream/query * q:梦境关键字，如：黄金 需要">
+源码地址RxMVP项目截图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Retrofit2+Rxjava+MVP实践">
 <meta property="og:url" content="http://javen205.oschina.io/2016/08/27/Retrofit2+Rxjava+MVP实践/index.html">
 <meta property="og:site_name" content="智慧云端日记">
 <meta property="og:description" content="此博文根据前面两篇文章 Android MVP 架构初试 Android MVP 架构封装  再结合主流框架Retrofit2+Rxjava来个实践
-源码地址RxMVP项目截图
-Retrofit2+Rxjava 封装JuHeService 数据请求接口
-1234567891011/** * 请求示例： * http://v.juhe.cn/dream/query * q:梦境关键字，如：黄金 需要">
+源码地址RxMVP项目截图">
 <meta property="og:image" content="http://javen205.oschina.io/images/public/MVP/MVP3.jpeg">
-<meta property="og:updated_time" content="2016-08-27T12:01:27.000Z">
+<meta property="og:updated_time" content="2016-08-27T12:20:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Retrofit2+Rxjava+MVP实践">
 <meta name="twitter:description" content="此博文根据前面两篇文章 Android MVP 架构初试 Android MVP 架构封装  再结合主流框架Retrofit2+Rxjava来个实践
-源码地址RxMVP项目截图
-Retrofit2+Rxjava 封装JuHeService 数据请求接口
-1234567891011/** * 请求示例： * http://v.juhe.cn/dream/query * q:梦境关键字，如：黄金 需要">
+源码地址RxMVP项目截图">
 <meta name="twitter:image" content="http://javen205.oschina.io/images/public/MVP/MVP3.jpeg">
 
 
@@ -379,6 +373,7 @@ Retrofit2+Rxjava 封装JuHeService 数据请求接口
       
         <p>此博文根据前面两篇文章 <code>Android MVP 架构初试</code> <code>Android MVP 架构封装</code>  再结合主流框架<code>Retrofit2+Rxjava</code>来个实践</p>
 <h3 id="源码地址RxMVP"><a href="#源码地址RxMVP" class="headerlink" title="源码地址RxMVP"></a><a href="https://github.com/Javen205/RxMVP" target="_blank" rel="external">源码地址RxMVP</a></h3><h3 id="项目截图"><a href="#项目截图" class="headerlink" title="项目截图"></a>项目截图</h3><p><img src="/images/public/MVP/MVP3.jpeg" alt=""></p>
+<a id="more"></a> 
 <h3 id="Retrofit2-Rxjava-封装"><a href="#Retrofit2-Rxjava-封装" class="headerlink" title="Retrofit2+Rxjava 封装"></a>Retrofit2+Rxjava 封装</h3><p>JuHeService 数据请求接口</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 请求示例：</div><div class="line"> * http://v.juhe.cn/dream/query</div><div class="line"> * q:梦境关键字，如：黄金 需要utf8 urlencode</div><div class="line"> * cid:指定分类，默认全部</div><div class="line"> * full: 是否显示详细信息，1:是 0:否，默认0</div><div class="line"> */</div><div class="line">public interface JuHeService &#123;</div><div class="line">    @GET(&quot;dream/query&quot;)</div><div class="line">    Observable&lt;HttpJuHeResult&lt;List&lt;JuHeDream&gt;&gt;&gt; getDreams(@QueryMap Map&lt;String, Object&gt; options);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>HttpJuHeMethods 聚合解梦封装的方法</p>
