@@ -281,6 +281,442 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/27/Android极速开发三(SD卡缓存目录)/" itemprop="url">
+                  Android极速开发三（SD卡缓存目录）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T22:32:00+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Android极速开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Android极速开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/27/Android极速开发三(SD卡缓存目录)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android极速开发三(SD卡缓存目录)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/27/Android极速开发三(SD卡缓存目录)/" class="leancloud_visitors" data-flag-title="Android极速开发三（SD卡缓存目录）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>读取某个文件夹中的所有Apk文件路径并打开安装页面</li>
+<li>读取某文件夹下的所有apk文件</li>
+<li>获取SD卡跟目录中的某个文件</li>
+<li>弹出安装界面</li>
+<li>卸载apk</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @author Javen</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class SDKUtil &#123;</div><div class="line">	private final static String TAG=SDKUtil.class.getSimpleName();</div><div class="line">	</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 读取某个文件夹中的所有Apk文件路径并打开安装页面</div><div class="line">	 * @param context</div><div class="line">	 * @param path</div><div class="line">	 */</div><div class="line">	 public static void readApkAndStart(Context context,String path)&#123;</div><div class="line">	    	List&lt;String&gt; listpath = readAllApkForPath(context, path);</div><div class="line">	    	if (listpath!=null &amp;&amp; listpath.size()&gt;0) &#123;</div><div class="line">	    		for (String string : listpath) &#123;</div><div class="line">	        		SDKUtil.openInstallView(context, string);</div><div class="line">	    		&#125;</div><div class="line">			&#125;else &#123;</div><div class="line">				L.e(&quot;xxxx-----&quot;, &quot;readApkAndStart null。。。。。。。&quot;);</div><div class="line">			&#125;</div><div class="line">	 &#125;</div><div class="line">	 /**</div><div class="line">     * 读取某文件夹下的所有apk文件</div><div class="line">     * @param context</div><div class="line">     * @param path</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static List&lt;String&gt; readAllApkForPath(Context context,String path)&#123;</div><div class="line">    	List&lt;String&gt; fileNameList=new ArrayList&lt;String&gt;();</div><div class="line">    	File dir;</div><div class="line">    	if (Parameter.isDebug) &#123;</div><div class="line">    		 dir = getSDir(context, path);</div><div class="line">		&#125;else &#123;</div><div class="line">			 dir = getDiskCacheDir(context, path);</div><div class="line">		&#125;</div><div class="line">    	</div><div class="line">    	if (dir.isDirectory()) &#123;</div><div class="line">			File[] files = dir.listFiles();</div><div class="line">			for (File file : files) &#123;</div><div class="line">				String filePath = file.getAbsolutePath();</div><div class="line">				if (filePath.endsWith(&quot;.apk&quot;)) &#123;</div><div class="line">					fileNameList.add(filePath);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			return fileNameList;</div><div class="line">		&#125;</div><div class="line">		return null;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 获取SD卡跟目录中的某个文件</div><div class="line">     * @param context</div><div class="line">     * @param uniqueName</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static File getSDir(Context context, String uniqueName) &#123;</div><div class="line">        boolean externalStorageAvailable = Environment</div><div class="line">                .getExternalStorageState().equals(Environment.MEDIA_MOUNTED);</div><div class="line">        String path = null;</div><div class="line">        if (externalStorageAvailable) &#123;</div><div class="line">        	path=Environment.getExternalStorageDirectory().getAbsolutePath();</div><div class="line">        &#125;</div><div class="line">        return new File(path + File.separator + uniqueName);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 获取缓存地址</div><div class="line">     * @param context</div><div class="line">     * @param uniqueName</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static File getDiskCacheDir(Context context, String uniqueName) &#123;</div><div class="line">        boolean externalStorageAvailable = Environment</div><div class="line">                .getExternalStorageState().equals(Environment.MEDIA_MOUNTED);</div><div class="line">        String cachePath;</div><div class="line">        if (externalStorageAvailable) &#123;</div><div class="line">            cachePath = context.getExternalCacheDir().getPath();</div><div class="line">           </div><div class="line">        &#125; else &#123;</div><div class="line">            cachePath = context.getCacheDir().getPath();</div><div class="line">        &#125;</div><div class="line">        L.i(TAG, cachePath);</div><div class="line">        return new File(cachePath + File.separator + uniqueName);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 弹出安装界面</div><div class="line">     * @param context </div><div class="line">     * @param pathString apk 路径</div><div class="line">     */</div><div class="line">    public static void openInstallView(Context context,String pathString)&#123;</div><div class="line">    	//启动安装界面</div><div class="line">//		Intent install = new Intent(Intent.ACTION_VIEW);</div><div class="line">//		install.setDataAndType(Uri.fromFile(new File(pathString)),</div><div class="line">//				&quot;application/vnd.android.package-archive&quot;);</div><div class="line">//		install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">//		context.startActivity(install);</div><div class="line">    	ApkController.install(pathString, context);</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 卸载apk</div><div class="line">     * @param context</div><div class="line">     * @param packageName</div><div class="line">     */</div><div class="line">    public static void uninstallApk(Context context, String packageName) &#123;  </div><div class="line">        Uri uri = Uri.parse(&quot;package:&quot; + packageName);  </div><div class="line">        Intent intent = new Intent(Intent.ACTION_DELETE, uri);  </div><div class="line">        context.startActivity(intent);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/27/Android极速开发二(调节屏幕亮度)/" itemprop="url">
+                  Android极速开发二（调节屏幕的亮度）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T22:32:00+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Android极速开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Android极速开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/27/Android极速开发二(调节屏幕亮度)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android极速开发二(调节屏幕亮度)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/27/Android极速开发二(调节屏幕亮度)/" class="leancloud_visitors" data-flag-title="Android极速开发二（调节屏幕的亮度）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>屏幕亮度调节</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//设置应用中的亮度 不保存</div><div class="line">    public void Brightness(View view)&#123;</div><div class="line">        boolean autoBrightness = BrightnessTools.isAutoBrightness(getContentResolver());</div><div class="line">        if (autoBrightness) &#123;</div><div class="line">            T.showLong(this, &quot;关闭自动调节亮度&quot;);</div><div class="line">            BrightnessTools.stopAutoBrightness(this);</div><div class="line">        &#125;</div><div class="line">        BrightnessTools.setBrightness(this, 255);</div><div class="line">        T.showLong(this, &quot;亮度已经设置为了最大&quot;);</div><div class="line">    &#125;</div><div class="line">    //获取当前亮度 并设置最大的亮度保存</div><div class="line">    public void saveBrightness(View view)&#123;</div><div class="line">        int screenBrightness = BrightnessTools.getScreenBrightness(this);</div><div class="line">        T.showLong(this, &quot;当前屏幕亮度为：&quot;+screenBrightness);</div><div class="line">        BrightnessTools.saveBrightness(getContentResolver(), 255);</div><div class="line">    &#125;</div><div class="line">    //开启关闭自动调节亮度</div><div class="line">    public void offAuto(View view)&#123;</div><div class="line">        boolean autoBrightness = BrightnessTools.isAutoBrightness(getContentResolver());</div><div class="line">        if (autoBrightness) &#123;</div><div class="line">            T.showLong(this, &quot;关闭自动调节亮度&quot;);</div><div class="line">            BrightnessTools.stopAutoBrightness(this);</div><div class="line">        &#125;else &#123;</div><div class="line">            T.showLong(this, &quot;开启自动调节亮度&quot;);</div><div class="line">            BrightnessTools.startAutoBrightness(this);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/27/Android极速开发二(调节屏幕亮度)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/27/Retrofit2+Rxjava+MVP实践/" itemprop="url">
+                  Retrofit2+Rxjava+MVP实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T19:35:00+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Android-MVP/" itemprop="url" rel="index">
+                    <span itemprop="name">Android MVP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/27/Retrofit2+Rxjava+MVP实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Retrofit2+Rxjava+MVP实践/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/27/Retrofit2+Rxjava+MVP实践/" class="leancloud_visitors" data-flag-title="Retrofit2+Rxjava+MVP实践">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>此博文根据前面两篇文章 <code>Android MVP 架构初试</code> <code>Android MVP 架构封装</code>  再结合主流框架<code>Retrofit2+Rxjava</code>来个实践</p>
+<h3 id="源码地址RxMVP"><a href="#源码地址RxMVP" class="headerlink" title="源码地址RxMVP"></a><a href="https://github.com/Javen205/RxMVP">源码地址RxMVP</a></h3><h3 id="项目截图"><a href="#项目截图" class="headerlink" title="项目截图"></a>项目截图</h3><p><img src="/images/public/MVP/MVP3.jpeg" alt=""></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/27/Retrofit2+Rxjava+MVP实践/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/27/Android MVP 架构封装/" itemprop="url">
                   Android MVP 构架封装
                 </a>
@@ -425,8 +861,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/27/Android MVP 架构初试/" itemprop="url">
-                  Android MVP 构架初试
+                <a class="post-title-link" href="/2016/08/27/Android极速开发(Apk 安装)/" itemprop="url">
+                  Android极速开发一（Apk安装）
                 </a>
               
             
@@ -439,7 +875,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T16:25:00+08:00" content="2016-08-27">
+            <time itemprop="dateCreated" datetime="2016-08-27T17:25:00+08:00" content="2016-08-27">
               2016-08-27
             </time>
           </span>
@@ -465,8 +901,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/Android-MVP/" itemprop="url" rel="index">
-                    <span itemprop="name">Android MVP</span>
+                  <a href="/categories/Android/Android极速开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Android极速开发</span>
                   </a>
                 </span>
 
@@ -481,8 +917,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/27/Android MVP 架构初试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android MVP 架构初试/" itemprop="commentsCount"></span>
+                <a href="/2016/08/27/Android极速开发(Apk 安装)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android极速开发(Apk 安装)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -492,7 +928,7 @@
 
           
           
-             <span id="/2016/08/27/Android MVP 架构初试/" class="leancloud_visitors" data-flag-title="Android MVP 构架初试">
+             <span id="/2016/08/27/Android极速开发(Apk 安装)/" class="leancloud_visitors" data-flag-title="Android极速开发一（Apk安装）">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -515,464 +951,13 @@
 
       
         
-          <p>目前讨论<code>MVP</code>  <code>MVVM</code> 的架构也来越多，这种构架也很适合Android。研究MVP记录如下</p>
-<h3 id="源码地址RxMVP分支Tag02"><a href="#源码地址RxMVP分支Tag02" class="headerlink" title="源码地址RxMVP分支Tag02"></a><a href="https://github.com/Javen205/RxMVP/tree/Tag02">源码地址RxMVP分支Tag02</a></h3><h3 id="原有的MVC构架"><a href="#原有的MVC构架" class="headerlink" title="原有的MVC构架"></a>原有的MVC构架</h3><p>刚开始接触Android的时候会觉得Android的整个代码架构就是一个MVC。</p>
-<ul>
-<li>M : 业务层和模型层，相当与javabean和我们的业务请求代码</li>
-<li>V : 视图层，对应Android的layout.xml布局文件</li>
-<li>C : 控制层，对应于Activity中对于UI 的各种操作</li>
-</ul>
-<p>看起来MVC架构很清晰，但是实际的开发中，请求的业务代码往往被丢到了Activity里面，大家都知道layout.xml的布局文件只能提供默认的UI设置，所以开发中视图层的变化也被丢到了Activity里面，再加上Activity本身承担着控制层的责任。所以Activity达成了MVC集合的成就，最终我们的Activity就变得越来越难看，从几百行变成了几千行。维护的成本也越来越高</p>
-<h3 id="新的MVP架构"><a href="#新的MVP架构" class="headerlink" title="新的MVP架构"></a>新的MVP架构</h3><ul>
-<li>M : 还是业务层和模型层</li>
-<li>V : 视图层的责任由Activity来担当</li>
-<li>P : 新成员Prensenter 用来代理 C(control) 控制层</li>
-</ul>
-<p>MVP与MVC最大的不同，其实是Activity职责的变化，由原来的C (控制层) 变成了 V(视图层)，不再管控制层的问题，只管如何去显示。控制层的角色就由我们的新人 Presenter来担当，这种架构就解决了Activity过度耦合控制层和视图层的问题。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/Android MVP 架构初试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/27/Android Studio 添加apt的支持/" itemprop="url">
-                  Android Studio 添加apt的支持
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T15:45:00+08:00" content="2016-08-27">
-              2016-08-27
-            </time>
-          </span>
+          
+            <p>安装之前判断是否有root权限，如果有root权限就静默安转，如果没有就利用意图进行安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @author Javen</div><div class="line"> * @since 2016/05/24</div><div class="line"> */</div><div class="line">public class ApkController &#123;</div><div class="line">    /**</div><div class="line">     * 描述: 安装</div><div class="line">     */</div><div class="line">    public static boolean install(String apkPath,Context context)&#123;</div><div class="line">        // 先判断手机是否有root权限</div><div class="line">        if(hasRootPerssion())&#123;</div><div class="line">            // 有root权限，利用静默安装实现</div><div class="line">            return clientInstall(apkPath);</div><div class="line">        &#125;else&#123;</div><div class="line">            // 没有root权限，利用意图进行安装</div><div class="line">            File file = new File(apkPath);</div><div class="line">            if(!file.exists())</div><div class="line">                return false; </div><div class="line">            Intent intent = new Intent();</div><div class="line">            intent.setAction(&quot;android.intent.action.VIEW&quot;);</div><div class="line">            intent.addCategory(&quot;android.intent.category.DEFAULT&quot;);</div><div class="line">            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">            intent.setDataAndType(Uri.fromFile(file),&quot;application/vnd.android.package-archive&quot;);</div><div class="line">            context.startActivity(intent);</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 描述: 卸载</div><div class="line">     */</div><div class="line">    public static boolean uninstall(String packageName,Context context)&#123;</div><div class="line">        if(hasRootPerssion())&#123;</div><div class="line">            // 有root权限，利用静默卸载实现</div><div class="line">            return clientUninstall(packageName);</div><div class="line">        &#125;else&#123;</div><div class="line">            Uri packageURI = Uri.parse(&quot;package:&quot; + packageName);</div><div class="line">            Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,packageURI);</div><div class="line">            uninstallIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">            context.startActivity(uninstallIntent);</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 判断手机是否有root权限</div><div class="line">     */</div><div class="line">    private static boolean hasRootPerssion()&#123;</div><div class="line">        PrintWriter PrintWriter = null;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">            process = Runtime.getRuntime().exec(&quot;su&quot;);</div><div class="line">            PrintWriter = new PrintWriter(process.getOutputStream());</div><div class="line">            PrintWriter.flush();</div><div class="line">            PrintWriter.close();</div><div class="line">            int value = process.waitFor();  </div><div class="line">            return returnResult(value);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 静默安装</div><div class="line">     */</div><div class="line">    private static boolean clientInstall(String apkPath)&#123;</div><div class="line">        PrintWriter PrintWriter = null;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">            process = Runtime.getRuntime().exec(&quot;su&quot;);</div><div class="line">            PrintWriter = new PrintWriter(process.getOutputStream());</div><div class="line">            PrintWriter.println(&quot;chmod 777 &quot;+apkPath);</div><div class="line">            PrintWriter.println(&quot;export LD_LIBRARY_PATH=/vendor/lib:/system/lib&quot;);</div><div class="line">            PrintWriter.println(&quot;pm install -r &quot;+apkPath);</div><div class="line">//          PrintWriter.println(&quot;exit&quot;);</div><div class="line">            PrintWriter.flush();</div><div class="line">            PrintWriter.close();</div><div class="line">            int value = process.waitFor();  </div><div class="line">            return returnResult(value);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 静默卸载</div><div class="line">     */</div><div class="line">    private static boolean clientUninstall(String packageName)&#123;</div><div class="line">        PrintWriter PrintWriter = null;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">            process = Runtime.getRuntime().exec(&quot;su&quot;);</div><div class="line">            PrintWriter = new PrintWriter(process.getOutputStream());</div><div class="line">            PrintWriter.println(&quot;LD_LIBRARY_PATH=/vendor/lib:/system/lib &quot;);</div><div class="line">            PrintWriter.println(&quot;pm uninstall &quot;+packageName);</div><div class="line">            PrintWriter.flush();</div><div class="line">            PrintWriter.close();</div><div class="line">            int value = process.waitFor();  </div><div class="line">            return returnResult(value); </div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 启动app</div><div class="line">     * com.exmaple.client/.MainActivity</div><div class="line">     * com.exmaple.client/com.exmaple.client.MainActivity</div><div class="line">     */</div><div class="line">    public static boolean startApp(String packageName,String activityName)&#123;</div><div class="line">        boolean isSuccess = false;</div><div class="line">        String cmd = &quot;am start -n &quot; + packageName + &quot;/&quot; + activityName + &quot; \n&quot;;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">           process = Runtime.getRuntime().exec(cmd);</div><div class="line">           int value = process.waitFor();  </div><div class="line">           return returnResult(value);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">          e.printStackTrace();</div><div class="line">        &#125; finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return isSuccess;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">     </div><div class="line">    private static boolean returnResult(int value)&#123;</div><div class="line">        // 代表成功  </div><div class="line">        if (value == 0) &#123;</div><div class="line">            return true;</div><div class="line">        &#125; else if (value == 1) &#123; // 失败</div><div class="line">            return false;</div><div class="line">        &#125; else &#123; // 未知情况</div><div class="line">            return false;</div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 查询所有非系统app的信息</div><div class="line">     * @param mContext</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static List&lt;Map&lt;String, Object&gt;&gt; getAPPInstalled(Context mContext) &#123;</div><div class="line"></div><div class="line">        List&lt;Map&lt;String, Object&gt;&gt; listItems = new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</div><div class="line"></div><div class="line">        // 获取系统内的所有程序信息</div><div class="line">        Intent mainintent = new Intent(Intent.ACTION_MAIN, null);</div><div class="line">        mainintent.addCategory(Intent.CATEGORY_LAUNCHER);</div><div class="line">        List&lt;PackageInfo&gt; packageinfo = mContext.getPackageManager()</div><div class="line">                .getInstalledPackages(0);</div><div class="line"></div><div class="line">        int count = packageinfo.size();</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line"></div><div class="line">            PackageInfo pinfo = packageinfo.get(i);</div><div class="line">            ApplicationInfo appInfo = pinfo.applicationInfo;</div><div class="line">            if ((appInfo.flags &amp; ApplicationInfo.FLAG_SYSTEM) &gt; 0) &#123;</div><div class="line">                // 系统程序 忽略</div><div class="line">            &#125; else &#123;</div><div class="line">                // 非系统程序</div><div class="line">                Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</div><div class="line">                map.put(&quot;app_logo&quot;, pinfo.applicationInfo.loadIcon(mContext</div><div class="line">                        .getPackageManager()));</div><div class="line">                map.put(&quot;app_name&quot;, pinfo.applicationInfo.loadLabel(mContext</div><div class="line">                        .getPackageManager()));</div><div class="line">                map.put(&quot;package_name&quot;, pinfo.applicationInfo.packageName);</div><div class="line">                map.put(&quot;app_version_name&quot;, pinfo.versionName);</div><div class="line">                map.put(&quot;app_version_code&quot;, pinfo.versionCode);</div><div class="line"></div><div class="line">                listItems.add(map);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return listItems;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 判断应用是否需要安装</div><div class="line">     * @param mContext</div><div class="line">     * @param packageName</div><div class="line">     * @param versionCode</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static boolean isInstalled(Context mContext,String packageName,int versionCode) &#123;</div><div class="line"></div><div class="line">        // 获取系统内的所有程序信息</div><div class="line">        Intent mainintent = new Intent(Intent.ACTION_MAIN, null);</div><div class="line">        mainintent.addCategory(Intent.CATEGORY_LAUNCHER);</div><div class="line">        List&lt;PackageInfo&gt; packageinfo = mContext.getPackageManager()</div><div class="line">                .getInstalledPackages(0);</div><div class="line"></div><div class="line">        int count = packageinfo.size();</div><div class="line">        String pn;</div><div class="line">        int vc;</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line"></div><div class="line">            PackageInfo pinfo = packageinfo.get(i);</div><div class="line">            ApplicationInfo appInfo = pinfo.applicationInfo;</div><div class="line">            if ((appInfo.flags &amp; ApplicationInfo.FLAG_SYSTEM) &gt; 0) &#123;</div><div class="line">                // 系统程序 忽略</div><div class="line">            &#125; else &#123;</div><div class="line">                // 非系统程序</div><div class="line">                pn=pinfo.applicationInfo.packageName;</div><div class="line">                vc=pinfo.versionCode;</div><div class="line"></div><div class="line">                if (pn.equalsIgnoreCase(packageName) &amp;&amp; vc &gt;= versionCode) &#123;</div><div class="line">                    return true;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>获取手机安装的非系统应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class App &#123;</div><div class="line"></div><div class="line">    public static List&lt;Map&lt;String, Object&gt;&gt; getAPPInstalled(Context mContext) &#123;</div><div class="line"></div><div class="line">        List&lt;Map&lt;String, Object&gt;&gt; listItems = new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</div><div class="line"></div><div class="line">        //查询所有非系统app的信息</div><div class="line">        Intent mainintent = new Intent(Intent.ACTION_MAIN, null);</div><div class="line">        mainintent.addCategory(Intent.CATEGORY_LAUNCHER);</div><div class="line">        List&lt;PackageInfo&gt; packageinfo = mContext.getPackageManager()</div><div class="line">                .getInstalledPackages(0);</div><div class="line"></div><div class="line">        int count = packageinfo.size();</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line"></div><div class="line">            PackageInfo pinfo = packageinfo.get(i);</div><div class="line">            ApplicationInfo appInfo = pinfo.applicationInfo;</div><div class="line">            if ((appInfo.flags &amp; ApplicationInfo.FLAG_SYSTEM) &gt; 0) &#123;</div><div class="line">                // 系统程序 忽略</div><div class="line">            &#125; else &#123;</div><div class="line">                // 非系统程序</div><div class="line">                Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</div><div class="line">                map.put(&quot;app_logo&quot;, pinfo.applicationInfo.loadIcon(mContext</div><div class="line">                        .getPackageManager()));</div><div class="line">                map.put(&quot;app_name&quot;, pinfo.applicationInfo.loadLabel(mContext</div><div class="line">                        .getPackageManager()));</div><div class="line">                map.put(&quot;package_name&quot;, pinfo.applicationInfo.packageName);</div><div class="line">                map.put(&quot;app_version_name&quot;, pinfo.versionName);</div><div class="line">                map.put(&quot;app_version_code&quot;, pinfo.versionCode);</div><div class="line"></div><div class="line">                listItems.add(map);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return listItems;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/27/Android Studio 添加apt的支持/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android Studio 添加apt的支持/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/27/Android Studio 添加apt的支持/" class="leancloud_visitors" data-flag-title="Android Studio 添加apt的支持">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>我们在使用butterknife的时候需要apt的支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//注解绑定view</div><div class="line">compile &apos;com.jakewharton:butterknife:8.2.1&apos;</div><div class="line">apt &apos;com.jakewharton:butterknife-compiler:8.2.1&apos;</div></pre></td></tr></table></figure></p>
-<p>默认的情况下gradle 是支持的，下面是解决方案</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/Android Studio 添加apt的支持/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/" itemprop="url">
-                  RxJava + Retrofit 完成网络请求
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-06T23:43:22+08:00" content="2016-08-06">
-              2016-08-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/RxJava/" itemprop="url" rel="index">
-                    <span itemprop="name">RxJava</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/RxJava/Retrofit/" itemprop="url" rel="index">
-                    <span itemprop="name">Retrofit</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/06/RxJava 与 Retrofit 结合的最佳实践/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/" class="leancloud_visitors" data-flag-title="RxJava + Retrofit 完成网络请求">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>RxJava和Retrofit也火了一段时间了。一直没有时间研究这些新东西，最近有时间准备写个项目练手，打算先用Android写一个Demo出来，却发现Android的世界发生了天翻地覆的变化，EventBus和OKHttp3 都不见了，RxJava和Retrofit是什么东东？</p>
-<p>如果你对Retrofit不熟悉就先看 <a href="https://github.com/square/retrofit">官网的介绍</a></p>
-<p>如果你对RxJava不熟悉请先看 <a href="https://github.com/ReactiveX/RxJava">官网介绍</a> 以及 <code>gank.io</code> <a href="http://gank.io/post/560e15be2dca930e00da1083">给 Android 开发者的 RxJava 详解</a> 这篇文章 </p>
-<p>当然也有很多RxJava与Retrofit的文章，我是参考<code>tough1985</code>大神的 <a href="http://gank.io/post/56e80c2c677659311bed9841">这篇文章</a></p>
-<p>学(好)习(记)就(性)要(不)做(如)个(烂)笔(笔)记(头)</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/06/RxJava 与 Retrofit 结合的最佳实践/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/31/从零开始使用Git/" itemprop="url">
-                  从零开始使用Git
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-31T12:36:00+08:00" content="2016-07-31">
-              2016-07-31
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/资源共享/" itemprop="url" rel="index">
-                    <span itemprop="name">资源共享</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/31/从零开始使用Git/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/31/从零开始使用Git/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/31/从零开始使用Git/" class="leancloud_visitors" data-flag-title="从零开始使用Git">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="此篇文章是共享资源做记录，我就不重复造轮子了"><a href="#此篇文章是共享资源做记录，我就不重复造轮子了" class="headerlink" title="此篇文章是共享资源做记录，我就不重复造轮子了"></a>此篇文章是共享资源做记录，我就不重复造轮子了</h2><h3 id="什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码"><a href="#什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码" class="headerlink" title="什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码"></a>什么是Git，Git与GitHub以及码云的区别，如何安转，如何提交编辑代码</h3><p>参考地址：<a href="http://stormzhang.com/github/2016/05/25/learn-github-from-zero1/">http://stormzhang.com/github/2016/05/25/learn-github-from-zero1/</a></p>
-<p>参考地址：<a href="http://blog.csdn.net/marktheone/article/category/6333885">http://blog.csdn.net/marktheone/article/category/6333885</a></p>
-<h3 id="Git下载地址："><a href="#Git下载地址：" class="headerlink" title="Git下载地址："></a>Git下载地址：</h3><p><a href="https://git-scm.com/download/">https://git-scm.com/download/</a></p>
-<h3 id="github-使用帮助文档"><a href="#github-使用帮助文档" class="headerlink" title="github 使用帮助文档"></a>github 使用帮助文档</h3><p><a href="https://help.github.com/articles/generating-an-ssh-key/">https://help.github.com/articles/generating-an-ssh-key/</a></p>
-<h3 id="git-oschina-使用帮助文档"><a href="#git-oschina-使用帮助文档" class="headerlink" title="git.oschina 使用帮助文档"></a>git.oschina 使用帮助文档</h3><p> <a href="http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9#ssh-keys">http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9#ssh-keys</a></p>
-<p><strong>Git 学习笔记</strong></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/31/从零开始使用Git/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -1003,7 +988,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1044,7 +1029,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1052,7 +1037,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1061,7 +1046,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

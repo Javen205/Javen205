@@ -870,8 +870,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/27/Retrofit2+Rxjava+MVP实践/" itemprop="url">
-                  Retrofit2+Rxjava+MVP实践
+                <a class="post-title-link" href="/2016/08/27/Android极速开发四(手机屏幕)/" itemprop="url">
+                  Android极速开发四（手机屏幕）
                 </a>
               
             
@@ -884,7 +884,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T19:35:00+08:00" content="2016-08-27">
+            <time itemprop="dateCreated" datetime="2016-08-27T22:42:00+08:00" content="2016-08-27">
               2016-08-27
             </time>
           </span>
@@ -910,8 +910,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/Android-MVP/" itemprop="url" rel="index">
-                    <span itemprop="name">Android MVP</span>
+                  <a href="/categories/Android/Android极速开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Android极速开发</span>
                   </a>
                 </span>
 
@@ -926,8 +926,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/27/Retrofit2+Rxjava+MVP实践/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Retrofit2+Rxjava+MVP实践/" itemprop="commentsCount"></span>
+                <a href="/2016/08/27/Android极速开发四(手机屏幕)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android极速开发四(手机屏幕)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -937,7 +937,7 @@
 
           
           
-             <span id="/2016/08/27/Retrofit2+Rxjava+MVP实践/" class="leancloud_visitors" data-flag-title="Retrofit2+Rxjava+MVP实践">
+             <span id="/2016/08/27/Android极速开发四(手机屏幕)/" class="leancloud_visitors" data-flag-title="Android极速开发四（手机屏幕）">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -960,13 +960,15 @@
 
       
         
-          <p>此博文根据前面两篇文章 <code>Android MVP 架构初试</code> <code>Android MVP 架构封装</code>  再结合主流框架<code>Retrofit2+Rxjava</code>来个实践</p>
-<h3 id="源码地址RxMVP"><a href="#源码地址RxMVP" class="headerlink" title="源码地址RxMVP"></a><a href="https://github.com/Javen205/RxMVP">源码地址RxMVP</a></h3><h3 id="项目截图"><a href="#项目截图" class="headerlink" title="项目截图"></a>项目截图</h3><p><img src="/images/public/MVP/MVP3.jpeg" alt=""></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/Retrofit2+Rxjava+MVP实践/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <ul>
+<li>获取屏幕宽高</li>
+<li>手机横竖屏的判断</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class ScreenUtils &#123;</div><div class="line"></div><div class="line">    public static int getWidth(Context context) &#123;</div><div class="line">        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);</div><div class="line">        DisplayMetrics outMetrics = new DisplayMetrics();</div><div class="line">        manager.getDefaultDisplay().getMetrics(outMetrics);</div><div class="line"></div><div class="line">        return outMetrics.widthPixels;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static int getHeight(Context context) &#123;</div><div class="line">        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);</div><div class="line">        DisplayMetrics outMetrics = new DisplayMetrics();</div><div class="line">        manager.getDefaultDisplay().getMetrics(outMetrics);</div><div class="line"></div><div class="line">        return outMetrics.heightPixels;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class ConfigUtils &#123;</div><div class="line"></div><div class="line">    public static boolean isOrientationPortrait(Context context) &#123;</div><div class="line">        if (context.getResources().getConfiguration().orientation ==</div><div class="line">                Configuration.ORIENTATION_PORTRAIT) &#123;</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static boolean isOrientationLandscape(Context context) &#123;</div><div class="line">        if (context.getResources().getConfiguration().orientation ==</div><div class="line">                Configuration.ORIENTATION_LANDSCAPE) &#123;</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -997,7 +999,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1038,7 +1040,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1046,7 +1048,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1055,7 +1057,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
