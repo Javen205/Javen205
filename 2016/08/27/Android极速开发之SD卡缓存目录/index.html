@@ -84,19 +84,34 @@
 
 
 
-<meta name="description" content="安装之前判断是否有root权限，如果有root权限就静默安转，如果没有就利用意图进行安装
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182">
+<meta name="description" content="读取某个文件夹中的所有Apk文件路径并打开安装页面
+读取某文件夹下的所有apk文件
+获取SD卡跟目录中的某个文件
+弹出安装界面
+卸载apk
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android极速开发一（Apk安装）">
-<meta property="og:url" content="http://javen205.oschina.io/2016/08/27/Android极速开发一(Apk 安装)/index.html">
+<meta property="og:title" content="Android极速开发之SD卡缓存目录">
+<meta property="og:url" content="http://javen205.oschina.io/2016/08/27/Android极速开发之SD卡缓存目录/index.html">
 <meta property="og:site_name" content="智慧云端日记">
-<meta property="og:description" content="安装之前判断是否有root权限，如果有root权限就静默安转，如果没有就利用意图进行安装
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182">
-<meta property="og:updated_time" content="2016-08-27T12:54:39.000Z">
+<meta property="og:description" content="读取某个文件夹中的所有Apk文件路径并打开安装页面
+读取某文件夹下的所有apk文件
+获取SD卡跟目录中的某个文件
+弹出安装界面
+卸载apk
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
+<meta property="og:updated_time" content="2016-09-03T09:54:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android极速开发一（Apk安装）">
-<meta name="twitter:description" content="安装之前判断是否有root权限，如果有root权限就静默安转，如果没有就利用意图进行安装
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182">
+<meta name="twitter:title" content="Android极速开发之SD卡缓存目录">
+<meta name="twitter:description" content="读取某个文件夹中的所有Apk文件路径并打开安装页面
+读取某文件夹下的所有apk文件
+获取SD卡跟目录中的某个文件
+弹出安装界面
+卸载apk
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
 
 
 
@@ -108,7 +123,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: undefined,
+      userId: 6277749700019881000,
       author: '博主'
     }
   };
@@ -117,9 +132,9 @@
 
 
 
-  <link rel="canonical" href="http://javen205.oschina.io/2016/08/27/Android极速开发一(Apk 安装)/"/>
+  <link rel="canonical" href="http://javen205.oschina.io/2016/08/27/Android极速开发之SD卡缓存目录/"/>
 
-  <title> Android极速开发一（Apk安装） | 智慧云端日记 </title>
+  <title> Android极速开发之SD卡缓存目录 | 智慧云端日记 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -282,7 +297,7 @@
             
             
               
-                Android极速开发一（Apk安装）
+                Android极速开发之SD卡缓存目录
               
             
           </h1>
@@ -294,7 +309,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T16:25:00+08:00" content="2016-08-27">
+            <time itemprop="dateCreated" datetime="2016-08-27T22:32:00+08:00" content="2016-08-27">
               2016-08-27
             </time>
           </span>
@@ -336,8 +351,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/27/Android极速开发一(Apk 安装)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android极速开发一(Apk 安装)/" itemprop="commentsCount"></span>
+                <a href="/2016/08/27/Android极速开发之SD卡缓存目录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/Android极速开发之SD卡缓存目录/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -347,7 +362,7 @@
 
           
           
-             <span id="/2016/08/27/Android极速开发一(Apk 安装)/" class="leancloud_visitors" data-flag-title="Android极速开发一（Apk安装）">
+             <span id="/2016/08/27/Android极速开发之SD卡缓存目录/" class="leancloud_visitors" data-flag-title="Android极速开发之SD卡缓存目录">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -369,8 +384,14 @@
       
 
       
-        <p>安装之前判断是否有root权限，如果有root权限就静默安转，如果没有就利用意图进行安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @author Javen</div><div class="line"> * @since 2016/05/24</div><div class="line"> */</div><div class="line">public class ApkController &#123;</div><div class="line">    /**</div><div class="line">     * 描述: 安装</div><div class="line">     */</div><div class="line">    public static boolean install(String apkPath,Context context)&#123;</div><div class="line">        // 先判断手机是否有root权限</div><div class="line">        if(hasRootPerssion())&#123;</div><div class="line">            // 有root权限，利用静默安装实现</div><div class="line">            return clientInstall(apkPath);</div><div class="line">        &#125;else&#123;</div><div class="line">            // 没有root权限，利用意图进行安装</div><div class="line">            File file = new File(apkPath);</div><div class="line">            if(!file.exists())</div><div class="line">                return false; </div><div class="line">            Intent intent = new Intent();</div><div class="line">            intent.setAction(&quot;android.intent.action.VIEW&quot;);</div><div class="line">            intent.addCategory(&quot;android.intent.category.DEFAULT&quot;);</div><div class="line">            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">            intent.setDataAndType(Uri.fromFile(file),&quot;application/vnd.android.package-archive&quot;);</div><div class="line">            context.startActivity(intent);</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 描述: 卸载</div><div class="line">     */</div><div class="line">    public static boolean uninstall(String packageName,Context context)&#123;</div><div class="line">        if(hasRootPerssion())&#123;</div><div class="line">            // 有root权限，利用静默卸载实现</div><div class="line">            return clientUninstall(packageName);</div><div class="line">        &#125;else&#123;</div><div class="line">            Uri packageURI = Uri.parse(&quot;package:&quot; + packageName);</div><div class="line">            Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,packageURI);</div><div class="line">            uninstallIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">            context.startActivity(uninstallIntent);</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 判断手机是否有root权限</div><div class="line">     */</div><div class="line">    private static boolean hasRootPerssion()&#123;</div><div class="line">        PrintWriter PrintWriter = null;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">            process = Runtime.getRuntime().exec(&quot;su&quot;);</div><div class="line">            PrintWriter = new PrintWriter(process.getOutputStream());</div><div class="line">            PrintWriter.flush();</div><div class="line">            PrintWriter.close();</div><div class="line">            int value = process.waitFor();  </div><div class="line">            return returnResult(value);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 静默安装</div><div class="line">     */</div><div class="line">    private static boolean clientInstall(String apkPath)&#123;</div><div class="line">        PrintWriter PrintWriter = null;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">            process = Runtime.getRuntime().exec(&quot;su&quot;);</div><div class="line">            PrintWriter = new PrintWriter(process.getOutputStream());</div><div class="line">            PrintWriter.println(&quot;chmod 777 &quot;+apkPath);</div><div class="line">            PrintWriter.println(&quot;export LD_LIBRARY_PATH=/vendor/lib:/system/lib&quot;);</div><div class="line">            PrintWriter.println(&quot;pm install -r &quot;+apkPath);</div><div class="line">//          PrintWriter.println(&quot;exit&quot;);</div><div class="line">            PrintWriter.flush();</div><div class="line">            PrintWriter.close();</div><div class="line">            int value = process.waitFor();  </div><div class="line">            return returnResult(value);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 静默卸载</div><div class="line">     */</div><div class="line">    private static boolean clientUninstall(String packageName)&#123;</div><div class="line">        PrintWriter PrintWriter = null;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">            process = Runtime.getRuntime().exec(&quot;su&quot;);</div><div class="line">            PrintWriter = new PrintWriter(process.getOutputStream());</div><div class="line">            PrintWriter.println(&quot;LD_LIBRARY_PATH=/vendor/lib:/system/lib &quot;);</div><div class="line">            PrintWriter.println(&quot;pm uninstall &quot;+packageName);</div><div class="line">            PrintWriter.flush();</div><div class="line">            PrintWriter.close();</div><div class="line">            int value = process.waitFor();  </div><div class="line">            return returnResult(value); </div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    /**</div><div class="line">     * 启动app</div><div class="line">     * com.exmaple.client/.MainActivity</div><div class="line">     * com.exmaple.client/com.exmaple.client.MainActivity</div><div class="line">     */</div><div class="line">    public static boolean startApp(String packageName,String activityName)&#123;</div><div class="line">        boolean isSuccess = false;</div><div class="line">        String cmd = &quot;am start -n &quot; + packageName + &quot;/&quot; + activityName + &quot; \n&quot;;</div><div class="line">        Process process = null;</div><div class="line">        try &#123;</div><div class="line">           process = Runtime.getRuntime().exec(cmd);</div><div class="line">           int value = process.waitFor();  </div><div class="line">           return returnResult(value);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">          e.printStackTrace();</div><div class="line">        &#125; finally&#123;</div><div class="line">            if(process!=null)&#123;</div><div class="line">                process.destroy();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return isSuccess;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">     </div><div class="line">    private static boolean returnResult(int value)&#123;</div><div class="line">        // 代表成功  </div><div class="line">        if (value == 0) &#123;</div><div class="line">            return true;</div><div class="line">        &#125; else if (value == 1) &#123; // 失败</div><div class="line">            return false;</div><div class="line">        &#125; else &#123; // 未知情况</div><div class="line">            return false;</div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 查询所有非系统app的信息</div><div class="line">     * @param mContext</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static List&lt;Map&lt;String, Object&gt;&gt; getAPPInstalled(Context mContext) &#123;</div><div class="line"></div><div class="line">        List&lt;Map&lt;String, Object&gt;&gt; listItems = new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</div><div class="line"></div><div class="line">        // 获取系统内的所有程序信息</div><div class="line">        Intent mainintent = new Intent(Intent.ACTION_MAIN, null);</div><div class="line">        mainintent.addCategory(Intent.CATEGORY_LAUNCHER);</div><div class="line">        List&lt;PackageInfo&gt; packageinfo = mContext.getPackageManager()</div><div class="line">                .getInstalledPackages(0);</div><div class="line"></div><div class="line">        int count = packageinfo.size();</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line"></div><div class="line">            PackageInfo pinfo = packageinfo.get(i);</div><div class="line">            ApplicationInfo appInfo = pinfo.applicationInfo;</div><div class="line">            if ((appInfo.flags &amp; ApplicationInfo.FLAG_SYSTEM) &gt; 0) &#123;</div><div class="line">                // 系统程序 忽略</div><div class="line">            &#125; else &#123;</div><div class="line">                // 非系统程序</div><div class="line">                Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</div><div class="line">                map.put(&quot;app_logo&quot;, pinfo.applicationInfo.loadIcon(mContext</div><div class="line">                        .getPackageManager()));</div><div class="line">                map.put(&quot;app_name&quot;, pinfo.applicationInfo.loadLabel(mContext</div><div class="line">                        .getPackageManager()));</div><div class="line">                map.put(&quot;package_name&quot;, pinfo.applicationInfo.packageName);</div><div class="line">                map.put(&quot;app_version_name&quot;, pinfo.versionName);</div><div class="line">                map.put(&quot;app_version_code&quot;, pinfo.versionCode);</div><div class="line"></div><div class="line">                listItems.add(map);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return listItems;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 判断应用是否需要安装</div><div class="line">     * @param mContext</div><div class="line">     * @param packageName</div><div class="line">     * @param versionCode</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static boolean isInstalled(Context mContext,String packageName,int versionCode) &#123;</div><div class="line"></div><div class="line">        // 获取系统内的所有程序信息</div><div class="line">        Intent mainintent = new Intent(Intent.ACTION_MAIN, null);</div><div class="line">        mainintent.addCategory(Intent.CATEGORY_LAUNCHER);</div><div class="line">        List&lt;PackageInfo&gt; packageinfo = mContext.getPackageManager()</div><div class="line">                .getInstalledPackages(0);</div><div class="line"></div><div class="line">        int count = packageinfo.size();</div><div class="line">        String pn;</div><div class="line">        int vc;</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line"></div><div class="line">            PackageInfo pinfo = packageinfo.get(i);</div><div class="line">            ApplicationInfo appInfo = pinfo.applicationInfo;</div><div class="line">            if ((appInfo.flags &amp; ApplicationInfo.FLAG_SYSTEM) &gt; 0) &#123;</div><div class="line">                // 系统程序 忽略</div><div class="line">            &#125; else &#123;</div><div class="line">                // 非系统程序</div><div class="line">                pn=pinfo.applicationInfo.packageName;</div><div class="line">                vc=pinfo.versionCode;</div><div class="line"></div><div class="line">                if (pn.equalsIgnoreCase(packageName) &amp;&amp; vc &gt;= versionCode) &#123;</div><div class="line">                    return true;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <ul>
+<li>读取某个文件夹中的所有Apk文件路径并打开安装页面</li>
+<li>读取某文件夹下的所有apk文件</li>
+<li>获取SD卡跟目录中的某个文件</li>
+<li>弹出安装界面</li>
+<li>卸载apk</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @author Javen</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class SDKUtil &#123;</div><div class="line">	private final static String TAG=SDKUtil.class.getSimpleName();</div><div class="line">	</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 读取某个文件夹中的所有Apk文件路径并打开安装页面</div><div class="line">	 * @param context</div><div class="line">	 * @param path</div><div class="line">	 */</div><div class="line">	 public static void readApkAndStart(Context context,String path)&#123;</div><div class="line">	    	List&lt;String&gt; listpath = readAllApkForPath(context, path);</div><div class="line">	    	if (listpath!=null &amp;&amp; listpath.size()&gt;0) &#123;</div><div class="line">	    		for (String string : listpath) &#123;</div><div class="line">	        		SDKUtil.openInstallView(context, string);</div><div class="line">	    		&#125;</div><div class="line">			&#125;else &#123;</div><div class="line">				L.e(&quot;xxxx-----&quot;, &quot;readApkAndStart null。。。。。。。&quot;);</div><div class="line">			&#125;</div><div class="line">	 &#125;</div><div class="line">	 /**</div><div class="line">     * 读取某文件夹下的所有apk文件</div><div class="line">     * @param context</div><div class="line">     * @param path</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static List&lt;String&gt; readAllApkForPath(Context context,String path)&#123;</div><div class="line">    	List&lt;String&gt; fileNameList=new ArrayList&lt;String&gt;();</div><div class="line">    	File dir;</div><div class="line">    	if (Parameter.isDebug) &#123;</div><div class="line">    		 dir = getSDir(context, path);</div><div class="line">		&#125;else &#123;</div><div class="line">			 dir = getDiskCacheDir(context, path);</div><div class="line">		&#125;</div><div class="line">    	</div><div class="line">    	if (dir.isDirectory()) &#123;</div><div class="line">			File[] files = dir.listFiles();</div><div class="line">			for (File file : files) &#123;</div><div class="line">				String filePath = file.getAbsolutePath();</div><div class="line">				if (filePath.endsWith(&quot;.apk&quot;)) &#123;</div><div class="line">					fileNameList.add(filePath);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			return fileNameList;</div><div class="line">		&#125;</div><div class="line">		return null;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 获取SD卡跟目录中的某个文件</div><div class="line">     * @param context</div><div class="line">     * @param uniqueName</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static File getSDir(Context context, String uniqueName) &#123;</div><div class="line">        boolean externalStorageAvailable = Environment</div><div class="line">                .getExternalStorageState().equals(Environment.MEDIA_MOUNTED);</div><div class="line">        String path = null;</div><div class="line">        if (externalStorageAvailable) &#123;</div><div class="line">        	path=Environment.getExternalStorageDirectory().getAbsolutePath();</div><div class="line">        &#125;</div><div class="line">        return new File(path + File.separator + uniqueName);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 获取缓存地址</div><div class="line">     * @param context</div><div class="line">     * @param uniqueName</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static File getDiskCacheDir(Context context, String uniqueName) &#123;</div><div class="line">        boolean externalStorageAvailable = Environment</div><div class="line">                .getExternalStorageState().equals(Environment.MEDIA_MOUNTED);</div><div class="line">        String cachePath;</div><div class="line">        if (externalStorageAvailable) &#123;</div><div class="line">            cachePath = context.getExternalCacheDir().getPath();</div><div class="line">           </div><div class="line">        &#125; else &#123;</div><div class="line">            cachePath = context.getCacheDir().getPath();</div><div class="line">        &#125;</div><div class="line">        L.i(TAG, cachePath);</div><div class="line">        return new File(cachePath + File.separator + uniqueName);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 弹出安装界面</div><div class="line">     * @param context </div><div class="line">     * @param pathString apk 路径</div><div class="line">     */</div><div class="line">    public static void openInstallView(Context context,String pathString)&#123;</div><div class="line">    	//启动安装界面</div><div class="line">//		Intent install = new Intent(Intent.ACTION_VIEW);</div><div class="line">//		install.setDataAndType(Uri.fromFile(new File(pathString)),</div><div class="line">//				&quot;application/vnd.android.package-archive&quot;);</div><div class="line">//		install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">//		context.startActivity(install);</div><div class="line">    	ApkController.install(pathString, context);</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 卸载apk</div><div class="line">     * @param context</div><div class="line">     * @param packageName</div><div class="line">     */</div><div class="line">    public static void uninstallApk(Context context, String packageName) &#123;  </div><div class="line">        Uri uri = Uri.parse(&quot;package:&quot; + packageName);  </div><div class="line">        Intent intent = new Intent(Intent.ACTION_DELETE, uri);  </div><div class="line">        context.startActivity(intent);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -430,16 +451,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/27/Android MVP 架构初试/" rel="next" title="Android MVP 构架初试">
-                <i class="fa fa-chevron-left"></i> Android MVP 构架初试
+              <a href="/2016/08/27/Retrofit2+Rxjava+MVP实践/" rel="next" title="Retrofit2+Rxjava+MVP实践">
+                <i class="fa fa-chevron-left"></i> Retrofit2+Rxjava+MVP实践
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/27/Android MVP 架构封装/" rel="prev" title="Android MVP 构架封装">
-                Android MVP 构架封装 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/27/Android极速开发之调节屏幕亮度/" rel="prev" title="Android极速开发之调节屏幕的亮度">
+                Android极速开发之调节屏幕的亮度 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -455,10 +476,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/08/27/Android极速开发一(Apk 安装)/"
-     data-title="Android极速开发一（Apk安装）"
+        <div class="ds-share flat" data-thread-key="2016/08/27/Android极速开发之SD卡缓存目录/"
+     data-title="Android极速开发之SD卡缓存目录"
      data-content=""
-     data-url="http://javen205.oschina.io/2016/08/27/Android极速开发一(Apk 安装)/">
+     data-url="http://javen205.oschina.io/2016/08/27/Android极速开发之SD卡缓存目录/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -485,8 +506,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/27/Android极速开发一(Apk 安装)/"
-           data-title="Android极速开发一（Apk安装）" data-url="http://javen205.oschina.io/2016/08/27/Android极速开发一(Apk 安装)/">
+      <div class="ds-thread" data-thread-key="2016/08/27/Android极速开发之SD卡缓存目录/"
+           data-title="Android极速开发之SD卡缓存目录" data-url="http://javen205.oschina.io/2016/08/27/Android极速开发之SD卡缓存目录/">
       </div>
     
   </div>
@@ -531,7 +552,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -797,6 +818,10 @@
     })();
   </script>
 
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

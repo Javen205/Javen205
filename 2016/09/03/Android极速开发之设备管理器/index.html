@@ -1,0 +1,1092 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Android极速开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="继续来总结一些常用封装。
+欢迎留言、转发、打赏
+项目源码参考地址 点我点我–欢迎Start">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android极速开发之设备管理器">
+<meta property="og:url" content="http://javen205.oschina.io/2016/09/03/Android极速开发之设备管理器/index.html">
+<meta property="og:site_name" content="智慧云端日记">
+<meta property="og:description" content="继续来总结一些常用封装。
+欢迎留言、转发、打赏
+项目源码参考地址 点我点我–欢迎Start">
+<meta property="og:updated_time" content="2016-09-03T10:02:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android极速开发之设备管理器">
+<meta name="twitter:description" content="继续来总结一些常用封装。
+欢迎留言、转发、打赏
+项目源码参考地址 点我点我–欢迎Start">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6277749700019881000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://javen205.oschina.io/2016/09/03/Android极速开发之设备管理器/"/>
+
+  <title> Android极速开发之设备管理器 | 智慧云端日记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7db51d5bb8825e0ae42c8881760c229c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">智慧云端日记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just do IT</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rewards">
+          <a href="/2016/07/02/打赏捐赠列表/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-money"></i> <br />
+            
+            捐赠列表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android极速开发之设备管理器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-03T17:32:00+08:00" content="2016-09-03">
+              2016-09-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Android极速开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Android极速开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/03/Android极速开发之设备管理器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/03/Android极速开发之设备管理器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/03/Android极速开发之设备管理器/" class="leancloud_visitors" data-flag-title="Android极速开发之设备管理器">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>继续来总结一些常用封装。</p>
+<p>欢迎留言、转发、打赏</p>
+<p>项目源码参考地址 <a href="https://github.com/Javen205/DeviceMange" target="_blank" rel="external">点我点我–欢迎Start</a></p>
+<a id="more"></a>
+<ul>
+<li>何为设备管理器</li>
+<li>激活设备管理器能做些什么</li>
+<li>如何激活设备管理器</li>
+</ul>
+<p>Android 2.2 SDK提供了一个可管理和操作设备的API叫DevicePolicyManager（这是设备管理的主类），使用这个API你可以接管手机的应用权限，对手机做出很重要很多大胆的操作（温馨提示：数据无价，谨慎操作），比如设置锁屏方式、恢复出厂设置、设置密码、强制清除密码，修改密码等操作。</p>
+<p>DeviceAdminReceiver</p>
+<p> 该类继承自 BroadcastReceiver 。 从源码可以看到，其实就是实现了一个OnReceive方法，该方法中根据不同的Action，执行相应的操作。 比如，如果激活成功，那么Action就是ACTION_DEVICE_ADMIN_ENABLED， 据此调用 onEnabled 方法。下面会有继承DeviceAdminReceiver方法的实现。</p>
+<p>到底如何激活设备管理器呢？</p>
+<p>1.申请设备管理器权限，注册权限监听器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;!--设备管理--&gt;</div><div class="line">&lt;receiver</div><div class="line">    android:name=&quot;.demo.DeviceReceiver&quot;</div><div class="line">    android:permission=&quot;android.permission.BIND_DEVICE_ADMIN&quot;&gt;</div><div class="line">    &lt;meta-data</div><div class="line">        android:name=&quot;android.app.device_admin&quot;</div><div class="line">        android:resource=&quot;@xml/device_admin&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;intent-filter&gt;</div><div class="line">        &lt;action android:name=&quot;android.app.action.DEVICE_ADMIN_ENABLED&quot; /&gt;</div><div class="line">        &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;</div><div class="line">        &lt;category android:name=&quot;android.intent.category.HOME&quot; /&gt;</div><div class="line">    &lt;/intent-filter&gt;</div><div class="line">&lt;/receiver&gt;</div><div class="line">&lt;!--设备管理 END--&gt;</div></pre></td></tr></table></figure>
+<p>2.创建xml文件夹添加device_admin.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;device-admin</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">    &lt;uses-policies&gt;</div><div class="line">        &lt;limit-password /&gt;</div><div class="line">        &lt;!-- 限制密码类型 --&gt;</div><div class="line">        &lt;watch-login /&gt;</div><div class="line">        &lt;!-- 监控登录尝试 --&gt;</div><div class="line">        &lt;reset-password /&gt;</div><div class="line">        &lt;!-- 重置密码 --&gt;</div><div class="line">        &lt;force-lock /&gt;</div><div class="line">        &lt;!--锁屏 --&gt;</div><div class="line">        &lt;wipe-data /&gt;</div><div class="line">        &lt;!-- 恢复出厂设置 --&gt;</div><div class="line">    &lt;/uses-policies&gt;</div><div class="line">&lt;/device-admin&gt;</div></pre></td></tr></table></figure>
+<p>3.常用方法封装</p>
+<p>该方法使用的<code>双重锁定单例模式</code> 私有构造方法中获取<code>设备管理服务</code>并实例化一个<code>DeviceReceiver</code>继承自 <code>DeviceAdminReceiver</code>具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div></pre></td><td class="code"><pre><div class="line">public class DeviceMethod &#123;</div><div class="line">    private static DeviceMethod mDeviceMethod;</div><div class="line"></div><div class="line">    private DevicePolicyManager devicePolicyManager;</div><div class="line">    private ComponentName componentName;</div><div class="line">    private Context mContext;</div><div class="line"></div><div class="line">    private DeviceMethod (Context context)&#123;</div><div class="line">        mContext=context;</div><div class="line">        //获取设备管理服务</div><div class="line">        devicePolicyManager=(DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);</div><div class="line">        //DeviceReceiver 继承自 DeviceAdminReceiver</div><div class="line">        componentName=new ComponentName(context, DeviceReceiver.class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static DeviceMethod getInstance(Context context)&#123;</div><div class="line">        if (mDeviceMethod==null) &#123;</div><div class="line">            synchronized (DeviceMethod.class) &#123;</div><div class="line">                if (mDeviceMethod==null) &#123;</div><div class="line">                    mDeviceMethod=new DeviceMethod(context);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return mDeviceMethod;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 激活程序</div><div class="line">    public void onActivate() &#123;</div><div class="line">        Toast.makeText(mContext, &quot;激活&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        //判断是否激活  如果没有就启动激活设备</div><div class="line">        if (!devicePolicyManager.isAdminActive(componentName)) &#123;</div><div class="line">            Intent intent = new Intent(</div><div class="line">                    DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);</div><div class="line">            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,</div><div class="line">                    componentName);</div><div class="line">            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, &quot;提示文字&quot;);</div><div class="line">            mContext.startActivity(intent);</div><div class="line">        &#125;else &#123;</div><div class="line">            Toast.makeText(mContext, &quot;设备已经激活,请勿重复激活&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 移除程序 如果不移除程序 APP无法被卸载</div><div class="line">     */</div><div class="line">    public void onRemoveActivate() &#123;</div><div class="line">        devicePolicyManager.removeActiveAdmin(componentName);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置解锁方式 不需要激活就可以运行</div><div class="line">     */</div><div class="line">    public void startLockMethod() &#123;</div><div class="line">        Intent intent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);</div><div class="line">        mContext.startActivity(intent);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置解锁方式</div><div class="line">     */</div><div class="line">    public void setLockMethod() &#123;</div><div class="line">        // PASSWORD_QUALITY_ALPHABETIC</div><div class="line">        // 用户输入的密码必须要有字母（或者其他字符）。</div><div class="line">        // PASSWORD_QUALITY_ALPHANUMERIC</div><div class="line">        // 用户输入的密码必须要有字母和数字。</div><div class="line">        // PASSWORD_QUALITY_NUMERIC</div><div class="line">        // 用户输入的密码必须要有数字</div><div class="line">        // PASSWORD_QUALITY_SOMETHING</div><div class="line">        // 由设计人员决定的。</div><div class="line">        // PASSWORD_QUALITY_UNSPECIFIED</div><div class="line">        // 对密码没有要求。</div><div class="line">        if (devicePolicyManager.isAdminActive(componentName)) &#123;</div><div class="line">            Intent intent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);</div><div class="line">            devicePolicyManager.setPasswordQuality(componentName,</div><div class="line">                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);</div><div class="line">            mContext.startActivity(intent);</div><div class="line">        &#125;else &#123;</div><div class="line">            Toast.makeText(mContext, &quot;请先激活设备&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 立刻锁屏</div><div class="line">     */</div><div class="line">    public void LockNow() &#123;</div><div class="line">        if (devicePolicyManager.isAdminActive(componentName)) &#123;</div><div class="line">            devicePolicyManager.lockNow();</div><div class="line">        &#125;else &#123;</div><div class="line">            Toast.makeText(mContext, &quot;请先激活设备&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置多长时间后锁屏</div><div class="line">     * @param time</div><div class="line">     */</div><div class="line">    public void LockByTime(long time) &#123;</div><div class="line">        if (devicePolicyManager.isAdminActive(componentName)) &#123;</div><div class="line">            devicePolicyManager.setMaximumTimeToLock(componentName, time);</div><div class="line">        &#125;else &#123;</div><div class="line">            Toast.makeText(mContext, &quot;请先激活设备&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 恢复出厂设置</div><div class="line">     */</div><div class="line">    public void WipeData() &#123;</div><div class="line">        if (devicePolicyManager.isAdminActive(componentName)) &#123;</div><div class="line">            devicePolicyManager.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE);</div><div class="line">        &#125;else &#123;</div><div class="line">            Toast.makeText(mContext, &quot;请先激活设备&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置密码锁</div><div class="line">     * @param password</div><div class="line">     */</div><div class="line">    public void setPassword(String password) &#123;</div><div class="line">        if (devicePolicyManager.isAdminActive(componentName)) &#123;</div><div class="line">            devicePolicyManager.resetPassword(password,</div><div class="line">                    DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);</div><div class="line">        &#125;else &#123;</div><div class="line">            Toast.makeText(mContext, &quot;请先激活设备&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="遗留问题-弹出激活界面点击取消-如何监听"><a href="#遗留问题-弹出激活界面点击取消-如何监听" class="headerlink" title="遗留问题  弹出激活界面点击取消 如何监听"></a>遗留问题  弹出激活界面点击取消 如何监听</h3><p>有好的解决方案欢迎留言（目前我想到的可以尝试使用模拟用户点击【之前很火🔥的抢微信红包插件】）</p>
+<p>以下是设备管理器操作的广播监听<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">public class DeviceReceiver extends DeviceAdminReceiver &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onEnabled(Context context, Intent intent) &#123;</div><div class="line">            // 设备管理：可用</div><div class="line">            Toast.makeText(context, &quot;设备管理：可用&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onDisabled(final Context context, Intent intent) &#123;</div><div class="line">            // 设备管理：不可用</div><div class="line">            Toast.makeText(context, &quot;设备管理：不可用&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">            //如果取消了激活就再次提示激活</div><div class="line">            new Handler().postDelayed(new Runnable() &#123;</div><div class="line">                @Override</div><div class="line">                public void run() &#123;</div><div class="line">                    DeviceMethod.getInstance(context.getApplicationContext()).onActivate();</div><div class="line">                &#125;</div><div class="line">            &#125;, 3000);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public CharSequence onDisableRequested(Context context, Intent intent) &#123;</div><div class="line">           /* // 这里处理 不可编辑设备。这里可以造成死机状态</div><div class="line">            Intent intent2 = new Intent(context, NoticeSetting.class);</div><div class="line">            intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">            context.startActivity(intent2);</div><div class="line">            context.stopService(intent);// 是否可以停止*/</div><div class="line"></div><div class="line">            return &quot;这是一个可选的消息，警告有关禁止用户的请求&quot;;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onPasswordChanged(Context context, Intent intent) &#123;</div><div class="line">            // 设备管理：密码己经改变</div><div class="line">            Toast.makeText(context, &quot;设备管理：密码己经改变&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onPasswordFailed(Context context, Intent intent) &#123;</div><div class="line">            // 设备管理：改变密码失败</div><div class="line">            Toast.makeText(context, &quot;设备管理：改变密码失败&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onPasswordSucceeded(Context context, Intent intent) &#123;</div><div class="line">            // 设备管理：改变密码成功</div><div class="line">            Toast.makeText(context, &quot;设备管理：改变密码成功&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4.一些栗子</p>
+<ul>
+<li>激活设备管理器</li>
+<li>取消激活设备管理器</li>
+<li>设置解锁方式</li>
+<li>立刻锁屏</li>
+<li>设置N秒后锁屏</li>
+<li>恢复出厂设置</li>
+<li>设置密码锁</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">// 激活程序</div><div class="line">public void OnActivate(View v) &#123;</div><div class="line">    DeviceMethod.getInstance(this).onActivate();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 移除程序 如果不移除程序 APP无法被卸载</div><div class="line">public void OnRemoveActivate(View v) &#123;</div><div class="line">    DeviceMethod.getInstance(this).onRemoveActivate();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 设置解锁方式 不需要激活就可以运行</div><div class="line">public void btnszmm(View v) &#123;</div><div class="line">    DeviceMethod.getInstance(this).startLockMethod();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 设置解锁方式</div><div class="line">public void btnmm(View v) &#123;</div><div class="line">   DeviceMethod.getInstance(this).setLockMethod();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 立刻锁屏</div><div class="line">public void btnlock(View v) &#123;</div><div class="line">    DeviceMethod.getInstance(this).LockNow();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 设置5秒后锁屏</div><div class="line">public void btnlocktime(View v) &#123;</div><div class="line">    DeviceMethod.getInstance(this).LockByTime(5000);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 恢复出厂设置</div><div class="line">public void btnwipe(View v) &#123;</div><div class="line">    DeviceMethod.getInstance(this).WipeData();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 设置密码锁</div><div class="line">public void setPassword(View v) &#123;</div><div class="line">   DeviceMethod.getInstance(this).setPassword(&quot;1234&quot;);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>欢迎留言、转发、打赏<br>项目源码参考地址 <a href="https://github.com/Javen205/DeviceMange" target="_blank" rel="external">点我点我–欢迎Start</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/to/wechat-qcode.jpg" alt="Javen wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/to/wx.jpg" alt="Javen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/to/apay.jpg" alt="Javen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Android极速开发/" rel="tag">#Android极速开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/31/Android极速开发之桌面快捷方式/" rel="next" title="Android极速开发之桌面快捷方式">
+                <i class="fa fa-chevron-left"></i> Android极速开发之桌面快捷方式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/03/Android极速开发之发送短信/" rel="prev" title="Android极速开发之发送短信">
+                Android极速开发之发送短信 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/03/Android极速开发之设备管理器/"
+     data-title="Android极速开发之设备管理器"
+     data-content=""
+     data-url="http://javen205.oschina.io/2016/09/03/Android极速开发之设备管理器/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/03/Android极速开发之设备管理器/"
+           data-title="Android极速开发之设备管理器" data-url="http://javen205.oschina.io/2016/09/03/Android极速开发之设备管理器/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo/img.jpg"
+               alt="Javen" />
+          <p class="site-author-name" itemprop="name">Javen</p>
+          <p class="site-description motion-element" itemprop="description">凡事皆有终结，因此，耐心是赢得成功的一种手段。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://git.oschina.net/javen205" target="_blank" title="Git">
+                  
+                    <i class="fa fa-fw fa-git"></i>
+                  
+                  Git
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2545091901" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/zyw-205520" target="_blank" title="博客">
+                  
+                    <i class="fa fa-fw fa-gg-circle"></i>
+                  
+                  博客
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" title="Git教程" target="_blank">Git教程</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com" title="NextT" target="_blank">NextT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="友情链接" target="_blank">友情链接</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#遗留问题-弹出激活界面点击取消-如何监听"><span class="nav-number">1.</span> <span class="nav-text">遗留问题  弹出激活界面点击取消 如何监听</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Yu7irauVr0CHgnXgUolTJEz1-gzGzoHsz", "NmtG2bRFM173EgH4J6Jj7ygF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
