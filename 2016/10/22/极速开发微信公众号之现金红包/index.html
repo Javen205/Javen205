@@ -1,0 +1,1124 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微信公众号,开源项目,我的作品," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="欢迎留言、转发
+微信极速开发系列文章：点击这里
+
+前几篇文章介绍了微信支付。 公众号支付、微信扫码支付、刷卡支付、微信买单
+
+此文来聊聊微信商户中的支付工具—-现金红包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极速开发微信公众号之现金红包">
+<meta property="og:url" content="http://javen205.oschina.io/2016/10/22/极速开发微信公众号之现金红包/index.html">
+<meta property="og:site_name" content="智慧云端日记">
+<meta property="og:description" content="欢迎留言、转发
+微信极速开发系列文章：点击这里
+
+前几篇文章介绍了微信支付。 公众号支付、微信扫码支付、刷卡支付、微信买单
+
+此文来聊聊微信商户中的支付工具—-现金红包">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-447e3de25bc44add.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-870f4ddcaca1bc4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-ccbc54296e406cdf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-10010e412fc3e9ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-fd2000216b7aed6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-01T08:47:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极速开发微信公众号之现金红包">
+<meta name="twitter:description" content="欢迎留言、转发
+微信极速开发系列文章：点击这里
+
+前几篇文章介绍了微信支付。 公众号支付、微信扫码支付、刷卡支付、微信买单
+
+此文来聊聊微信商户中的支付工具—-现金红包">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1342351-447e3de25bc44add.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6277749700019881000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://javen205.oschina.io/2016/10/22/极速开发微信公众号之现金红包/"/>
+
+  <title> 极速开发微信公众号之现金红包 | 智慧云端日记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7db51d5bb8825e0ae42c8881760c229c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">智慧云端日记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just do IT</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rewards">
+          <a href="/2016/07/02/打赏捐赠列表/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-money"></i> <br />
+            
+            捐赠列表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                极速开发微信公众号之现金红包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-22T22:18:00+08:00" content="2016-10-22">
+              2016-10-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/" itemprop="url" rel="index">
+                    <span itemprop="name">微信公众号</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/22/极速开发微信公众号之现金红包/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/22/极速开发微信公众号之现金红包/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/22/极速开发微信公众号之现金红包/" class="leancloud_visitors" data-flag-title="极速开发微信公众号之现金红包">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>欢迎留言、转发</p>
+<p>微信极速开发系列文章：<a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">点击这里</a></p>
+<blockquote>
+<p>前几篇文章介绍了微信支付。 <a href="http://www.jianshu.com/p/cb2456a2d7a7" target="_blank" rel="external">公众号支付</a>、<a href="http://www.jianshu.com/p/474af73eb176" target="_blank" rel="external">微信扫码支付</a>、<a href="http://www.jianshu.com/p/ef6c9c5c5807" target="_blank" rel="external">刷卡支付</a>、<a href="http://www.jianshu.com/p/e28eb52830c5" target="_blank" rel="external">微信买单</a></p>
+</blockquote>
+<p>此文来聊聊微信商户中的支付工具—-现金红包<br><a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-447e3de25bc44add.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="现金红包.png"></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p><a href="https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_3&amp;index=2" target="_blank" rel="external">【官方文档】</a></p>
+<p>一、开通现金红包权限</p>
+<p>在使用现金红包之前，请前往开通现金红包功能。操作路径：【登录微信支付商户平台——&gt;产品中心——&gt;现金红包——&gt;开通】。</p>
+<p>二、下载API证书</p>
+<p>商户调用微信红包接口时，服务器会进行证书验证，请在商户平台下载证书</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-870f4ddcaca1bc4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="现金红包-下载证书.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-ccbc54296e406cdf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="现金红包-下载之后的文件.png"></p>
+<blockquote>
+<p>有人要问这么多证书到底使用那个呢？跟开发语言有关系吗？</p>
+</blockquote>
+<p>什么语言使用什么证书,以及如何使用可以参考截图中的<code>证书说明.txt</code></p>
+<p>内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">欢迎使用微信支付！</div><div class="line">微信支付API共四份（证书pkcs12格式、证书pem格式、证书密钥pem格式、CA证书）,为接口中强制要求时需携带的证书文件。</div><div class="line">证书属于敏感信息，请妥善保管不要泄露和被他人复制。</div><div class="line">不同开发语言下的证书格式不同，以下为说明指引：</div><div class="line">	证书pkcs12格式（apiclient_cert.p12）</div><div class="line">		包含了私钥信息的证书文件，为p12(pfx)格式，由微信支付签发给您用来标识和界定您的身份</div><div class="line">		部分安全性要求较高的API需要使用该证书来确认您的调用身份</div><div class="line">		windows上可以直接双击导入系统，导入过程中会提示输入证书密码，证书密码默认为您的商户ID（如：10010000）</div><div class="line">	证书pem格式（apiclient_cert.pem）</div><div class="line">		从apiclient_cert.p12中导出证书部分的文件，为pem格式，请妥善保管不要泄漏和被他人复制</div><div class="line">		部分开发语言和环境，不能直接使用p12文件，而需要使用pem，所以为了方便您使用，已为您直接提供</div><div class="line">		您也可以使用openssl命令来自己导出：openssl pkcs12 -clcerts -nokeys -in apiclient_cert.p12 -out apiclient_cert.pem</div><div class="line">	证书密钥pem格式（apiclient_key.pem）</div><div class="line">		从apiclient_cert.p12中导出密钥部分的文件，为pem格式</div><div class="line">		部分开发语言和环境，不能直接使用p12文件，而需要使用pem，所以为了方便您使用，已为您直接提供</div><div class="line">		您也可以使用openssl命令来自己导出：openssl pkcs12 -nocerts -in apiclient_cert.p12 -out apiclient_key.pem</div><div class="line">	CA证书（rootca.pem）</div><div class="line">		微信支付api服务器上也部署了证明微信支付身份的服务器证书，您在使用api进行调用时也需要验证所调用服务器及域名的真实性</div><div class="line">		该文件为签署微信支付证书的权威机构的根证书，可以用来验证微信支付服务器证书的真实性</div><div class="line">		某些环境和工具已经内置了若干权威机构的根证书，无需引用该证书也可以正常进行验证，这里提供给您在未内置所必须根证书的环境中载入使用</div></pre></td></tr></table></figure>
+<p>三、充值</p>
+<p>在发放现金红包之前，请确保你的资金充足。如若不足，请充值。操作路径：【登录商户平台——&gt;账户中心——&gt;资金管理——&gt;充值】</p>
+<blockquote>
+<p>每个红包的平均金额必须在1.00元到200.00元之间</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-10010e412fc3e9ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="现金红包-充值.png"></p>
+<p>四、获取openid</p>
+<p>目前支持向指定微信用户的openid发放指定金额红包。（获取openid参见之前写的文章：<a href="http://www.jianshu.com/p/01b04bdf9645" target="_blank" rel="external">极速开发微信公众号之授权获取用户信息</a></p>
+<p>五、相关参数设置</p>
+<p> 和红包相关的参数【主要是安全方面：绑定IP、防止用户盗刷】，你可以在页面上自主设置和更改。<br>操作路径如下：【登录商户平台——&gt;产品中心——&gt;现金红包——&gt;产品设置】（注：“产品设置”操作按钮仅当你开通现金红包功能之后才会出现）。<br>你可以设置和更改以下参数：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-fd2000216b7aed6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="现金红包-设置参数.png"></p>
+<p>说明：<br>1、 调用IP地址：设置之后，仅有已设置的IP地址可以调用，其余的IP调用会报错；<br>2、用户领取上限：限制同一openid同一日领取的个数<br>3、防刷等级：防刷是指微信风控针对微信小号、僵尸号、机器号等的拦截，你可以通过更改防刷等级控制防刷的强度。<br>4、 同时，你也可以申请更改红包额度。但是需要经过微信支付的审核，审核通过之后才会生效。</p>
+<h2 id="现金红包类别"><a href="#现金红包类别" class="headerlink" title="现金红包类别"></a>现金红包类别</h2><blockquote>
+<p>现金红包分为两类：<br>1、普通红包 <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_4&amp;index=3" target="_blank" rel="external">【官方文档】</a><br>2、裂变红包 <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_5&amp;index=4" target="_blank" rel="external">【官方文档】</a></p>
+<p>两者部分参数不同</p>
+</blockquote>
+<h2 id="发送现金红包"><a href="#发送现金红包" class="headerlink" title="发送现金红包"></a>发送现金红包</h2><p>1、发送普通红包接口 <code>com.javen.weixin.api.RedPackApi.java</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private static String sendRedPackUrl = &quot;https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack&quot;;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 发送红包</div><div class="line">	 * @param params 请求参数</div><div class="line">	 * @param certPath 证书文件目录</div><div class="line">	 * @param partner 证书密码</div><div class="line">	 * @return &#123;String&#125;</div><div class="line">	 */</div><div class="line">	public static String sendRedPack(Map&lt;String, String&gt; params, String certPath, String partner) &#123;</div><div class="line">		return HttpUtils.postSSL(sendRedPackUrl, PaymentKit.toXml(params), certPath, partner);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>2、发送裂变红包接口 <code>com.javen.weixin.api.RedPackApi.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private static String sendGroupRedPackUrl = &quot;https://api.mch.weixin.qq.com/mmpaymkttransfers/sendgroupredpack&quot;;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 发送裂变红包</div><div class="line">	 * @param params 请求参数</div><div class="line">	 * @param certPath 证书文件目录</div><div class="line">	 * @param partner 证书密码</div><div class="line">	 * @return &#123;String&#125;</div><div class="line">	 */</div><div class="line">	public static String sendGroupRedPack(Map&lt;String, String&gt; params, String certPath, String partner) &#123;</div><div class="line">		return HttpUtils.postSSL(sendGroupRedPackUrl, PaymentKit.toXml(params), certPath, partner);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>具体实现封装 <code>com.javen.utils.ReadPackUtils.java</code><br>1、普通红包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">	 * 发送普通红包</div><div class="line">	 * @param request 获取IP</div><div class="line">	 * @param total_amount  付款现金(单位分)</div><div class="line">	 * @param total_num 红包发放总人数</div><div class="line">	 * @param wishing 红包祝福语</div><div class="line">	 * @param act_name 活动名称</div><div class="line">	 * @param remark 备注</div><div class="line">	 * @param reOpenid 用户openid</div><div class="line">	 * @param partner 商户号</div><div class="line">	 * @param wxappid 公众账号appid</div><div class="line">	 * @param sendName 商户名称</div><div class="line">	 * @param paternerKey 商户签名key</div><div class="line">	 * @param certPath 证书路径</div><div class="line">	 * @return</div><div class="line">	 */</div><div class="line">	public static boolean sendredpack(HttpServletRequest request,String total_amount,String total_num,String wishing,String act_name,String remark,String reOpenid,String partner,String wxappid,String sendName,String paternerKey,String certPath) &#123;</div><div class="line">		// 商户订单号</div><div class="line">		String mchBillno = System.currentTimeMillis() + &quot;&quot;;</div><div class="line">		String ip = IpKit.getRealIp(request);</div><div class="line"></div><div class="line">		Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</div><div class="line">		// 随机字符串</div><div class="line">		params.put(&quot;nonce_str&quot;, System.currentTimeMillis() / 1000 + &quot;&quot;);</div><div class="line">		// 商户订单号</div><div class="line">		params.put(&quot;mch_billno&quot;, mchBillno);</div><div class="line">		// 商户号</div><div class="line">		params.put(&quot;mch_id&quot;, partner);</div><div class="line">		// 公众账号ID</div><div class="line">		params.put(&quot;wxappid&quot;, wxappid);</div><div class="line">		// 商户名称</div><div class="line">		params.put(&quot;send_name&quot;, sendName);</div><div class="line">		// 用户OPENID</div><div class="line">		params.put(&quot;re_openid&quot;, reOpenid);</div><div class="line">		// 付款现金(单位分)</div><div class="line">		params.put(&quot;total_amount&quot;, total_amount);</div><div class="line">		// 红包发放总人数</div><div class="line">		params.put(&quot;total_num&quot;, total_num);</div><div class="line">		// 红包祝福语</div><div class="line">		params.put(&quot;wishing&quot;, wishing);</div><div class="line">		// 终端IP</div><div class="line">		params.put(&quot;client_ip&quot;, ip);</div><div class="line">		// 活动名称</div><div class="line">		params.put(&quot;act_name&quot;, act_name	);</div><div class="line">		// 备注</div><div class="line">		params.put(&quot;remark&quot;, remark);</div><div class="line">		//创建签名</div><div class="line">		String sign = PaymentKit.createSign(params, paternerKey);</div><div class="line">		params.put(&quot;sign&quot;, sign);</div><div class="line"></div><div class="line">		String xmlResult = RedPackApi.sendRedPack(params, certPath, partner);</div><div class="line">		Map&lt;String, String&gt; result = PaymentKit.xmlToMap(xmlResult);</div><div class="line">		log.warn(JsonKit.toJson(result));</div><div class="line">		//此字段是通信标识，非交易标识，交易是否成功需要查看result_code来判断</div><div class="line">		String return_code = result.get(&quot;return_code&quot;);</div><div class="line">		//业务结果</div><div class="line">		String result_code = result.get(&quot;result_code&quot;);</div><div class="line">		</div><div class="line">		if (StrKit.isBlank(return_code) || !&quot;SUCCESS&quot;.equals(return_code)) &#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">		if (StrKit.notBlank(result_code) &amp;&amp; &quot;SUCCESS&quot;.equals(result_code)) &#123;</div><div class="line">			</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>2、裂变红包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">	 * 发送裂变红包</div><div class="line">	 * @param partner</div><div class="line">	 * @param wxappid</div><div class="line">	 * @param sendName</div><div class="line">	 * @param reOpenid</div><div class="line">	 * @param total_amount</div><div class="line">	 * @param total_num</div><div class="line">	 * @param wishing</div><div class="line">	 * @param act_name</div><div class="line">	 * @param remark</div><div class="line">	 * @param paternerKey</div><div class="line">	 * @param certPath</div><div class="line">	 * @return</div><div class="line">	 */</div><div class="line">	public static boolean sendGroupRedPack(String partner, String wxappid, String sendName, String reOpenid, String total_amount, String total_num, String wishing, String act_name, String remark, String paternerKey, String certPath)&#123;</div><div class="line">		// 商户订单号</div><div class="line">		String mchBillno = System.currentTimeMillis() + &quot;&quot;;</div><div class="line">		</div><div class="line">		Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</div><div class="line">		// 随机字符串</div><div class="line">		params.put(&quot;nonce_str&quot;, System.currentTimeMillis() / 1000 + &quot;&quot;);</div><div class="line">		// 商户订单号</div><div class="line">		params.put(&quot;mch_billno&quot;, mchBillno);</div><div class="line">		// 商户号</div><div class="line">		params.put(&quot;mch_id&quot;, partner);</div><div class="line">		// 公众账号ID</div><div class="line">		params.put(&quot;wxappid&quot;, wxappid);</div><div class="line">		// 商户名称</div><div class="line">		params.put(&quot;send_name&quot;, sendName);</div><div class="line">		// 用户OPENID</div><div class="line">		params.put(&quot;re_openid&quot;, reOpenid);</div><div class="line">		// 付款现金(单位分)</div><div class="line">		params.put(&quot;total_amount&quot;, total_amount);</div><div class="line">		// 红包发放总人数</div><div class="line">		params.put(&quot;total_num&quot;, total_num);</div><div class="line">		//红包金额设置方式</div><div class="line">		params.put(&quot;amt_type&quot;, &quot;ALL_RAND&quot;);</div><div class="line">		// 红包祝福语</div><div class="line">		params.put(&quot;wishing&quot;, wishing);</div><div class="line">		// 活动名称</div><div class="line">		params.put(&quot;act_name&quot;, act_name	);</div><div class="line">		// 备注</div><div class="line">		params.put(&quot;remark&quot;, remark);</div><div class="line">		</div><div class="line">		//创建签名</div><div class="line">		String sign = PaymentKit.createSign(params, paternerKey);</div><div class="line">		params.put(&quot;sign&quot;, sign);</div><div class="line">		</div><div class="line">		String xmlResult = RedPackApi.sendGroupRedPack(params, certPath, partner);</div><div class="line">		Map&lt;String, String&gt; result = PaymentKit.xmlToMap(xmlResult);</div><div class="line">		log.warn(JsonKit.toJson(result));</div><div class="line">		//此字段是通信标识，非交易标识，交易是否成功需要查看result_code来判断</div><div class="line">		String return_code = result.get(&quot;return_code&quot;);</div><div class="line">		//业务结果</div><div class="line">		String result_code = result.get(&quot;result_code&quot;);</div><div class="line">		</div><div class="line">		if (StrKit.isBlank(return_code) || !&quot;SUCCESS&quot;.equals(return_code)) &#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">		if (StrKit.notBlank(result_code) &amp;&amp; &quot;SUCCESS&quot;.equals(result_code)) &#123;</div><div class="line">			</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="发送红包Demo"><a href="#发送红包Demo" class="headerlink" title="发送红包Demo"></a>发送红包Demo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 微信红包demo</div><div class="line"> * @author Javen</div><div class="line"> * 2016年5月28日</div><div class="line"> */</div><div class="line">public class RedPackApiController extends Controller &#123;</div><div class="line">	private static String sendName = &quot;Javen205&quot;;</div><div class="line">	//微信证书路径</div><div class="line">	private static String certPath = &quot;/Users/Javen/Downloads/cert/apiclient_cert.p12&quot;;</div><div class="line">	//商户相关资料</div><div class="line">	String wxappid = PropKit.get(&quot;appId&quot;);</div><div class="line">	// 微信支付分配的商户号</div><div class="line">	String partner = PropKit.get(&quot;mch_id&quot;);</div><div class="line">	//API密钥</div><div class="line">	String paternerKey = PropKit.get(&quot;paternerKey&quot;);</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 发送普通红包</div><div class="line">	 */</div><div class="line">	public void sendredpack() &#123;</div><div class="line">		</div><div class="line">		boolean isSend = ReadPackUtils.sendredpack(getRequest(), &quot;100&quot;, &quot;1&quot;, &quot;感谢您参加猜灯谜活动，祝您元宵节快乐！&quot;,</div><div class="line">				&quot;猜灯谜抢红包活动&quot;, &quot;猜越多得越多，快来抢！&quot;, &quot;o_pncsidC-pRRfCP4zj98h6slREw&quot;,</div><div class="line">				partner, wxappid, sendName, paternerKey, certPath);</div><div class="line">		</div><div class="line">		renderJson(isSend);</div><div class="line">	&#125;</div><div class="line">	/**</div><div class="line">	 * 发送裂变红包</div><div class="line">	 */</div><div class="line">	public void sendGroupRedPack() &#123;</div><div class="line">		</div><div class="line">		boolean isSend = ReadPackUtils.sendGroupRedPack(partner, wxappid, &quot;天虹百货&quot;, &quot;o_pncsidC-pRRfCP4zj98h6slREw&quot;, </div><div class="line">				&quot;100&quot;, &quot;10&quot;, &quot;感谢您参加猜灯谜活动，祝您元宵节快乐！&quot;, &quot;猜灯谜抢红包活动&quot;,</div><div class="line">				&quot;猜越多得越多，快来抢&quot;, paternerKey, certPath);</div><div class="line">		</div><div class="line">		</div><div class="line">		renderJson(isSend);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"></div><div class="line">	public void query() &#123;</div><div class="line">		String query = ReadPackUtils.query(&quot;10000098201411111234567890&quot;, partner, wxappid, paternerKey, certPath);</div><div class="line">		renderJson(query);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="查询红包记录"><a href="#查询红包记录" class="headerlink" title="查询红包记录"></a>查询红包记录</h2><p><a href="https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_6&amp;index=5" target="_blank" rel="external">【查询红包记录官方文档】</a></p>
+<p>接口封装<code>com.javen.weixin.api.RedPackApi.java</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private static String getHBInfo = &quot;https://api.mch.weixin.qq.com/mmpaymkttransfers/gethbinfo &quot;;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 根据商户订单号查询信息</div><div class="line">	 * @param params 请求参数</div><div class="line">	 * @param certPath 证书文件目录</div><div class="line">	 * @param partner 证书密码</div><div class="line">	 * @return &#123;String&#125;</div><div class="line">	 */</div><div class="line">	public static String getHbInfo(Map&lt;String, String&gt; params, String certPath, String partner) &#123;</div><div class="line">		return HttpUtils.postSSL(getHBInfo, PaymentKit.toXml(params), certPath, partner);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>具体实现封装    <code>com.javen.utils.ReadPackUtils.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">	 * 根据商户订单号查询红包</div><div class="line">	 * @param mch_billno 商户订单号</div><div class="line">	 * @param partner 商户号</div><div class="line">	 * @param wxappid 公众账号ID</div><div class="line">	 * @param paternerKey 商户签名Key</div><div class="line">	 * @param certPath 证书路径</div><div class="line">	 * @return</div><div class="line">	 */</div><div class="line">	public static String  query(String mch_billno,String partner,String wxappid,String paternerKey,String certPath) &#123;</div><div class="line">		Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</div><div class="line">		// 随机字符串</div><div class="line">		params.put(&quot;nonce_str&quot;, System.currentTimeMillis() / 1000 + &quot;&quot;);</div><div class="line">		// 商户订单号</div><div class="line">		params.put(&quot;mch_billno&quot;, mch_billno);</div><div class="line">		// 商户号</div><div class="line">		params.put(&quot;mch_id&quot;, partner);</div><div class="line">		// 公众账号ID</div><div class="line">		params.put(&quot;appid&quot;, wxappid);</div><div class="line">		params.put(&quot;bill_type&quot;, &quot;MCHT&quot;);</div><div class="line">		//创建签名</div><div class="line">		String sign = PaymentKit.createSign(params, paternerKey);</div><div class="line">		params.put(&quot;sign&quot;, sign);</div><div class="line"></div><div class="line">		String xmlResult = RedPackApi.getHbInfo(params, certPath, partner);</div><div class="line">		Map&lt;String, String&gt; result = PaymentKit.xmlToMap(xmlResult);</div><div class="line">		System.out.println(result);</div><div class="line">		return JsonKit.toJson(result);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>码字完毕，以上就是微信发送现金红包的详细介绍。</p>
+<p>欢迎留言、转发<br>微信极速开发系列文章：<a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">http://www.jianshu.com/p/a172a1b69fdd</a><br>此文章项目开源地址：<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">极速开发微信公众号-Start支持项目发展</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/to/wechat-qcode.jpg" alt="Javen wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/to/wx.jpg" alt="Javen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/to/apay.jpg" alt="Javen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微信公众号/" rel="tag">#微信公众号</a>
+          
+            <a href="/tags/开源项目/" rel="tag">#开源项目</a>
+          
+            <a href="/tags/我的作品/" rel="tag">#我的作品</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/极速开发微信公众号之模板消息/" rel="next" title="极速开发微信公众号之模板消息">
+                <i class="fa fa-chevron-left"></i> 极速开发微信公众号之模板消息
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/14/会员注册、找回密码、登陆（邮箱与手机验证码）/" rel="prev" title="极速开发微信公众号之页面注册、登录、找回密码">
+                极速开发微信公众号之页面注册、登录、找回密码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/22/极速开发微信公众号之现金红包/"
+     data-title="极速开发微信公众号之现金红包"
+     data-content=""
+     data-url="http://javen205.oschina.io/2016/10/22/极速开发微信公众号之现金红包/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/22/极速开发微信公众号之现金红包/"
+           data-title="极速开发微信公众号之现金红包" data-url="http://javen205.oschina.io/2016/10/22/极速开发微信公众号之现金红包/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo/img.jpg"
+               alt="Javen" />
+          <p class="site-author-name" itemprop="name">Javen</p>
+          <p class="site-description motion-element" itemprop="description">凡事皆有终结，因此，耐心是赢得成功的一种手段。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://git.oschina.net/javen205" target="_blank" title="Git">
+                  
+                    <i class="fa fa-fw fa-git"></i>
+                  
+                  Git
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2545091901" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/zyw-205520" target="_blank" title="博客">
+                  
+                    <i class="fa fa-fw fa-gg-circle"></i>
+                  
+                  博客
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" title="Git教程" target="_blank">Git教程</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com" title="NextT" target="_blank">NextT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="友情链接" target="_blank">友情链接</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现金红包类别"><span class="nav-number">2.</span> <span class="nav-text">现金红包类别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送现金红包"><span class="nav-number">3.</span> <span class="nav-text">发送现金红包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送红包Demo"><span class="nav-number">4.</span> <span class="nav-text">发送红包Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询红包记录"><span class="nav-number">5.</span> <span class="nav-text">查询红包记录</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Yu7irauVr0CHgnXgUolTJEz1-gzGzoHsz", "NmtG2bRFM173EgH4J6Jj7ygF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

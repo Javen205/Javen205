@@ -1,0 +1,1108 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微信公众号,开源项目,我的作品," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="微信开发交流群：148540125
+系列文章参考地址 极速开发微信公众号
+欢迎留言、转发、打赏项目源码参考地址 点我点我–欢迎Start
+
+前几篇文章已讲完如何导入项目，如何启动配置项目，如何成为开发者，重源码分析消息是如何交互（如果前四项不是很清楚可以看这里 极速开发微信公众号。这篇文章就来讲讲如果实现自定义菜单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极速开发微信公众号之自定义菜单">
+<meta property="og:url" content="http://javen205.oschina.io/2016/09/16/极速开发微信公众号之自定义菜单/index.html">
+<meta property="og:site_name" content="智慧云端日记">
+<meta property="og:description" content="微信开发交流群：148540125
+系列文章参考地址 极速开发微信公众号
+欢迎留言、转发、打赏项目源码参考地址 点我点我–欢迎Start
+
+前几篇文章已讲完如何导入项目，如何启动配置项目，如何成为开发者，重源码分析消息是如何交互（如果前四项不是很清楚可以看这里 极速开发微信公众号。这篇文章就来讲讲如果实现自定义菜单">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-0093250250c51cda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-84da6ae19e64b0a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-2a90a7e19896a2d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-99416787ac33b795.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-01T08:57:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极速开发微信公众号之自定义菜单">
+<meta name="twitter:description" content="微信开发交流群：148540125
+系列文章参考地址 极速开发微信公众号
+欢迎留言、转发、打赏项目源码参考地址 点我点我–欢迎Start
+
+前几篇文章已讲完如何导入项目，如何启动配置项目，如何成为开发者，重源码分析消息是如何交互（如果前四项不是很清楚可以看这里 极速开发微信公众号。这篇文章就来讲讲如果实现自定义菜单">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1342351-0093250250c51cda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6277749700019881000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://javen205.oschina.io/2016/09/16/极速开发微信公众号之自定义菜单/"/>
+
+  <title> 极速开发微信公众号之自定义菜单 | 智慧云端日记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7db51d5bb8825e0ae42c8881760c229c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">智慧云端日记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just do IT</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rewards">
+          <a href="/2016/07/02/打赏捐赠列表/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-money"></i> <br />
+            
+            捐赠列表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                极速开发微信公众号之自定义菜单
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-16T14:25:00+08:00" content="2016-09-16">
+              2016-09-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/" itemprop="url" rel="index">
+                    <span itemprop="name">微信公众号</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/16/极速开发微信公众号之自定义菜单/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/16/极速开发微信公众号之自定义菜单/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/16/极速开发微信公众号之自定义菜单/" class="leancloud_visitors" data-flag-title="极速开发微信公众号之自定义菜单">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>微信开发交流群：148540125</p>
+<p>系列文章参考地址 <a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">极速开发微信公众号</a></p>
+<p>欢迎留言、转发、打赏<br>项目源码参考地址 <a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">点我点我–欢迎Start</a></p>
+<blockquote>
+<p>前几篇文章已讲完如何导入项目，如何启动配置项目，如何成为开发者，重源码分析消息是如何交互（如果前四项不是很清楚可以看这里 <a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">极速开发微信公众号</a>。这篇文章就来讲讲如果实现自定义菜单</p>
+</blockquote>
+<a id="more"></a>
+<p>实现自定义菜单有两种方式<br>1、编辑模式<br>2、开发模式</p>
+<p>编辑模式就很简单了就不赘述了……</p>
+<h3 id="开发模式实现自定义菜单"><a href="#开发模式实现自定义菜单" class="headerlink" title="开发模式实现自定义菜单"></a>开发模式实现自定义菜单</h3><p>1、使用微信<a href="http://mp.weixin.qq.com/debug/" target="_blank" rel="external">公众平台接口调试工具</a>实现<br>2、使用<a href="http://mp.weixin.qq.com/wiki/10/0234e39a2025342c17a7d23595c6b40a.html" target="_blank" rel="external">官方提供的接口</a>实现</p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><blockquote>
+<p>注意：<br>1、目前<code>订阅号</code> 只能使用编辑模式而且不能添加超链接，微信认证之后才可以使用开发模式。<br>2、编辑模式与开发模式不能同时开启<br>3、生成的菜单不会立即显示（隔天），如果想立即看到效果可以取消关注再关注</p>
+</blockquote>
+<p>添加插件</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-0093250250c51cda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="K8WTIEI86W9W5XERD`MRD{6.png"></p>
+<h3 id="使用微信公众平台接口调试工具实现"><a href="#使用微信公众平台接口调试工具实现" class="headerlink" title="使用微信公众平台接口调试工具实现"></a>使用微信<a href="http://mp.weixin.qq.com/debug/" target="_blank" rel="external">公众平台接口调试工具</a>实现</h3><p><img src="http://upload-images.jianshu.io/upload_images/1342351-84da6ae19e64b0a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自定义菜单-接口调试工具.png"></p>
+<p>可以看到需要两个参数而且都是必填 <code>access_token</code>  <code>body</code></p>
+<p>有人要问，这两个参数如何获取呢？</p>
+<p><code>body</code> 其实就是要生成菜单的<code>JSON对象</code> 官方有提供一个栗子可以<a href="http://mp.weixin.qq.com/wiki/10/0234e39a2025342c17a7d23595c6b40a.html" target="_blank" rel="external">参考</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;button&quot;:[</div><div class="line">    &#123;	</div><div class="line">         &quot;type&quot;:&quot;click&quot;,</div><div class="line">         &quot;name&quot;:&quot;今日歌曲&quot;,</div><div class="line">         &quot;key&quot;:&quot;V1001_TODAY_MUSIC&quot;</div><div class="line">     &#125;,</div><div class="line">     &#123;</div><div class="line">          &quot;name&quot;:&quot;菜单&quot;,</div><div class="line">          &quot;sub_button&quot;:[</div><div class="line">          &#123;	</div><div class="line">              &quot;type&quot;:&quot;view&quot;,</div><div class="line">              &quot;name&quot;:&quot;搜索&quot;,</div><div class="line">              &quot;url&quot;:&quot;http://www.soso.com/&quot;</div><div class="line">           &#125;,</div><div class="line">           &#123;</div><div class="line">              &quot;type&quot;:&quot;view&quot;,</div><div class="line">              &quot;name&quot;:&quot;视频&quot;,</div><div class="line">              &quot;url&quot;:&quot;http://v.qq.com/&quot;</div><div class="line">           &#125;,</div><div class="line">           &#123;</div><div class="line">              &quot;type&quot;:&quot;click&quot;,</div><div class="line">              &quot;name&quot;:&quot;赞一下我们&quot;,</div><div class="line">              &quot;key&quot;:&quot;V1001_GOOD&quot;</div><div class="line">           &#125;]</div><div class="line">      &#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>access_token</code> 的获取如下图<br><img src="http://upload-images.jianshu.io/upload_images/1342351-2a90a7e19896a2d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自定义菜单-获取access_token.png"></p>
+<h3 id="使用官方提供的接口实现"><a href="#使用官方提供的接口实现" class="headerlink" title="使用官方提供的接口实现"></a>使用<a href="http://mp.weixin.qq.com/wiki/10/0234e39a2025342c17a7d23595c6b40a.html" target="_blank" rel="external">官方提供的接口</a>实现</h3><blockquote>
+<p>初次了解微信自定义菜单的同学建议先看看官方的文档3遍</p>
+</blockquote>
+<p>在<code>Jfinal-weixin</code>中有封装菜单的创建、查询、删除、以及个性化菜单的创建、查询、删除、<strong>测试个性化菜单匹配结果</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-99416787ac33b795.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自定义菜单-菜单封装的接口.png"></p>
+<p>那么问题来了，封装好了如何使用呢？<br>以下是提供封装的接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">//查询自定义菜单</div><div class="line">public static ApiResult getMenu() &#123;</div><div class="line">    String jsonResult = HttpUtils.get(getMenu + AccessTokenApi.getAccessTokenStr());</div><div class="line">    return new ApiResult(jsonResult);</div><div class="line">&#125;</div><div class="line">//创建自定义菜单</div><div class="line">public static ApiResult createMenu(String jsonStr) &#123;</div><div class="line">    String jsonResult = HttpUtils.post(createMenu + AccessTokenApi.getAccessTokenStr(), jsonStr);</div><div class="line">    return new ApiResult(jsonResult);</div><div class="line">&#125;</div><div class="line">//删除自定义菜单</div><div class="line">public static ApiResult deleteMenu() &#123;</div><div class="line">    String jsonResult = HttpUtils.get(deleteMenuUrl + AccessTokenApi.getAccessTokenStr());</div><div class="line">    return new ApiResult(jsonResult);</div><div class="line">&#125;</div><div class="line">//创建个性化自定义菜单</div><div class="line">public static ApiResult addConditional(String jsonStr) &#123;</div><div class="line">    String jsonResult = HttpUtils.post(addConditionalUrl + AccessTokenApi.getAccessTokenStr(), jsonStr);</div><div class="line">    return new ApiResult(jsonResult);</div><div class="line">&#125;</div><div class="line">//删除个性化自定义菜单</div><div class="line">public static ApiResult delConditional(String menuid) &#123;</div><div class="line">    HashMap params = new HashMap();</div><div class="line">    params.put(&quot;menuid&quot;, menuid);</div><div class="line">    String url = delConditionalUrl + AccessTokenApi.getAccessTokenStr();</div><div class="line">    String jsonResult = HttpUtils.post(url, JsonUtils.toJson(params));</div><div class="line">    return new ApiResult(jsonResult);</div><div class="line">&#125;</div><div class="line">//测试个性化菜单匹配结果</div><div class="line">public static ApiResult tryMatch(String userId) &#123;</div><div class="line">    HashMap params = new HashMap();</div><div class="line">    params.put(&quot;user_id&quot;, userId);</div><div class="line">    String url = tryMatchUrl + AccessTokenApi.getAccessTokenStr();</div><div class="line">    String jsonResult = HttpUtils.post(url, JsonUtils.toJson(params));</div><div class="line">    return new ApiResult(jsonResult);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static ApiResult getCurrentSelfMenuInfo() &#123;</div><div class="line">    String jsonResult = HttpUtils.get(getCurrentSelfMenuInfoUrl + AccessTokenApi.getAccessTokenStr());</div><div class="line">    return new ApiResult(jsonResult);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">开源项目weixin_guide</a>中<code>com.javen.weixin.menu.MenuManager</code>类中提供了详细使用的Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123; </div><div class="line">         </div><div class="line">           // 将菜单对象转换成json字符串</div><div class="line">           String jsonMenu = JsonKit.toJson(getTestMenu()).toString();</div><div class="line">           System.out.println(jsonMenu);</div><div class="line">           ApiConfig ac = new ApiConfig();</div><div class="line">            </div><div class="line">            // 配置微信 API 相关常量 请使用你自己公众号的</div><div class="line">            ac.setAppId(&quot;wx614c453e0d1dcd12&quot;);</div><div class="line">            ac.setAppSecret(&quot;19a02e4927d346484fc70327970457f9&quot;);</div><div class="line">//          ac.setAppId(PropKit.get(&quot;appId&quot;));</div><div class="line">//          ac.setAppSecret(PropKit.get(&quot;appSecret&quot;));</div><div class="line">            ApiConfigKit.setThreadLocalApiConfig(ac);</div><div class="line">           </div><div class="line">           //创建菜单</div><div class="line">           ApiResult apiResult=MenuApi.createMenu(jsonMenu);</div><div class="line">           System.out.println(apiResult.getJson());</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<p>可以看到main方法中调用了<code>MenuApi.createMenu(jsonMenu)</code><br>那<code>jsonMenu</code> 从何而来呢？</p>
+<p>其实这里是将自定义菜单的实体对象转化为了JSON</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String jsonMenu = JsonKit.toJson(getTestMenu()).toString();</div></pre></td></tr></table></figure>
+<h3 id="菜单的封装"><a href="#菜单的封装" class="headerlink" title="菜单的封装"></a>菜单的封装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line">         * 组装菜单数据 </div><div class="line">         *  </div><div class="line">         * @return </div><div class="line">         */  </div><div class="line">        private static Menu getTestMenu() &#123;  </div><div class="line">            ClickButton btn11 = new ClickButton();  </div><div class="line">            btn11.setName(&quot;微信相册发图&quot;);  </div><div class="line">            btn11.setType(&quot;pic_weixin&quot;);  </div><div class="line">            btn11.setKey(&quot;rselfmenu_1_1&quot;);</div><div class="line">      </div><div class="line">            ClickButton btn12 = new ClickButton();  </div><div class="line">            btn12.setName(&quot;拍照或者相册发图&quot;);  </div><div class="line">            btn12.setType(&quot;pic_photo_or_album&quot;);  </div><div class="line">            btn12.setKey(&quot;rselfmenu_1_2&quot;);;  </div><div class="line">      </div><div class="line">            ClickButton btn13 = new ClickButton();  </div><div class="line">            btn13.setName(&quot;系统拍照发图&quot;);  </div><div class="line">            btn13.setType(&quot;pic_sysphoto&quot;);  </div><div class="line">            btn13.setKey(&quot;rselfmenu_1_3&quot;);</div><div class="line">      </div><div class="line">            ClickButton btn21 = new ClickButton();  </div><div class="line">            btn21.setName(&quot;扫码带提示&quot;);  </div><div class="line">            btn21.setType(&quot;scancode_waitmsg&quot;);  </div><div class="line">            btn21.setKey(&quot;rselfmenu_2_1&quot;);;  </div><div class="line">      </div><div class="line">            ClickButton btn22 = new ClickButton();  </div><div class="line">            btn22.setName(&quot;扫码推事件&quot;);  </div><div class="line">            btn22.setType(&quot;scancode_push&quot;);  </div><div class="line">            btn22.setKey(&quot;rselfmenu_2_2&quot;);;  </div><div class="line">      </div><div class="line">            ViewButton btn23 = new ViewButton();  </div><div class="line">            btn23.setName(&quot;我的设备&quot;);  </div><div class="line">            btn23.setType(&quot;view&quot;);  </div><div class="line">            btn23.setUrl(&quot;https://hw.weixin.qq.com/devicectrl/panel/device-list.html?appid=wx614c453e0d1dcd12&quot;); </div><div class="line">            </div><div class="line">            ViewButton btn31 = new ViewButton();  </div><div class="line">            btn31.setName(&quot;微社区&quot;);  </div><div class="line">            btn31.setType(&quot;view&quot;);  </div><div class="line">            btn31.setUrl(&quot;http://whsf.tunnel.mobi/whsf/msg/wsq&quot;);  </div><div class="line">      </div><div class="line">            </div><div class="line">            ClickButton btn32 = new ClickButton();  </div><div class="line">            btn32.setName(&quot;发送位置&quot;);  </div><div class="line">            btn32.setType(&quot;location_select&quot;);  </div><div class="line">            btn32.setKey(&quot;rselfmenu_3_2&quot;); </div><div class="line">      </div><div class="line">            //http://tencent://message/?uin=572839485&amp;Site=在线咨询&amp;Menu=yes</div><div class="line">            //http://wpa.qq.com/msgrd?v=3&amp;uin=572839485&amp;site=qq&amp;menu=yes</div><div class="line">            </div><div class="line">            ViewButton btn33 = new ViewButton();  </div><div class="line">            btn33.setName(&quot;在线咨询&quot;);  </div><div class="line">            btn33.setType(&quot;view&quot;);  </div><div class="line">            btn33.setUrl(&quot;http://wpa.qq.com/msgrd?v=3&amp;uin=572839485&amp;site=qq&amp;menu=yes&quot;);  </div><div class="line">      </div><div class="line">            ViewButton btn34 = new ViewButton();  </div><div class="line">            btn34.setName(&quot;我的博客&quot;);  </div><div class="line">            btn34.setType(&quot;view&quot;);  </div><div class="line">            btn34.setUrl(&quot;http://www.cnblogs.com/zyw-205520&quot;); </div><div class="line">            </div><div class="line">            ClickButton btn35 = new ClickButton();  </div><div class="line">            btn35.setName(&quot;点击事件&quot;);  </div><div class="line">            btn35.setType(&quot;click&quot;);  </div><div class="line">            btn35.setKey(&quot;rselfmenu_3_5&quot;); </div><div class="line">            </div><div class="line">            ComButton mainBtn1 = new ComButton();  </div><div class="line">            mainBtn1.setName(&quot;发图&quot;);  </div><div class="line">            mainBtn1.setSub_button(new Button[] &#123; btn11, btn12, btn13&#125;);  </div><div class="line">      </div><div class="line">            ComButton mainBtn2 = new ComButton();  </div><div class="line">            mainBtn2.setName(&quot;扫码&quot;);  </div><div class="line">            mainBtn2.setSub_button(new Button[] &#123; btn21, btn22 ,btn23&#125;);  </div><div class="line">      </div><div class="line">            ComButton mainBtn3 = new ComButton();  </div><div class="line">            mainBtn3.setName(&quot;个人中心&quot;);  </div><div class="line">            mainBtn3.setSub_button(new Button[] &#123; btn31, btn32, btn33, btn34 ,btn35 &#125;);  </div><div class="line">      </div><div class="line">            /** </div><div class="line">             * 这是公众号xiaoqrobot目前的菜单结构，每个一级菜单都有二级菜单项&lt;br&gt; </div><div class="line">             *  </div><div class="line">             * 在某个一级菜单下没有二级菜单的情况，menu该如何定义呢？&lt;br&gt; </div><div class="line">             * 比如，第三个一级菜单项不是“更多体验”，而直接是“幽默笑话”，那么menu应该这样定义：&lt;br&gt; </div><div class="line">             * menu.setButton(new Button[] &#123; mainBtn1, mainBtn2, btn33 &#125;); </div><div class="line">             */  </div><div class="line">            Menu menu = new Menu();  </div><div class="line">            menu.setButton(new Button[] &#123; mainBtn1, mainBtn2, mainBtn3 &#125;);  </div><div class="line">            return menu;  </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>执行main方法会输出生成菜单的JSON以及响应的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">生成菜单的JSON：&#123;&quot;button&quot;:[&#123;&quot;sub_button&quot;:[&#123;&quot;name&quot;:&quot;微信相册发图&quot;,&quot;type&quot;:&quot;pic_weixin&quot;,&quot;key&quot;:&quot;rselfmenu_1_1&quot;&#125;,&#123;&quot;name&quot;:&quot;拍照或者相册发图&quot;,&quot;type&quot;:&quot;pic_photo_or_album&quot;,&quot;key&quot;:&quot;rselfmenu_1_2&quot;&#125;,&#123;&quot;name&quot;:&quot;系统拍照发图&quot;,&quot;type&quot;:&quot;pic_sysphoto&quot;,&quot;key&quot;:&quot;rselfmenu_1_3&quot;&#125;],&quot;name&quot;:&quot;发图&quot;,&quot;type&quot;:null&#125;,&#123;&quot;sub_button&quot;:[&#123;&quot;name&quot;:&quot;扫码带提示&quot;,&quot;type&quot;:&quot;scancode_waitmsg&quot;,&quot;key&quot;:&quot;rselfmenu_2_1&quot;&#125;,&#123;&quot;name&quot;:&quot;扫码推事件&quot;,&quot;type&quot;:&quot;scancode_push&quot;,&quot;key&quot;:&quot;rselfmenu_2_2&quot;&#125;,&#123;&quot;name&quot;:&quot;我的设备&quot;,&quot;type&quot;:&quot;view&quot;,&quot;url&quot;:&quot;https://hw.weixin.qq.com/devicectrl/panel/device-list.html?appid=wx614c453e0d1dcd12&quot;&#125;],&quot;name&quot;:&quot;扫码&quot;,&quot;type&quot;:null&#125;,&#123;&quot;sub_button&quot;:[&#123;&quot;name&quot;:&quot;微社区&quot;,&quot;type&quot;:&quot;view&quot;,&quot;url&quot;:&quot;http://whsf.tunnel.mobi/whsf/msg/wsq&quot;&#125;,&#123;&quot;name&quot;:&quot;发送位置&quot;,&quot;type&quot;:&quot;location_select&quot;,&quot;key&quot;:&quot;rselfmenu_3_2&quot;&#125;,&#123;&quot;name&quot;:&quot;在线咨询&quot;,&quot;type&quot;:&quot;view&quot;,&quot;url&quot;:&quot;http://wpa.qq.com/msgrd?v=3&amp;uin=572839485&amp;site=qq&amp;menu=yes&quot;&#125;,&#123;&quot;name&quot;:&quot;我的博客&quot;,&quot;type&quot;:&quot;view&quot;,&quot;url&quot;:&quot;http://www.cnblogs.com/zyw-205520&quot;&#125;,&#123;&quot;name&quot;:&quot;点击事件&quot;,&quot;type&quot;:&quot;click&quot;,&quot;key&quot;:&quot;rselfmenu_3_5&quot;&#125;],&quot;name&quot;:&quot;个人中心&quot;,&quot;type&quot;:null&#125;],&quot;matchrule&quot;:null&#125;</div><div class="line"></div><div class="line">响应的状态： &#123;&quot;errcode&quot;:0,&quot;errmsg&quot;:&quot;ok&quot;&#125;</div></pre></td></tr></table></figure>
+<p>以上是生成自定义菜单的全过程。</p>
+<p>欢迎留言、转发、打赏<br>项目源码参考地址 <a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">点我点我–欢迎Start</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/to/wechat-qcode.jpg" alt="Javen wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/to/wx.jpg" alt="Javen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/to/apay.jpg" alt="Javen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微信公众号/" rel="tag">#微信公众号</a>
+          
+            <a href="/tags/开源项目/" rel="tag">#开源项目</a>
+          
+            <a href="/tags/我的作品/" rel="tag">#我的作品</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/16/极速开发微信公众号之如何实现消息交互/" rel="next" title="极速开发微信公众号之如何实现消息交互">
+                <i class="fa fa-chevron-left"></i> 极速开发微信公众号之如何实现消息交互
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/17/极速开发微信公众号之授权获取用户信息/" rel="prev" title="极速开发微信公众号之授权获取用户信息">
+                极速开发微信公众号之授权获取用户信息 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/16/极速开发微信公众号之自定义菜单/"
+     data-title="极速开发微信公众号之自定义菜单"
+     data-content=""
+     data-url="http://javen205.oschina.io/2016/09/16/极速开发微信公众号之自定义菜单/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/16/极速开发微信公众号之自定义菜单/"
+           data-title="极速开发微信公众号之自定义菜单" data-url="http://javen205.oschina.io/2016/09/16/极速开发微信公众号之自定义菜单/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo/img.jpg"
+               alt="Javen" />
+          <p class="site-author-name" itemprop="name">Javen</p>
+          <p class="site-description motion-element" itemprop="description">凡事皆有终结，因此，耐心是赢得成功的一种手段。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://git.oschina.net/javen205" target="_blank" title="Git">
+                  
+                    <i class="fa fa-fw fa-git"></i>
+                  
+                  Git
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2545091901" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/zyw-205520" target="_blank" title="博客">
+                  
+                    <i class="fa fa-fw fa-gg-circle"></i>
+                  
+                  博客
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" title="Git教程" target="_blank">Git教程</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com" title="NextT" target="_blank">NextT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="友情链接" target="_blank">友情链接</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发模式实现自定义菜单"><span class="nav-number">1.</span> <span class="nav-text">开发模式实现自定义菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">2.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用微信公众平台接口调试工具实现"><span class="nav-number">3.</span> <span class="nav-text">使用微信公众平台接口调试工具实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用官方提供的接口实现"><span class="nav-number">4.</span> <span class="nav-text">使用官方提供的接口实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单的封装"><span class="nav-number">5.</span> <span class="nav-text">菜单的封装</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Yu7irauVr0CHgnXgUolTJEz1-gzGzoHsz", "NmtG2bRFM173EgH4J6Jj7ygF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1131 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微信公众号,开源项目,我的作品," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="欢迎留言、转发
+微信极速开发系列文章：点击这里
+
+上两篇文章介绍了微信公众号支付以及微信扫码支付
+
+此篇文章具体来聊聊微信刷卡支付">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极速开发微信公众号之刷卡支付">
+<meta property="og:url" content="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之刷卡支付/index.html">
+<meta property="og:site_name" content="智慧云端日记">
+<meta property="og:description" content="欢迎留言、转发
+微信极速开发系列文章：点击这里
+
+上两篇文章介绍了微信公众号支付以及微信扫码支付
+
+此篇文章具体来聊聊微信刷卡支付">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-63bc02b8ed9b5361.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-01T08:53:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极速开发微信公众号之刷卡支付">
+<meta name="twitter:description" content="欢迎留言、转发
+微信极速开发系列文章：点击这里
+
+上两篇文章介绍了微信公众号支付以及微信扫码支付
+
+此篇文章具体来聊聊微信刷卡支付">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1342351-63bc02b8ed9b5361.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6277749700019881000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之刷卡支付/"/>
+
+  <title> 极速开发微信公众号之刷卡支付 | 智慧云端日记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7db51d5bb8825e0ae42c8881760c229c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">智慧云端日记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just do IT</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rewards">
+          <a href="/2016/07/02/打赏捐赠列表/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-money"></i> <br />
+            
+            捐赠列表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                极速开发微信公众号之刷卡支付
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-15T18:47:00+08:00" content="2016-10-15">
+              2016-10-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/" itemprop="url" rel="index">
+                    <span itemprop="name">微信公众号</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/15/极速开发微信公众号之刷卡支付/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/15/极速开发微信公众号之刷卡支付/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/15/极速开发微信公众号之刷卡支付/" class="leancloud_visitors" data-flag-title="极速开发微信公众号之刷卡支付">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>欢迎留言、转发</p>
+<p>微信极速开发系列文章：<a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">点击这里</a></p>
+<blockquote>
+<p>上两篇文章介绍了微信<a href="http://www.jianshu.com/p/cb2456a2d7a7" target="_blank" rel="external">公众号支付</a>以及<a href="http://www.jianshu.com/p/474af73eb176" target="_blank" rel="external">微信扫码支付</a></p>
+</blockquote>
+<p>此篇文章具体来聊聊微信刷卡支付<br><a id="more"></a> </p>
+<hr>
+<p>刷卡支付-<a href="https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=5_1#" target="_blank" rel="external">官方文档</a></p>
+<hr>
+<h2 id="场景介绍"><a href="#场景介绍" class="headerlink" title="场景介绍"></a>场景介绍</h2><ul>
+<li>步骤1：用户选择刷卡支付付款并打开微信，进入“我”-&gt;“钱包”-&gt;“刷卡”条码界面</li>
+<li>步骤2：收银员在商户系统操作生成支付订单，用户确认支付金额</li>
+<li>步骤3：商户收银员用扫码设备扫描用户的条码/二维码，商户收银系统提交支付</li>
+<li>步骤4：微信支付后台系统收到支付请求，根据验证密码规则判断是否验证用户的支付密码，不需要验证密码的交易直接发起扣款，需要验证密码的交易会弹出密码输入框。支付成功后微信端会弹出成功页面，支付失败会弹出错误提示</li>
+</ul>
+<h2 id="商户侧流程"><a href="#商户侧流程" class="headerlink" title="商户侧流程"></a>商户侧流程</h2><hr>
+<p>详细文档介绍只需要简单了解流程 <a href="https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=5_4" target="_blank" rel="external">点击这里</a></p>
+<hr>
+<p>刷卡支付接入模式可分为：商户后台接入(提供给别人使用类似第三方)和门店接入(自己使用)；<code>区别就是支付结果多分发一次</code>。</p>
+<p>根据用户是否需要输入支付密码可分为：免密模式和验密模式。</p>
+<h2 id="支付验证密码规则"><a href="#支付验证密码规则" class="headerlink" title="支付验证密码规则"></a>支付验证密码规则</h2><ul>
+<li>支付金额&gt;500元的交易需要验证用户支付密码</li>
+<li>用户账号每天最多有5笔交易可以免密，超过后需要验证密码</li>
+<li>微信支付后台判断用户支付行为有异常情况，符合免密规则的交易也会要求验证密码</li>
+</ul>
+<blockquote>
+<p>免密模式和验密模式两者的区别会在后面讲到</p>
+</blockquote>
+<p>下面来讲讲具体实现</p>
+<p>刷卡支付当中使用的支付接口为: <a href="https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_10" target="_blank" rel="external">提交刷卡支付API</a> 使用的是<code>https</code>请求；不需要微信支付证书。</p>
+<p>以下是具体实现代码：<br><code>com.javen.weixin.controller.WeixinPayController</code>中的<code>micropay()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">public void micropay()&#123;</div><div class="line">  String url=&quot;https://api.mch.weixin.qq.com/pay/micropay&quot;;</div><div class="line">  </div><div class="line">  String total_fee=&quot;1&quot;;</div><div class="line">  //授权码</div><div class="line">  String auth_code = getPara(&quot;auth_code&quot;);</div><div class="line">  </div><div class="line">  Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</div><div class="line">  params.put(&quot;appid&quot;, appid);</div><div class="line">  params.put(&quot;mch_id&quot;, partner);</div><div class="line">  params.put(&quot;device_info&quot;, &quot;javen205&quot;);//终端设备号</div><div class="line">  params.put(&quot;nonce_str&quot;, System.currentTimeMillis() / 1000 + &quot;&quot;);</div><div class="line">  params.put(&quot;body&quot;, &quot;刷卡支付测试&quot;);</div><div class="line">//  params.put(&quot;detail&quot;, &quot;json字符串&quot;);//非必须</div><div class="line">  params.put(&quot;attach&quot;, &quot;javen205&quot;);//附加参数非必须</div><div class="line">  String out_trade_no=System.currentTimeMillis()+&quot;&quot;;</div><div class="line">  params.put(&quot;out_trade_no&quot;, out_trade_no);</div><div class="line">  params.put(&quot;total_fee&quot;, total_fee);</div><div class="line">  </div><div class="line">  String ip = IpKit.getRealIp(getRequest());</div><div class="line">  if (StrKit.isBlank(ip)) &#123;</div><div class="line">   ip = &quot;127.0.0.1&quot;;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  params.put(&quot;spbill_create_ip&quot;, ip);</div><div class="line">  params.put(&quot;auth_code&quot;, auth_code);</div><div class="line">  </div><div class="line">  String sign = PaymentKit.createSign(params, paternerKey);</div><div class="line">  params.put(&quot;sign&quot;, sign);</div><div class="line">  </div><div class="line">  String xmlResult = HttpUtils.post(url, PaymentKit.toXml(params));</div><div class="line">  //同步返回结果</div><div class="line">  System.out.println(&quot;xmlResult:&quot;+xmlResult);</div><div class="line">  </div><div class="line">  Map&lt;String, String&gt; result = PaymentKit.xmlToMap(xmlResult);</div><div class="line">  String return_code = result.get(&quot;return_code&quot;);</div><div class="line">  if (StrKit.isBlank(return_code) || !&quot;SUCCESS&quot;.equals(return_code)) &#123;</div><div class="line">   //通讯失败 </div><div class="line">   String err_code = result.get(&quot;err_code&quot;);</div><div class="line">   //用户支付中，需要输入密码</div><div class="line">   if (err_code.equals(&quot;USERPAYING&quot;)) &#123;</div><div class="line">    //等待5秒后调用【查询订单API】https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_2</div><div class="line">    </div><div class="line">   &#125;</div><div class="line">   renderText(&quot;通讯失败&gt;&gt;&quot;+xmlResult);</div><div class="line">   return;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  String result_code = result.get(&quot;result_code&quot;);</div><div class="line">  if (StrKit.isBlank(result_code) || !&quot;SUCCESS&quot;.equals(result_code)) &#123;</div><div class="line">   //支付失败</div><div class="line">   renderText(&quot;支付失败&gt;&gt;&quot;+xmlResult);</div><div class="line">   return;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  //支付成功 </div><div class="line">  </div><div class="line">  renderText(xmlResult);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p> 在<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">开源项目weixin-guide</a>中 测试访问地址为<code>http://域名[/项目名称]/pay/micropay?auth_code=xxxxx</code> ， <code>授权码auth_code</code>  为微信客户端刷卡界面条形码上显示的数字。</p>
+<blockquote>
+<p>（注：用户刷卡条形码规则：18位纯数字，以10、11、12、13、14、15开头）</p>
+</blockquote>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><blockquote>
+<p>不用扫码枪也可以测试，只是测试手动输入授权码麻烦一点（1分钟刷新一次），需要你快速输入授权码。扫码枪只是读取授权码并没有多做其他的事情。</p>
+</blockquote>
+<p>我本地做端口映射测试的地址如下：</p>
+<p>其中<code>auth_code</code> 值是谁便写的<br><code>http://域名/pay/micropay?auth_code=111</code> 在浏览器中访问</p>
+<p>返回结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;xml&gt;&lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;</div><div class="line">&lt;return_msg&gt;&lt;![CDATA[OK]]&gt;&lt;/return_msg&gt;</div><div class="line">&lt;appid&gt;&lt;![CDATA[您公众号的appid]]&gt;&lt;/appid&gt;</div><div class="line">&lt;mch_id&gt;&lt;![CDATA[您微信商户号]]&gt;&lt;/mch_id&gt;</div><div class="line">&lt;device_info&gt;&lt;![CDATA[javen205]]&gt;&lt;/device_info&gt;</div><div class="line">&lt;nonce_str&gt;&lt;![CDATA[eXgczazQq54pqcyH]]&gt;&lt;/nonce_str&gt;</div><div class="line">&lt;sign&gt;&lt;![CDATA[FF03DA0E58845CCE1FCC2166EC03FBE5]]&gt;&lt;/sign&gt;</div><div class="line">&lt;result_code&gt;&lt;![CDATA[FAIL]]&gt;&lt;/result_code&gt;</div><div class="line">&lt;err_code&gt;&lt;![CDATA[AUTH_CODE_INVALID]]&gt;&lt;/err_code&gt;</div><div class="line">&lt;err_code_des&gt;&lt;![CDATA[请扫描微信支付被扫条码/二维码]]&gt;&lt;/err_code_des&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure></p>
+<p>刷卡支付超过5次就会提示输入密码</p>
+<p>返回的<code>err_code</code> 为<code>USERPAYING</code></p>
+<p>此时支付结果就需要通过 <a href="https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_2" target="_blank" rel="external">查询订单</a>接口来获取</p>
+<blockquote>
+<p>这就是有密码与无密码的区别，有密码必须通过<code>查询订单</code>来获取支付结果，如果结果任然为<code>USERPAYING</code>,则每隔5秒循环调用<code>查询订单API</code>判断实际支付结果，如果用户取消支付或累计30秒用户都未支付，商户收银台退出查询流程后继续调用<code>撤销订单API</code>撤销支付交易。</p>
+</blockquote>
+<p>输入正确的<code>auth_code</code> 返回的结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;xml&gt;&lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;</div><div class="line">&lt;return_msg&gt;&lt;![CDATA[OK]]&gt;&lt;/return_msg&gt;</div><div class="line">&lt;appid&gt;&lt;![CDATA[您公众号的appid]]&gt;&lt;/appid&gt;</div><div class="line">&lt;mch_id&gt;&lt;![CDATA[您微信商户号]]&gt;&lt;/mch_id&gt;</div><div class="line">&lt;device_info&gt;&lt;![CDATA[javen205]]&gt;&lt;/device_info&gt;</div><div class="line">&lt;nonce_str&gt;&lt;![CDATA[Z9p14VPJ822ZTPXP]]&gt;&lt;/nonce_str&gt;</div><div class="line">&lt;sign&gt;&lt;![CDATA[03BD421A33A5079A1BE6030E2EBA8291]]&gt;&lt;/sign&gt;</div><div class="line">&lt;result_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/result_code&gt;</div><div class="line">&lt;openid&gt;&lt;![CDATA[o_pncsidC-pRRfCP4zj98h6slREw]]&gt;&lt;/openid&gt;</div><div class="line">&lt;is_subscribe&gt;&lt;![CDATA[Y]]&gt;&lt;/is_subscribe&gt;</div><div class="line">&lt;trade_type&gt;&lt;![CDATA[MICROPAY]]&gt;&lt;/trade_type&gt;</div><div class="line">&lt;bank_type&gt;&lt;![CDATA[CFT]]&gt;&lt;/bank_type&gt;</div><div class="line">&lt;total_fee&gt;1&lt;/total_fee&gt;</div><div class="line">&lt;fee_type&gt;&lt;![CDATA[CNY]]&gt;&lt;/fee_type&gt;</div><div class="line">&lt;transaction_id&gt;&lt;![CDATA[4009682001201610156761057959]]&gt;&lt;/transaction_id&gt;</div><div class="line">&lt;out_trade_no&gt;&lt;![CDATA[1476523316727]]&gt;&lt;/out_trade_no&gt;</div><div class="line">&lt;attach&gt;&lt;![CDATA[javen205]]&gt;&lt;/attach&gt;</div><div class="line">&lt;time_end&gt;&lt;![CDATA[20161015172058]]&gt;&lt;/time_end&gt;</div><div class="line">&lt;cash_fee&gt;1&lt;/cash_fee&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure></p>
+<p>使用场景描述</p>
+<blockquote>
+<p>如果<strong>接入模式为商户后台接入</strong> 支付成功了微信支付系统就会将上面的<code>xml</code>数据返回给商户，商户再将支付结果回调给门店收银台，收银台继续处理业务逻辑</p>
+<p>如果<strong>接入模式-门店接入</strong> 支付成功了微信支付系统就会将上面的<code>xml</code>数据返回给收银台，收银台继续处理业务逻辑</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-63bc02b8ed9b5361.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="刷卡支付.png"></p>
+<p>码字完毕，以上就是微信刷卡支付的详细介绍。</p>
+<p>欢迎留言、转发<br>微信极速开发系列文章：<a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">http://www.jianshu.com/p/a172a1b69fdd</a></p>
+<p>此文章项目开源地址：<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">极速开发微信公众号-Start支持项目发展</a></p>
+<blockquote>
+<p>后续更新预告<br>1、微信红包<br>2、企业转账</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/to/wechat-qcode.jpg" alt="Javen wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/to/wx.jpg" alt="Javen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/to/apay.jpg" alt="Javen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微信公众号/" rel="tag">#微信公众号</a>
+          
+            <a href="/tags/开源项目/" rel="tag">#开源项目</a>
+          
+            <a href="/tags/我的作品/" rel="tag">#我的作品</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/15/极速开发微信公众号之扫码支付/" rel="next" title="极速开发微信公众号之扫码支付">
+                <i class="fa fa-chevron-left"></i> 极速开发微信公众号之扫码支付
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/20/极速开发微信公众号之模板消息/" rel="prev" title="极速开发微信公众号之模板消息">
+                极速开发微信公众号之模板消息 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/15/极速开发微信公众号之刷卡支付/"
+     data-title="极速开发微信公众号之刷卡支付"
+     data-content=""
+     data-url="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之刷卡支付/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/15/极速开发微信公众号之刷卡支付/"
+           data-title="极速开发微信公众号之刷卡支付" data-url="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之刷卡支付/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo/img.jpg"
+               alt="Javen" />
+          <p class="site-author-name" itemprop="name">Javen</p>
+          <p class="site-description motion-element" itemprop="description">凡事皆有终结，因此，耐心是赢得成功的一种手段。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://git.oschina.net/javen205" target="_blank" title="Git">
+                  
+                    <i class="fa fa-fw fa-git"></i>
+                  
+                  Git
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2545091901" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/zyw-205520" target="_blank" title="博客">
+                  
+                    <i class="fa fa-fw fa-gg-circle"></i>
+                  
+                  博客
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" title="Git教程" target="_blank">Git教程</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com" title="NextT" target="_blank">NextT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="友情链接" target="_blank">友情链接</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景介绍"><span class="nav-number">1.</span> <span class="nav-text">场景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#商户侧流程"><span class="nav-number">2.</span> <span class="nav-text">商户侧流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支付验证密码规则"><span class="nav-number">3.</span> <span class="nav-text">支付验证密码规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">3.1.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Yu7irauVr0CHgnXgUolTJEz1-gzGzoHsz", "NmtG2bRFM173EgH4J6Jj7ygF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

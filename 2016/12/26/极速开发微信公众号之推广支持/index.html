@@ -1,0 +1,1252 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微信公众号,开源项目,我的作品," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="微信极速开发系列文章：点击喜欢不迷路
+前几篇文章详细介绍了微信App支付、公众号支付、微信红包、微信刷卡以及支付宝支付,今天来聊聊 推广支持之生成带参数的二维码、长链接转短链接
+
+目录1、查看权限2、生成带参数的二维码简介3、接口说明4、具体实现5、测试6、长链接转短链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极速开发微信公众号之推广支持">
+<meta property="og:url" content="http://javen205.oschina.io/2016/12/26/极速开发微信公众号之推广支持/index.html">
+<meta property="og:site_name" content="智慧云端日记">
+<meta property="og:description" content="微信极速开发系列文章：点击喜欢不迷路
+前几篇文章详细介绍了微信App支付、公众号支付、微信红包、微信刷卡以及支付宝支付,今天来聊聊 推广支持之生成带参数的二维码、长链接转短链接
+
+目录1、查看权限2、生成带参数的二维码简介3、接口说明4、具体实现5、测试6、长链接转短链接">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-1739b7bab5235273.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-d8a0306d49152fee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-2d8ba01e55c7ba5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-01T08:48:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极速开发微信公众号之推广支持">
+<meta name="twitter:description" content="微信极速开发系列文章：点击喜欢不迷路
+前几篇文章详细介绍了微信App支付、公众号支付、微信红包、微信刷卡以及支付宝支付,今天来聊聊 推广支持之生成带参数的二维码、长链接转短链接
+
+目录1、查看权限2、生成带参数的二维码简介3、接口说明4、具体实现5、测试6、长链接转短链接">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1342351-1739b7bab5235273.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6277749700019881000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://javen205.oschina.io/2016/12/26/极速开发微信公众号之推广支持/"/>
+
+  <title> 极速开发微信公众号之推广支持 | 智慧云端日记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7db51d5bb8825e0ae42c8881760c229c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">智慧云端日记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just do IT</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rewards">
+          <a href="/2016/07/02/打赏捐赠列表/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-money"></i> <br />
+            
+            捐赠列表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                极速开发微信公众号之推广支持
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-26T15:58:00+08:00" content="2016-12-26">
+              2016-12-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/" itemprop="url" rel="index">
+                    <span itemprop="name">微信公众号</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/26/极速开发微信公众号之推广支持/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/26/极速开发微信公众号之推广支持/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/26/极速开发微信公众号之推广支持/" class="leancloud_visitors" data-flag-title="极速开发微信公众号之推广支持">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>微信极速开发系列文章：<a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">点击喜欢不迷路</a></p>
+<p>前几篇文章详细介绍了微信App支付、公众号支付、微信红包、微信刷卡以及支付宝支付,今天来聊聊 <strong>推广支持之<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1443433542&amp;token=&amp;lang=zh_CN" target="_blank" rel="external">生成带参数的二维码</a>、<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1443433600&amp;token=&amp;lang=zh_CN" target="_blank" rel="external">长链接转短链接</a></strong></p>
+<blockquote>
+<p>目录<br>1、查看权限<br>2、生成带参数的二维码简介<br>3、接口说明<br>4、具体实现<br>5、测试<br>6、长链接转短链接</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="1、查看权限"><a href="#1、查看权限" class="headerlink" title="1、查看权限"></a>1、查看权限</h1><blockquote>
+<p><a href="https://mp.weixin.qq.com" target="_blank" rel="external">登录微信公众平台</a> &gt;开发&gt;接口权限进行查看如下图</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-1739b7bab5235273.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="查看权限"></p>
+<h1 id="2、生成带参数的二维码简介"><a href="#2、生成带参数的二维码简介" class="headerlink" title="2、生成带参数的二维码简介"></a>2、生成带参数的二维码简介</h1><blockquote>
+<p>为了满足用户渠道推广分析和用户帐号绑定等场景的需要，公众平台提供了生成带参数二维码的接口。使用该接口可以获得多个带不同场景值的二维码，用户扫描后，公众号可以接收到事件推送。</p>
+</blockquote>
+<p>【<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1443433542&amp;token=&amp;lang=zh_CN" target="_blank" rel="external">生成带参数的二维码官方介绍文档</a>】</p>
+<blockquote>
+<p>目前有<strong>2种类型</strong>的二维码：</p>
+</blockquote>
+<p>1、<strong>临时二维码</strong>，是有过期时间的，最长可以设置为在二维码生成后的30天（即2592000秒）后过期，但能够生成较多数量。临时二维码主要用于帐号绑定等不要求二维码永久保存的业务场景</p>
+<p>2、<strong>永久二维码</strong>，是无过期时间的，但数量较少（目前为最多10万个）。永久二维码主要用于适用于帐号绑定、用户来源统计等场景。</p>
+<blockquote>
+<p>当用户扫描带场景值二维码时，可能推送以下两种事件：</p>
+</blockquote>
+<p>如果用户 <strong>还未关注公众号</strong>，则用户可以关注公众号，关注后微信会将带场景值关注事件推送给开发者。</p>
+<p>如果用户 <strong>已经关注公众号</strong>，在用户扫描后会自动进入会话，微信也会将带场景值扫描事件推送给开发者。</p>
+<p>#3、接口说明</p>
+<blockquote>
+<p>获取带参数的二维码的过程包括两步，首先创建二维码ticket，然后凭借ticket到指定URL换取二维码。</p>
+</blockquote>
+<p><strong>创建二维码ticket</strong><br>每次创建二维码ticket需要提供一个开发者自行设定的参数（scene_id），分别介绍临时二维码和永久二维码的创建二维码ticket过程。</p>
+<p><strong>临时二维码请求说明</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">http请求方式: POST</div><div class="line">URL: https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN</div><div class="line">POST数据格式：json</div><div class="line">POST数据例子：</div><div class="line">&#123;</div><div class="line">  &quot;expire_seconds&quot;: 604800,</div><div class="line">  &quot;action_name&quot;: &quot;QR_SCENE&quot;,</div><div class="line">  &quot;action_info&quot;: &#123;</div><div class="line">    &quot;scene&quot;: &#123;</div><div class="line">      &quot;scene_id&quot;: 123</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>永久二维码请求说明</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">http请求方式: POST</div><div class="line">URL: https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN</div><div class="line">POST数据格式：json</div><div class="line">POST数据例子：</div><div class="line">&#123;</div><div class="line">  &quot;action_name&quot;: &quot;QR_LIMIT_SCENE&quot;,</div><div class="line">  &quot;action_info&quot;: &#123;</div><div class="line">    &quot;scene&quot;: &#123;</div><div class="line">      &quot;scene_id&quot;: 123</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">或者也可以使用以下POST数据创建字符串形式的二维码参数：</div><div class="line"></div><div class="line">&#123;</div><div class="line">  &quot;action_name&quot;: &quot;QR_LIMIT_STR_SCENE&quot;,</div><div class="line">  &quot;action_info&quot;: &#123;</div><div class="line">    &quot;scene&quot;: &#123;</div><div class="line">      &quot;scene_str&quot;: &quot;123&quot;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>参数说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>expire_seconds</td>
+<td>该二维码有效时间，以秒为单位。 最大不超过2592000（即30天），此字段如果不填，则默认有效期为30秒。</td>
+</tr>
+<tr>
+<td>action_name</td>
+<td>二维码类型，QR_SCENE为临时,QR_LIMIT_SCENE为永久,QR_LIMIT_STR_SCENE为永久的字符串参数值</td>
+</tr>
+<tr>
+<td>action_info</td>
+<td>二维码详细信息</td>
+</tr>
+<tr>
+<td>scene_id</td>
+<td>场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1–100000）</td>
+</tr>
+<tr>
+<td>scene_str</td>
+<td>场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段   </td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回说明</strong></p>
+<p>正确的Json返回结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;expire_seconds&quot;: 60,</div><div class="line">  &quot;ticket&quot;: &quot;gQH47joAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2taZ2Z3TVRtNzJXV1Brb3ZhYmJJAAIEZ23sUwMEmm3sUw==&quot;,</div><div class="line">  &quot;url&quot;: &quot;http://weixin.qq.com/q/kZgfwMTm72WWPkovabbI&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ticket</td>
+<td>获取的二维码ticket，凭借此ticket可以在有效时间内换取二维码。</td>
+</tr>
+<tr>
+<td>expire_seconds</td>
+<td>该二维码有效时间，以秒为单位。 最大不超过2592000（即30天）。</td>
+</tr>
+<tr>
+<td>url</td>
+<td>二维码图片解析后的地址，开发者可根据该地址自行生成需要的二维码图片</td>
+</tr>
+</tbody>
+</table>
+<p><strong>通过ticket换取二维码</strong><br>获取二维码ticket后，开发者可用ticket换取二维码图片。请注意，本接口无须登录态即可调用。</p>
+<p><strong>请求说明</strong></p>
+<blockquote>
+<p>HTTP GET请求（请使用https协议）<a href="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET" target="_blank" rel="external">https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET</a><br>提醒：TICKET记得进行UrlEncode</p>
+</blockquote>
+<p><strong>返回说明</strong></p>
+<p><strong>ticket正确情况下</strong>，http 返回码是200，是一张图片，可以直接展示或者下载。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">HTTP头（示例）如下：</div><div class="line">Accept-Ranges:bytes</div><div class="line">Cache-control:max-age=604800</div><div class="line">Connection:keep-alive</div><div class="line">Content-Length:28026</div><div class="line">Content-Type:image/jpg</div><div class="line">Date:Wed, 16 Oct 2013 06:37:10 GMT</div><div class="line">Expires:Wed, 23 Oct 2013 14:37:10 +0800</div><div class="line">Server:nginx/1.4.1</div></pre></td></tr></table></figure>
+<p><strong>错误情况下</strong>（如ticket非法）返回HTTP错误码404。</p>
+<h1 id="4、具体实现"><a href="#4、具体实现" class="headerlink" title="4、具体实现"></a>4、具体实现</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * 生成带参数的二维码 API</div><div class="line"> */</div><div class="line">public class QrcodeApi</div><div class="line">&#123;</div><div class="line">    private static String apiUrl = &quot;https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=&quot;;</div><div class="line">    </div><div class="line">    public static ApiResult create(String jsonStr) &#123;</div><div class="line">        String jsonResult = HttpUtils.post(apiUrl + AccessTokenApi.getAccessTokenStr(), jsonStr);</div><div class="line">        return new ApiResult(jsonResult);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 创建临时二维码</div><div class="line">     * @param expireSeconds 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）。</div><div class="line">     * @param sceneId 场景值ID，临时二维码时为32位非0整型</div><div class="line">     * @return ApiResult 二维码信息</div><div class="line">     */</div><div class="line">    public static ApiResult createTemporary(int expireSeconds, int sceneId) &#123;</div><div class="line">        Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</div><div class="line">        params.put(&quot;expire_seconds&quot;, expireSeconds);</div><div class="line">        params.put(&quot;action_name&quot;, &quot;QR_SCENE&quot;);</div><div class="line">        </div><div class="line">        Map&lt;String, Object&gt; actionInfo = new HashMap&lt;String, Object&gt;();</div><div class="line">        Map&lt;String, Object&gt; scene = new HashMap&lt;String, Object&gt;();</div><div class="line">        scene.put(&quot;scene_id&quot;, sceneId);</div><div class="line">        </div><div class="line">        actionInfo.put(&quot;scene&quot;, scene);</div><div class="line">        params.put(&quot;action_info&quot;, actionInfo);</div><div class="line">        return create(JsonUtils.toJson(params));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 创建永久二维码</div><div class="line">     * @param sceneId 场景值ID，永久二维码时最大值为100000（目前参数只支持1--100000）</div><div class="line">     * @return ApiResult 二维码信息</div><div class="line">     */</div><div class="line">    public static ApiResult createPermanent(int sceneId) &#123;</div><div class="line">        Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</div><div class="line">        params.put(&quot;action_name&quot;, &quot;QR_LIMIT_SCENE&quot;);</div><div class="line">        </div><div class="line">        Map&lt;String, Object&gt; actionInfo = new HashMap&lt;String, Object&gt;();</div><div class="line">        Map&lt;String, Object&gt; scene = new HashMap&lt;String, Object&gt;();</div><div class="line">        scene.put(&quot;scene_id&quot;, sceneId);</div><div class="line">        </div><div class="line">        actionInfo.put(&quot;scene&quot;, scene);</div><div class="line">        params.put(&quot;action_info&quot;, actionInfo);</div><div class="line">        return create(JsonUtils.toJson(params));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 创建永久二维码</div><div class="line">     * @param sceneStr 场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段</div><div class="line">     * @return ApiResult 二维码信息</div><div class="line">     */</div><div class="line">    public static ApiResult createPermanent(String sceneStr) &#123;</div><div class="line">        Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</div><div class="line">        params.put(&quot;action_name&quot;, &quot;QR_LIMIT_STR_SCENE&quot;);</div><div class="line">        </div><div class="line">        Map&lt;String, Object&gt; actionInfo = new HashMap&lt;String, Object&gt;();</div><div class="line">        Map&lt;String, Object&gt; scene = new HashMap&lt;String, Object&gt;();</div><div class="line">        scene.put(&quot;scene_str&quot;, sceneStr);</div><div class="line">        </div><div class="line">        actionInfo.put(&quot;scene&quot;, scene);</div><div class="line">        params.put(&quot;action_info&quot;, actionInfo);</div><div class="line">        return create(JsonUtils.toJson(params));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    private static String showQrcodeUrl = &quot;https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=&quot;;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 通过ticket换取二维码地址</div><div class="line">     * @param ticket 换取二维码参数</div><div class="line">     * @return String url</div><div class="line">     */</div><div class="line">    public static String getShowQrcodeUrl(String ticket) &#123;</div><div class="line">        return showQrcodeUrl + ticket;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>封装接口说明：<br>1、<code>QrcodeApi. create(String jsonStr)</code> 自定义json参数生成二维码<br>2、<code>QrcodeApi. createTemporary(int expireSeconds, int sceneId)</code> 创建临时二维码，可自定义时间以及场景ID<br>3、<code>QrcodeApi. createPermanent(int sceneId)</code> 创建永久二维码，可自定义场景ID<br>4、<code>QrcodeApi. createPermanent(String sceneStr)</code>  创建永久二维码,可自定义场景值ID（字符串形式的ID）</p>
+</blockquote>
+<p>#5、测试</p>
+<blockquote>
+<p>使用测试号进行测试,如果没有测试号可以【<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1443433542&amp;token=&amp;lang=zh_CN" target="_blank" rel="external">在此</a>】申请</p>
+</blockquote>
+<p>临时二维码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public void getQrcode()</div><div class="line">   &#123;</div><div class="line">       String str = &quot;&#123;\&quot;expire_seconds\&quot;: 604800, \&quot;action_name\&quot;: \&quot;QR_SCENE\&quot;, \&quot;action_info\&quot;: &#123;\&quot;scene\&quot;: &#123;\&quot;scene_id\&quot;: 123&#125;&#125;&#125;&quot;;</div><div class="line">       ApiResult apiResult = QrcodeApi.create(str);</div><div class="line">       renderText(apiResult.getJson());</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>如果没有权限则返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;errcode&quot;:48001,&quot;errmsg&quot;:&quot;api unauthorized hint: [Rkwbna0770rsz7!]&quot;&#125;</div></pre></td></tr></table></figure></p>
+<p>正确返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;expire_seconds&quot;: 604800,</div><div class="line">  &quot;ticket&quot;: &quot;gQEd8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYXdOV2xWLTI5aVUxdWhWRXhvMWwAAgQRv19YAwSAOgkA&quot;,</div><div class="line">  &quot;url&quot;: &quot;http://weixin.qq.com/q/02awNWlV-29iU1uhVExo1l&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>使用第三方工具根据以上Url<code>http://weixin.qq.com/q/02awNWlV-29iU1uhVExo1l</code>生成二维码</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-d8a0306d49152fee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用第三方工具根据Url生成二维码"></p>
+<blockquote>
+<p>使用微信扫码如果未关注将会跳转是关注页，点击关注则推送<code>subscribe</code>事件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;xml&gt;</div><div class="line">&lt;ToUserName&gt;&lt;![CDATA[gh_8746b7fa293e]]&gt;&lt;/ToUserName&gt;</div><div class="line">&lt;FromUserName&gt;&lt;![CDATA[ofkJSuGtXgB8n23e-y0kqDjJLXxk]]&gt;&lt;/FromUserName&gt;</div><div class="line">&lt;CreateTime&gt;1482670578&lt;/CreateTime&gt;</div><div class="line">&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;</div><div class="line">&lt;Event&gt;&lt;![CDATA[subscribe]]&gt;&lt;/Event&gt;</div><div class="line">&lt;EventKey&gt;&lt;![CDATA[qrscene_123]]&gt;&lt;/EventKey&gt;</div><div class="line">&lt;Ticket&gt;&lt;![CDATA[gQEd8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYXdOV2xWLTI5aVUxdWhWRXhvMWwAAgQRv19YAwSAOgkA]]&gt;&lt;/Ticket&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>使用微信扫码如果已关注将会向开发者推送扫码事件<code>SCAN</code> 如以下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;xml&gt;</div><div class="line">&lt;ToUserName&gt;&lt;![CDATA[gh_8746b7fa293e]]&gt;&lt;/ToUserName&gt;</div><div class="line">&lt;FromUserName&gt;&lt;![CDATA[ofkJSuGtXgB8n23e-y0kqDjJLXxk]]&gt;&lt;/FromUserName&gt;</div><div class="line">&lt;CreateTime&gt;1482670378&lt;/CreateTime&gt;</div><div class="line">&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;</div><div class="line">&lt;Event&gt;&lt;![CDATA[SCAN]]&gt;&lt;/Event&gt;</div><div class="line">&lt;EventKey&gt;&lt;![CDATA[123]]&gt;&lt;/EventKey&gt;</div><div class="line">&lt;Ticket&gt;&lt;![CDATA[gQEd8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYXdOV2xWLTI5aVUxdWhWRXhvMWwAAgQRv19YAwSAOgkA]]&gt;&lt;/Ticket&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>生成永久二维码并使用<code>ticket</code>换取二维码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public void getQrcode2()&#123;</div><div class="line">        ApiResult apiResult = QrcodeApi.createPermanent(100);</div><div class="line">        String qrcodeUrl = QrcodeApi.getShowQrcodeUrl(apiResult.getStr(&quot;ticket&quot;));</div><div class="line">        renderText(&quot;create&gt;&gt;&quot;+apiResult.getJson()+&quot; qrcodeUrl:&quot;+qrcodeUrl);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;ticket&quot;: &quot;gQFo8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0cwT21FZjNtM3RXbmd3REF6Ml82AAIEzyFQVwMEAAAAAA==&quot;,</div><div class="line">  &quot;url&quot;: &quot;http://weixin.qq.com/q/G0OmEf3m3tWngwDAz2_6&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>使用使用<code>ticket</code>换取二维码RUL<br>qrcodeUrl:<a href="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQFo8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0cwT21FZjNtM3RXbmd3REF6Ml82AAIEzyFQVwMEAAAAAA==" target="_blank" rel="external">https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQFo8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0cwT21FZjNtM3RXbmd3REF6Ml82AAIEzyFQVwMEAAAAAA==</a></p>
+</blockquote>
+<p>直接浏览访问即可查看二维码，当然也可以下载到本地</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-2d8ba01e55c7ba5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用`ticket`换取到的二维码"></p>
+<blockquote>
+<p>扫码后开发者响应的内容如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;xml&gt;</div><div class="line">&lt;ToUserName&gt;&lt;![CDATA[gh_8746b7fa293e]]&gt;&lt;/ToUserName&gt;</div><div class="line">&lt;FromUserName&gt;&lt;![CDATA[ofkJSuGtXgB8n23e-y0kqDjJLXxk]]&gt;&lt;/FromUserName&gt;</div><div class="line">&lt;CreateTime&gt;1482671133&lt;/CreateTime&gt;</div><div class="line">&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;</div><div class="line">&lt;Event&gt;&lt;![CDATA[SCAN]]&gt;&lt;/Event&gt;</div><div class="line">&lt;EventKey&gt;&lt;![CDATA[100]]&gt;&lt;/EventKey&gt;</div><div class="line">&lt;Ticket&gt;&lt;![CDATA[gQFo8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0cwT21FZjNtM3RXbmd3REF6Ml82AAIEzyFQVwMEAAAAAA==]]&gt;&lt;/Ticket&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果是<code>action_name</code>值为<code>QR_LIMIT_STR_SCENE</code>为永久的字符串参数值则响应以下内容</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;xml&gt;</div><div class="line">&lt;ToUserName&gt;&lt;![CDATA[gh_8746b7fa293e]]&gt;&lt;/ToUserName&gt;</div><div class="line">&lt;FromUserName&gt;&lt;![CDATA[ofkJSuGtXgB8n23e-y0kqDjJLXxk]]&gt;&lt;/FromUserName&gt;</div><div class="line">&lt;CreateTime&gt;1482671258&lt;/CreateTime&gt;</div><div class="line">&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;</div><div class="line">&lt;Event&gt;&lt;![CDATA[SCAN]]&gt;&lt;/Event&gt;</div><div class="line">&lt;EventKey&gt;&lt;![CDATA[Javen测试二维码]]&gt;&lt;/EventKey&gt;</div><div class="line">&lt;Ticket&gt;&lt;![CDATA[gQGm8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyMXdXUmtXLTI5aVUxMDAwMGcwN1IAAgSOxF9YAwQAAAAA]]&gt;&lt;/Ticket&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure>
+<p>#6、长链接转短链接</p>
+<blockquote>
+<p>将一条长链接转成短链接。<br><strong>主要使用场景</strong>： 开发者用于生成二维码的原链接（商品、支付二维码等）太长导致扫码速度和成功率下降，将原长链接通过此接口转成短链接再生成二维码将大大提升扫码速度和成功率。</p>
+</blockquote>
+<p><strong>接口调用请求说明</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http请求方式: POST</div><div class="line">https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN</div></pre></td></tr></table></figure></p>
+<p><strong>参数说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access_token</td>
+<td>是</td>
+<td>调用接口凭证</td>
+</tr>
+<tr>
+<td>action</td>
+<td>是</td>
+<td>此处填long2short，代表长链接转短链接</td>
+</tr>
+<tr>
+<td>long_url</td>
+<td>是</td>
+<td>需要转换的长链接，支持<a href="http://、https://、weixin://wxpay" target="_blank" rel="external">http://、https://、weixin://wxpay</a> 格式的url</td>
+</tr>
+</tbody>
+</table>
+<p><strong>接口封装</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 将一条长链接转成短链接 API</div><div class="line"> * 文档地址：http://mp.weixin.qq.com/wiki/6/d2ec191ffdf5a596238385f75f95ecbe.html</div><div class="line"> */</div><div class="line">public class ShorturlApi</div><div class="line">&#123;</div><div class="line">    private static String apiUrl = &quot;https://api.weixin.qq.com/cgi-bin/shorturl?access_token=&quot;;</div><div class="line">    </div><div class="line">    public static ApiResult getShorturl(String jsonStr) &#123;</div><div class="line">        String jsonResult = HttpUtils.post(apiUrl + AccessTokenApi.getAccessTokenStr(), jsonStr);</div><div class="line">        return new ApiResult(jsonResult);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 长链接转短链接接口</div><div class="line">     * @param longUrl 需要转换的长链接，支持http://、https://、weixin://wxpay 格式的url</div><div class="line">     * @return ApiResult 短连接信息</div><div class="line">     */</div><div class="line">    public static ApiResult getShortUrl(String longUrl) &#123;</div><div class="line">        Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</div><div class="line">        params.put(&quot;action&quot;, &quot;long2short&quot;);</div><div class="line">        params.put(&quot;long_url&quot;, longUrl);</div><div class="line">        return getShorturl(JsonUtils.toJson(params));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>测试</strong></p>
+<blockquote>
+<p>将我简书主页<code>http://www.jianshu.com/users/9be31238fda1/latest_articles</code> 转成短链接</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 长链接转成短链接</div><div class="line">     */</div><div class="line">    public void getShorturl()</div><div class="line">    &#123;</div><div class="line">        String str = &quot;&#123;\&quot;action\&quot;:\&quot;long2short\&quot;,&quot; +</div><div class="line">                &quot;\&quot;long_url\&quot;:\&quot;http://www.jianshu.com/users/9be31238fda1/latest_articles\&quot;&#125;&quot;;</div><div class="line">        ApiResult apiResult = ShorturlApi.getShorturl(str);</div><div class="line">        renderText(apiResult.getJson());</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>浏览器测试<code>http://localhost:8080/api/getShorturl</code> 正确返回如下内容</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;errcode&quot;:0,&quot;errmsg&quot;:&quot;ok&quot;,&quot;short_url&quot;:&quot;http://w.url.cn/s/Asx90AS&quot;&#125;</div></pre></td></tr></table></figure>
+<p>最终将我简书主页<code>http://www.jianshu.com/users/9be31238fda1/latest_articles</code><br> 转成短链接<code>http://w.url.cn/s/Asx90AS</code></p>
+<blockquote>
+<p>推荐阅读<br><a href="http://www.jianshu.com/p/febf7c2eea82" target="_blank" rel="external">Android版-微信APP支付</a><br><a href="http://www.jianshu.com/p/e28eb52830c5" target="_blank" rel="external">极速开发微信公众号之微信买单</a><br><a href="http://www.jianshu.com/p/cb2456a2d7a7" target="_blank" rel="external">极速开发微信公众号之公众号支付</a><br><a href="http://www.jianshu.com/p/474af73eb176" target="_blank" rel="external">极速开发微信公众号之扫码支付</a><br><a href="http://www.jianshu.com/p/ef6c9c5c5807" target="_blank" rel="external">极速开发微信公众号之刷卡支付</a><br><a href="http://www.jianshu.com/p/c06120bc1f5c" target="_blank" rel="external">极速开发微信公众号之现金红包</a><br><a href="http://www.jianshu.com/p/3d91248aea4b" target="_blank" rel="external">Android版-支付宝APP支付</a><br><a href="http://www.jianshu.com/p/7656de831a2c" target="_blank" rel="external">支付宝Wap支付</a></p>
+</blockquote>
+<p>记录学习的点滴，以此勉励不断奋斗的自己✌️✌️✌️ 如果对你有帮助记得点喜欢</p>
+<p><a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">源码下载地址</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/to/wechat-qcode.jpg" alt="Javen wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/to/wx.jpg" alt="Javen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/to/apay.jpg" alt="Javen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微信公众号/" rel="tag">#微信公众号</a>
+          
+            <a href="/tags/开源项目/" rel="tag">#开源项目</a>
+          
+            <a href="/tags/我的作品/" rel="tag">#我的作品</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/14/会员注册、找回密码、登陆（邮箱与手机验证码）/" rel="next" title="极速开发微信公众号之页面注册、登录、找回密码">
+                <i class="fa fa-chevron-left"></i> 极速开发微信公众号之页面注册、登录、找回密码
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2999/07/17/极速开发微信公众号/" rel="prev" title="极速开发微信公众号">
+                极速开发微信公众号 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/26/极速开发微信公众号之推广支持/"
+     data-title="极速开发微信公众号之推广支持"
+     data-content=""
+     data-url="http://javen205.oschina.io/2016/12/26/极速开发微信公众号之推广支持/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/26/极速开发微信公众号之推广支持/"
+           data-title="极速开发微信公众号之推广支持" data-url="http://javen205.oschina.io/2016/12/26/极速开发微信公众号之推广支持/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo/img.jpg"
+               alt="Javen" />
+          <p class="site-author-name" itemprop="name">Javen</p>
+          <p class="site-description motion-element" itemprop="description">凡事皆有终结，因此，耐心是赢得成功的一种手段。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://git.oschina.net/javen205" target="_blank" title="Git">
+                  
+                    <i class="fa fa-fw fa-git"></i>
+                  
+                  Git
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2545091901" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/zyw-205520" target="_blank" title="博客">
+                  
+                    <i class="fa fa-fw fa-gg-circle"></i>
+                  
+                  博客
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" title="Git教程" target="_blank">Git教程</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com" title="NextT" target="_blank">NextT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="友情链接" target="_blank">友情链接</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、查看权限"><span class="nav-number">1.</span> <span class="nav-text">1、查看权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、生成带参数的二维码简介"><span class="nav-number">2.</span> <span class="nav-text">2、生成带参数的二维码简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、具体实现"><span class="nav-number">3.</span> <span class="nav-text">4、具体实现</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Yu7irauVr0CHgnXgUolTJEz1-gzGzoHsz", "NmtG2bRFM173EgH4J6Jj7ygF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1149 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微信公众号,开源项目,我的作品," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="欢迎留言、转发
+微信极速开发系列文章：http://www.jianshu.com/p/a172a1b69fdd
+上一篇文章介绍了微信提供的那些支付方式以及公众号支付http://www.jianshu.com/p/cb2456a2d7a7
+这篇文章我们来聊聊微信扫码支付（模式一以及模式二）
+
+先奉上研究微信扫码支付踩过的坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极速开发微信公众号之扫码支付">
+<meta property="og:url" content="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之扫码支付/index.html">
+<meta property="og:site_name" content="智慧云端日记">
+<meta property="og:description" content="欢迎留言、转发
+微信极速开发系列文章：http://www.jianshu.com/p/a172a1b69fdd
+上一篇文章介绍了微信提供的那些支付方式以及公众号支付http://www.jianshu.com/p/cb2456a2d7a7
+这篇文章我们来聊聊微信扫码支付（模式一以及模式二）
+
+先奉上研究微信扫码支付踩过的坑">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342351-b11921b3759fd819.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-01T08:49:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极速开发微信公众号之扫码支付">
+<meta name="twitter:description" content="欢迎留言、转发
+微信极速开发系列文章：http://www.jianshu.com/p/a172a1b69fdd
+上一篇文章介绍了微信提供的那些支付方式以及公众号支付http://www.jianshu.com/p/cb2456a2d7a7
+这篇文章我们来聊聊微信扫码支付（模式一以及模式二）
+
+先奉上研究微信扫码支付踩过的坑">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1342351-b11921b3759fd819.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6277749700019881000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之扫码支付/"/>
+
+  <title> 极速开发微信公众号之扫码支付 | 智慧云端日记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7db51d5bb8825e0ae42c8881760c229c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">智慧云端日记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just do IT</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rewards">
+          <a href="/2016/07/02/打赏捐赠列表/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-money"></i> <br />
+            
+            捐赠列表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                极速开发微信公众号之扫码支付
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-15T15:09:00+08:00" content="2016-10-15">
+              2016-10-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/" itemprop="url" rel="index">
+                    <span itemprop="name">微信公众号</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信公众号/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/15/极速开发微信公众号之扫码支付/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/15/极速开发微信公众号之扫码支付/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/15/极速开发微信公众号之扫码支付/" class="leancloud_visitors" data-flag-title="极速开发微信公众号之扫码支付">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>欢迎留言、转发</p>
+<p>微信极速开发系列文章：<a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">http://www.jianshu.com/p/a172a1b69fdd</a></p>
+<p>上一篇文章介绍了微信提供的那些支付方式以及公众号支付<a href="http://www.jianshu.com/p/cb2456a2d7a7" target="_blank" rel="external">http://www.jianshu.com/p/cb2456a2d7a7</a></p>
+<p>这篇文章我们来聊聊微信扫码支付（模式一以及模式二）</p>
+<hr>
+<p><a href="http://www.cnblogs.com/zyw-205520/p/5495115.html" target="_blank" rel="external">先奉上研究微信扫码支付踩过的坑</a></p>
+<hr>
+<a id="more"></a>
+<h3 id="微信扫码支付文档"><a href="#微信扫码支付文档" class="headerlink" title="微信扫码支付文档"></a>微信扫码支付文档</h3><hr>
+<p><a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_3" target="_blank" rel="external">扫码支付官方文档</a></p>
+<hr>
+<h6 id="扫码支付分为以下两种方式："><a href="#扫码支付分为以下两种方式：" class="headerlink" title="扫码支付分为以下两种方式："></a>扫码支付分为以下两种方式：</h6><p>【模式一】：商户后台系统根据微信支付规则链接生成二维码，链接中带固定参数productid（可定义为产品标识或订单号）。用户扫码后，微信支付系统将productid和用户唯一标识(openid)回调商户后台系统(需要设置支付回调URL)，商户后台系统根据productid生成支付交易，最后微信支付系统发起用户支付流程。</p>
+<p>【模式二】：商户后台系统调用微信支付<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1" target="_blank" rel="external">统一下单API</a>生成预付交易，将接口返回的链接生成二维码，用户扫码后输入密码完成支付交易。注意：该模式的预付单有效期为2小时，过期后无法支付。<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_5" target="_blank" rel="external">详细接入步</a></p>
+<h2 id="扫码支付模式一"><a href="#扫码支付模式一" class="headerlink" title="扫码支付模式一"></a>扫码支付模式一</h2><h1 id="1、设置支付回调URL"><a href="#1、设置支付回调URL" class="headerlink" title="1、设置支付回调URL"></a>1、设置支付回调URL</h1><p>商户支付回调URL设置指引：进入公众平台–&gt;微信支付–&gt;开发配置–&gt;扫码支付–&gt;修改  如下图（来自官方文档）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342351-b11921b3759fd819.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="扫码支付模式一  设置回调URL.png"></p>
+<blockquote>
+<p>在<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">开源项目weixin-guide</a>中<code>扫码支付模式一</code>的回调URL为<code>http://域名[/项目名称]/pay/wxpay</code></p>
+</blockquote>
+<h1 id="2、根据微信支付规则链接生成二维码"><a href="#2、根据微信支付规则链接生成二维码" class="headerlink" title="2、根据微信支付规则链接生成二维码"></a>2、根据微信支付规则链接生成二维码</h1><h6 id="2-1-生成二维码规则"><a href="#2-1-生成二维码规则" class="headerlink" title="2.1 生成二维码规则"></a>2.1 生成二维码规则</h6><p>二维码中的内容为链接，形式为：</p>
+<blockquote>
+<p>weixin://wxpay/bizpayurl?sign=XXXXX&amp;appid=XXXXX&amp;mch_id=XXXXX&amp;product_id=XXXXXX&amp;time_stamp=XXXXXX&amp;nonce_str=XXXXX</p>
+</blockquote>
+<p>详细的参数说明参考文档 <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4" target="_blank" rel="external">点击这里</a> </p>
+<p>商户ID(mch_id)如何获取<a href="http://www.jianshu.com/p/cb2456a2d7a7" target="_blank" rel="external">点击这里</a></p>
+<p>签名安全规则文档 <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=4_3" target="_blank" rel="external">点击这里</a></p>
+<blockquote>
+<p>在<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">开源项目weixin-guide</a>中 <code>扫码支付模式一</code>  生成二维码规则封装如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public String getCodeUrl()&#123;</div><div class="line">  String url=&quot;weixin://wxpay/bizpayurl?sign=XXXXX&amp;appid=XXXXX&amp;mch_id=XXXXX&amp;product_id=XXXXX&amp;time_stamp=XXXXX&amp;nonce_str=XXXXX&quot;;</div><div class="line">  String product_id=&quot;001&quot;;</div><div class="line">  String timeStamp=Long.toString(System.currentTimeMillis() / 1000);</div><div class="line">  String nonceStr=Long.toString(System.currentTimeMillis());</div><div class="line">  Map&lt;String, String&gt; packageParams = new HashMap&lt;String, String&gt;();</div><div class="line">  packageParams.put(&quot;appid&quot;, appid);</div><div class="line">  packageParams.put(&quot;mch_id&quot;, partner);</div><div class="line">  packageParams.put(&quot;product_id&quot;,product_id);</div><div class="line">  packageParams.put(&quot;time_stamp&quot;, timeStamp);</div><div class="line">  packageParams.put(&quot;nonce_str&quot;, nonceStr);</div><div class="line">  String packageSign = PaymentKit.createSign(packageParams, paternerKey);</div><div class="line">  </div><div class="line">  return StringUtils.replace(url, &quot;XXXXX&quot;, packageSign,appid,partner,product_id,timeStamp,nonceStr);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>以上<code>action</code> 在<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">开源项目weixin-guide</a>中 访问地址为<code>http://域名[/项目名称]/pay/getCodeUrl</code>  其中 <code>product_id</code> 根据实际的业务逻辑可以当做参数传入</p>
+<h6 id="2-2-生成二维码并在页面上显示"><a href="#2-2-生成二维码并在页面上显示" class="headerlink" title="2.2 生成二维码并在页面上显示"></a>2.2 生成二维码并在页面上显示</h6><p>根据2.1生成二维码规则生成了二维码中的内容(链接)来生成二维码。</p>
+<blockquote>
+<p>商户可调用第三方库生成二维码图片</p>
+</blockquote>
+<p>这里使用google 开源图形码工具Zxing</p>
+<p>项目中引入相关的jar包 具体配置参考项目中的<code>pom.xml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 版本号--&gt;</div><div class="line">&lt;zxing.version&gt;3.2.1&lt;/zxing.version&gt;</div><div class="line"></div><div class="line">&lt;!-- 开源多维码生成工具 --&gt;</div><div class="line">  &lt;dependency&gt;</div><div class="line">   &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;</div><div class="line">   &lt;artifactId&gt;core&lt;/artifactId&gt;</div><div class="line">   &lt;version&gt;$&#123;zxing.version&#125;&lt;/version&gt;</div><div class="line">  &lt;/dependency&gt;</div><div class="line">  &lt;dependency&gt;</div><div class="line">   &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;</div><div class="line">   &lt;artifactId&gt;javase&lt;/artifactId&gt;</div><div class="line">   &lt;version&gt;$&#123;zxing.version&#125;&lt;/version&gt;</div><div class="line">  &lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<p>封装的工具类为<code>com.javen.kit.ZxingKit</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * google 开源图形码工具Zxing使用</div><div class="line"> */</div><div class="line">public class ZxingKit &#123;</div><div class="line"> private static Log log = Log.getLog(ZxingKit.class.getSimpleName());</div><div class="line"></div><div class="line"> /**</div><div class="line">  * Zxing图形码生成工具</div><div class="line">  *</div><div class="line">  * @param contents</div><div class="line">  *            内容</div><div class="line">  * @param barcodeFormat</div><div class="line">  *            BarcodeFormat对象</div><div class="line">  * @param format</div><div class="line">  *            图片格式，可选[png,jpg,bmp]</div><div class="line">  * @param width</div><div class="line">  *            宽</div><div class="line">  * @param height</div><div class="line">  *            高</div><div class="line">  * @param margin</div><div class="line">  *            边框间距px</div><div class="line">  * @param saveImgFilePath</div><div class="line">  *            存储图片的完整位置，包含文件名</div><div class="line">  * @return</div><div class="line">  */</div><div class="line"> public static Boolean encode(String contents, BarcodeFormat barcodeFormat, Integer margin,</div><div class="line">   ErrorCorrectionLevel errorLevel, String format, int width, int height, String saveImgFilePath) &#123;</div><div class="line">  Boolean bool = false;</div><div class="line">  BufferedImage bufImg;</div><div class="line">  Map&lt;EncodeHintType, Object&gt; hints = new HashMap&lt;EncodeHintType, Object&gt;();</div><div class="line">  // 指定纠错等级</div><div class="line">  hints.put(EncodeHintType.ERROR_CORRECTION, errorLevel);</div><div class="line">  hints.put(EncodeHintType.MARGIN, margin);</div><div class="line">  hints.put(EncodeHintType.CHARACTER_SET, &quot;UTF-8&quot;);</div><div class="line">  try &#123;</div><div class="line">   // contents = new String(contents.getBytes(&quot;UTF-8&quot;), &quot;ISO-8859-1&quot;);</div><div class="line">   BitMatrix bitMatrix = new MultiFormatWriter().encode(contents, barcodeFormat, width, height, hints);</div><div class="line">   MatrixToImageConfig config = new MatrixToImageConfig(0xFF000001, 0xFFFFFFFF);</div><div class="line">   bufImg = MatrixToImageWriter.toBufferedImage(bitMatrix, config);</div><div class="line">   bool = writeToFile(bufImg, format, saveImgFilePath);</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">   e.printStackTrace();</div><div class="line">  &#125;</div><div class="line">  return bool;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> /**</div><div class="line">  * @param srcImgFilePath</div><div class="line">  *            要解码的图片地址</div><div class="line">  * @return</div><div class="line">  */</div><div class="line"> @SuppressWarnings(&quot;finally&quot;)</div><div class="line"> public static Result decode(String srcImgFilePath) &#123;</div><div class="line">  Result result = null;</div><div class="line">  BufferedImage image;</div><div class="line">  try &#123;</div><div class="line">   File srcFile = new File(srcImgFilePath);</div><div class="line">   image = ImageIO.read(srcFile);</div><div class="line">   if (null != image) &#123;</div><div class="line">    LuminanceSource source = new BufferedImageLuminanceSource(image);</div><div class="line">    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));</div><div class="line"></div><div class="line">    Hashtable&lt;DecodeHintType, String&gt; hints = new Hashtable&lt;DecodeHintType, String&gt;();</div><div class="line">    hints.put(DecodeHintType.CHARACTER_SET, &quot;UTF-8&quot;);</div><div class="line">    result = new MultiFormatReader().decode(bitmap, hints);</div><div class="line">   &#125; else &#123;</div><div class="line">    log.debug(&quot;Could not decode image.&quot;);</div><div class="line">   &#125;</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">   e.printStackTrace();</div><div class="line">  &#125; finally &#123;</div><div class="line">   return result;</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> /**</div><div class="line">  * 将BufferedImage对象写入文件</div><div class="line">  *</div><div class="line">  * @param bufImg</div><div class="line">  *            BufferedImage对象</div><div class="line">  * @param format</div><div class="line">  *            图片格式，可选[png,jpg,bmp]</div><div class="line">  * @param saveImgFilePath</div><div class="line">  *            存储图片的完整位置，包含文件名</div><div class="line">  * @return</div><div class="line">  */</div><div class="line"> @SuppressWarnings(&quot;finally&quot;)</div><div class="line"> public static Boolean writeToFile(BufferedImage bufImg, String format, String saveImgFilePath) &#123;</div><div class="line">  Boolean bool = false;</div><div class="line">  try &#123;</div><div class="line">   bool = ImageIO.write(bufImg, format, new File(saveImgFilePath));</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">   e.printStackTrace();</div><div class="line">  &#125; finally &#123;</div><div class="line">   return bool;</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public static void main(String[] args) &#123;</div><div class="line">  String saveImgFilePath = &quot;D://zxing.png&quot;;</div><div class="line">  Boolean encode = encode(&quot;我是Javen205&quot;, BarcodeFormat.QR_CODE, 3, ErrorCorrectionLevel.H, &quot;png&quot;, 200, 200,</div><div class="line">    saveImgFilePath);</div><div class="line">  if (encode) &#123;</div><div class="line">   Result result = decode(saveImgFilePath);</div><div class="line">   String text = result.getText();</div><div class="line">   System.out.println(text);</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>OK 上面就是生成支付二维码的部分，接下来就是要将二维码显示在页面上，于是就有了下面的代码：<br><code>com.javen.weixin.controller.WeixinPayController.getPayQRCode()</code></p>
+<p><code>src\\main\\webapp\\view\\payQRCode.jsp</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 生成支付二维码（模式一）并在页面上显示</div><div class="line">  */</div><div class="line">public void scanCode1()&#123;</div><div class="line">  //获取扫码支付（模式一）url</div><div class="line">  String qrCodeUrl=getCodeUrl();</div><div class="line">  System.out.println(qrCodeUrl);</div><div class="line">  //生成二维码保存的路径</div><div class="line">  String name = &quot;payQRCode.png&quot;;</div><div class="line">  Boolean encode = ZxingKit.encode(qrCodeUrl, BarcodeFormat.QR_CODE, 3, ErrorCorrectionLevel.H, &quot;png&quot;, 200, 200,</div><div class="line">    PathKit.getWebRootPath()+File.separator+&quot;view&quot;+File.separator+name );</div><div class="line">  if (encode) &#123;</div><div class="line">   //在页面上显示</div><div class="line">   setAttr(&quot;payQRCode&quot;, name);</div><div class="line">   render(&quot;payQRCode.jsp&quot;);</div><div class="line">  &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>JSP 部分代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;img alt=&quot;&quot; src=&quot;&lt;%=path %&gt;/view/$&#123;payQRCode&#125;&quot;&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>最终生成二维码访问地址为<code>http://域名[/项目名称]/pay/scanCode1</code></p>
+</blockquote>
+<p>以上就是微信扫码支付(模式一)生成支付二维码的全过程</p>
+<h2 id="3、扫码回调商户支付URL"><a href="#3、扫码回调商户支付URL" class="headerlink" title="3、扫码回调商户支付URL"></a>3、扫码回调商户支付URL</h2><p>   用户扫码后，微信支付系统将productid和用户唯一标识(openid)回调商户后台系统。</p>
+<blockquote>
+<p>此回调的URL为上文<code>设置支付回调的URL</code>。特别要注意的是返回参数是xml输入流</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">HttpServletRequest request = getRequest();</div><div class="line">    /**</div><div class="line">    * 获取用户扫描二维码后，微信返回的信息</div><div class="line">    */</div><div class="line">   InputStream inStream = request.getInputStream();</div><div class="line">   ByteArrayOutputStream outSteam = new ByteArrayOutputStream();</div><div class="line">   byte[] buffer = new byte[1024];</div><div class="line">   int len = 0;</div><div class="line">   while ((len = inStream.read(buffer)) != -1) &#123;</div><div class="line">       outSteam.write(buffer, 0, len);</div><div class="line">   &#125;</div><div class="line">   outSteam.close();</div><div class="line">   inStream.close();</div><div class="line">   String result  = new String(outSteam.toByteArray(),&quot;utf-8&quot;);</div><div class="line">   System.out.println(&quot;callBack_xml&gt;&gt;&gt;&quot;+result);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;xml&gt;</div><div class="line">&lt;appid&gt;&lt;![CDATA[wx5e9360a3f46f64cd]]&gt;&lt;/appid&gt;</div><div class="line">&lt;openid&gt;&lt;![CDATA[o_pncsidC-pRRfCP4zj98h6slREw]]&gt;&lt;/openid&gt;</div><div class="line">&lt;mch_id&gt;&lt;![CDATA[商户ID]]&gt;&lt;/mch_id&gt;</div><div class="line">&lt;is_subscribe&gt;&lt;![CDATA[Y]]&gt;&lt;/is_subscribe&gt;</div><div class="line">&lt;nonce_str&gt;&lt;![CDATA[gT5NJAlv9eXawn1j]]&gt;&lt;/nonce_str&gt;</div><div class="line">&lt;product_id&gt;&lt;![CDATA[001]]&gt;&lt;/product_id&gt;</div><div class="line">&lt;sign&gt;&lt;![CDATA[D2BD7949269271B3112B442421B43D66]]&gt;&lt;/sign&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure>
+<h2 id="4、根据回调参数生成预付订单进行支付"><a href="#4、根据回调参数生成预付订单进行支付" class="headerlink" title="4、根据回调参数生成预付订单进行支付"></a>4、根据回调参数生成预付订单进行支付</h2><p>根据回调参数调用<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1" target="_blank" rel="external">统一下单API</a>生成预支付交易的<code>prepay_id</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">prepay_xml&gt;&gt;&gt;</div><div class="line">&lt;xml&gt;&lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;</div><div class="line">&lt;return_msg&gt;&lt;![CDATA[OK]]&gt;&lt;/return_msg&gt;</div><div class="line">&lt;appid&gt;&lt;![CDATA[微信的appid]]&gt;&lt;/appid&gt;</div><div class="line">&lt;mch_id&gt;&lt;![CDATA[商户ID]]&gt;&lt;/mch_id&gt;</div><div class="line">&lt;nonce_str&gt;&lt;![CDATA[p46NAoD82eAH2d9j]]&gt;&lt;/nonce_str&gt;</div><div class="line">&lt;sign&gt;&lt;![CDATA[4117C601F41533DC84159AF6B892F72D]]&gt;&lt;/sign&gt;</div><div class="line">&lt;result_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/result_code&gt;</div><div class="line">&lt;prepay_id&gt;&lt;![CDATA[wx201610151315007cb1cbe40b0064755332]]&gt;&lt;/prepay_id&gt;</div><div class="line">&lt;trade_type&gt;&lt;![CDATA[NATIVE]]&gt;&lt;/trade_type&gt;</div><div class="line">&lt;code_url&gt;&lt;![CDATA[weixin://wxpay/bizpayurl?pr=QCLqJIG]]&gt;&lt;/code_url&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure>
+<p>商户后台系统将prepay_id返回给微信支付系统,微信支付系统根据交易会话标识，发起用户端授权支付流程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">          * 发送信息给微信服务器</div><div class="line">          */</div><div class="line">   Map&lt;String, String&gt; payResult = PaymentKit.xmlToMap(xmlResult);</div><div class="line">   </div><div class="line">   String return_code = payResult.get(&quot;return_code&quot;);</div><div class="line">   String result_code = payResult.get(&quot;result_code&quot;);</div><div class="line">   </div><div class="line">   if (StrKit.notBlank(return_code) &amp;&amp; StrKit.notBlank(result_code) &amp;&amp; return_code.equalsIgnoreCase(&quot;SUCCESS&quot;)&amp;&amp;result_code.equalsIgnoreCase(&quot;SUCCESS&quot;)) &#123;</div><div class="line">    // 以下字段在return_code 和result_code都为SUCCESS的时候有返回</div><div class="line">    String prepay_id = payResult.get(&quot;prepay_id&quot;);</div><div class="line">    </div><div class="line">    Map&lt;String, String&gt; prepayParams = new HashMap&lt;String, String&gt;();</div><div class="line">    prepayParams.put(&quot;return_code&quot;, &quot;SUCCESS&quot;);</div><div class="line">    prepayParams.put(&quot;appId&quot;, appid);</div><div class="line">    prepayParams.put(&quot;mch_id&quot;, mch_id);</div><div class="line">    prepayParams.put(&quot;nonceStr&quot;, System.currentTimeMillis() + &quot;&quot;);</div><div class="line">    prepayParams.put(&quot;prepay_id&quot;, prepay_id);</div><div class="line">    String prepaySign = null;</div><div class="line">    if (sign.equals(packageSign)) &#123;</div><div class="line">     prepayParams.put(&quot;result_code&quot;, &quot;SUCCESS&quot;);</div><div class="line">    &#125;else &#123;</div><div class="line">     prepayParams.put(&quot;result_code&quot;, &quot;FAIL&quot;);</div><div class="line">     prepayParams.put(&quot;err_code_des&quot;, &quot;订单失效&quot;);   //result_code为FAIL时，添加该键值对，value值是微信告诉客户的信息</div><div class="line">    &#125;</div><div class="line">    prepaySign = PaymentKit.createSign(prepayParams, paternerKey);</div><div class="line">    prepayParams.put(&quot;sign&quot;, prepaySign);</div><div class="line">    String xml = PaymentKit.toXml(prepayParams);</div><div class="line">    log.error(xml);</div><div class="line">    renderText(xml);</div><div class="line">    </div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h2 id="5、支付结果通用通知"><a href="#5、支付结果通用通知" class="headerlink" title="5、支付结果通用通知"></a>5、支付结果通用通知</h2><hr>
+<h2 id="官方文档-点击这里"><a href="#官方文档-点击这里" class="headerlink" title="官方文档  点击这里"></a>官方文档  <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_7" target="_blank" rel="external">点击这里</a></h2><blockquote>
+<p>对后台通知交互时，如果微信收到商户的应答不是成功或超时，微信认为通知失败，微信会通过一定的策略定期重新发起通知，尽可能提高通知的成功率，但微信不保证通知最终能成功。 （通知频率为15/15/30/180/1800/1800/1800/1800/3600，单位：秒）<br><strong>注意：同样的通知可能会多次发送给商户系统。商户系统必须能够正确处理重复的通知。</strong><br>推荐的做法是，当收到通知进行处理时，首先检查对应业务数据的状态，判断该通知是否已经处理过，如果没有处理过再进行处理，如果处理过直接返回结果成功。在对业务数据进行状态检查和处理之前，要采用数据锁进行并发控制，以避免函数重入造成的数据混乱。<br><strong>特别提醒：商户系统对于支付结果通知的内容一定要做签名验证，防止数据泄漏导致出现“假通知”，造成资金损失。</strong><br>技术人员可登进微信商户后台扫描加入接口报警群。</p>
+</blockquote>
+<p>此通知接收地址为生成预付订单时设置的<code>notify_url</code> 。在<a href="http://git.oschina.net/javen205/weixin_guide" target="_blank" rel="external">开源项目weixin-guide</a>中通知默认的地址为<code>http://域名[/项目名称]/pay/pay_notify</code></p>
+<p>以上是微信扫码支付模式一的全过程。</p>
+<h2 id="扫码支付模式二"><a href="#扫码支付模式二" class="headerlink" title="扫码支付模式二"></a>扫码支付模式二</h2><blockquote>
+<p>模式二与模式一相比，流程更为简单，不依赖设置的回调支付URL。商户后台系统先调用微信支付的统一下单接口，微信后台系统返回链接参数code_url，商户后台系统将code_url值生成二维码图片，用户使用微信客户端扫码后发起支付。注意：code_url有效期为2小时，过期后扫码不能再发起支付。</p>
+</blockquote>
+<p>微信支付的统一下单接口具体实现上文也有提及到，如果还不是很清楚可以看  <code>com.javen.weixin.controller.WeixinPayController</code>中的<code>scanCode2</code> 以及<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1" target="_blank" rel="external">官方文档介绍 </a></p>
+<p>以下是调用预付订单返回的xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;xml&gt;&lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;</div><div class="line">&lt;return_msg&gt;&lt;![CDATA[OK]]&gt;&lt;/return_msg&gt;</div><div class="line">&lt;appid&gt;&lt;![CDATA[wx5e9360a3f46f64cd]]&gt;&lt;/appid&gt;</div><div class="line">&lt;mch_id&gt;&lt;![CDATA[1322117501]]&gt;&lt;/mch_id&gt;</div><div class="line">&lt;nonce_str&gt;&lt;![CDATA[XdVf2zXLErIHRfJn]]&gt;&lt;/nonce_str&gt;</div><div class="line">&lt;sign&gt;&lt;![CDATA[916703CD13C3615B9B629C4A9E4C3337]]&gt;&lt;/sign&gt;</div><div class="line">&lt;result_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/result_code&gt;</div><div class="line">&lt;prepay_id&gt;&lt;![CDATA[wx2016101514433661797ee3010493199442]]&gt;&lt;/prepay_id&gt;</div><div class="line">&lt;trade_type&gt;&lt;![CDATA[NATIVE]]&gt;&lt;/trade_type&gt;</div><div class="line">&lt;code_url&gt;&lt;![CDATA[weixin://wxpay/bizpayurl?pr=WWOXnrb]]&gt;&lt;/code_url&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure></p>
+<p>其中<code>code_url</code> 就是生成二维码的链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">String qrCodeUrl = result.get(&quot;code_url&quot;);</div><div class="line">  String name = &quot;payQRCode1.png&quot;;</div><div class="line">  Boolean encode = ZxingKit.encode(qrCodeUrl, BarcodeFormat.QR_CODE, 3, ErrorCorrectionLevel.H, &quot;png&quot;, 200, 200,</div><div class="line">    PathKit.getWebRootPath()+File.separator+&quot;view&quot;+File.separator+name );</div><div class="line">  if (encode) &#123;</div><div class="line">   //在页面上显示</div><div class="line">   setAttr(&quot;payQRCode&quot;, name);</div><div class="line">   render(&quot;payQRCode.jsp&quot;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>扫码即可进行支付，code_url有效期为2小时，过期后扫码不能再发起支付</p>
+<blockquote>
+<p>最终生成二维码访问地址为<code>http://域名[/项目名称]/pay/scanCode2</code></p>
+</blockquote>
+<p>码字完毕，以上就是微信扫码支付（模式一、模式二）的详细介绍。</p>
+<p>欢迎留言、转发<br>微信极速开发系列文章：<a href="http://www.jianshu.com/p/a172a1b69fdd" target="_blank" rel="external">http://www.jianshu.com/p/a172a1b69fdd</a></p>
+<blockquote>
+<p>后续更新预告<br>1、刷卡支付<br>2、微信红包<br>3、企业转账</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/to/wechat-qcode.jpg" alt="Javen wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/to/wx.jpg" alt="Javen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/to/apay.jpg" alt="Javen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微信公众号/" rel="tag">#微信公众号</a>
+          
+            <a href="/tags/开源项目/" rel="tag">#开源项目</a>
+          
+            <a href="/tags/我的作品/" rel="tag">#我的作品</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/11/极速开发微信公众号之公众号支付/" rel="next" title="极速开发微信公众号之公众号支付">
+                <i class="fa fa-chevron-left"></i> 极速开发微信公众号之公众号支付
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/15/极速开发微信公众号之刷卡支付/" rel="prev" title="极速开发微信公众号之刷卡支付">
+                极速开发微信公众号之刷卡支付 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/15/极速开发微信公众号之扫码支付/"
+     data-title="极速开发微信公众号之扫码支付"
+     data-content=""
+     data-url="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之扫码支付/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/15/极速开发微信公众号之扫码支付/"
+           data-title="极速开发微信公众号之扫码支付" data-url="http://javen205.oschina.io/2016/10/15/极速开发微信公众号之扫码支付/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo/img.jpg"
+               alt="Javen" />
+          <p class="site-author-name" itemprop="name">Javen</p>
+          <p class="site-description motion-element" itemprop="description">凡事皆有终结，因此，耐心是赢得成功的一种手段。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://git.oschina.net/javen205" target="_blank" title="Git">
+                  
+                    <i class="fa fa-fw fa-git"></i>
+                  
+                  Git
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2545091901" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/zyw-205520" target="_blank" title="博客">
+                  
+                    <i class="fa fa-fw fa-gg-circle"></i>
+                  
+                  博客
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" title="Git教程" target="_blank">Git教程</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com" title="NextT" target="_blank">NextT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=572839485&site=qq&menu=yes" title="友情链接" target="_blank">友情链接</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#微信扫码支付文档"><span class="nav-number">1.</span> <span class="nav-text">微信扫码支付文档</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#扫码支付分为以下两种方式："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">扫码支付分为以下两种方式：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫码支付模式一"><span class="nav-number"></span> <span class="nav-text">扫码支付模式一</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1、设置支付回调URL"><span class="nav-number"></span> <span class="nav-text">1、设置支付回调URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、根据微信支付规则链接生成二维码"><span class="nav-number"></span> <span class="nav-text">2、根据微信支付规则链接生成二维码</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-生成二维码规则"><span class="nav-number">0.0.0.1.</span> <span class="nav-text">2.1 生成二维码规则</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-2-生成二维码并在页面上显示"><span class="nav-number">0.0.0.2.</span> <span class="nav-text">2.2 生成二维码并在页面上显示</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、扫码回调商户支付URL"><span class="nav-number"></span> <span class="nav-text">3、扫码回调商户支付URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、根据回调参数生成预付订单进行支付"><span class="nav-number"></span> <span class="nav-text">4、根据回调参数生成预付订单进行支付</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、支付结果通用通知"><span class="nav-number"></span> <span class="nav-text">5、支付结果通用通知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方文档-点击这里"><span class="nav-number"></span> <span class="nav-text">官方文档  点击这里</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫码支付模式二"><span class="nav-number"></span> <span class="nav-text">扫码支付模式二</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Yu7irauVr0CHgnXgUolTJEz1-gzGzoHsz", "NmtG2bRFM173EgH4J6Jj7ygF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
